@@ -10,3 +10,5 @@ _archive/
 _handoff/
 .vercel/
 .astro/
+
+.vercel
