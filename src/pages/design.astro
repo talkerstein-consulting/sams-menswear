@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fabrics, popularSuiting } from '../data/fabrics.js';
+
+// Fabric chips for the picker — the popular set, Navy first.
+const picker = [...popularSuiting].sort((a, b) => (a.name === 'Navy' ? -1 : b.name === 'Navy' ? 1 : 0));
+// Minimal fabric lookup for JS (deep-link + fills)
+const fabData = fabrics.map((f) => ({ id: f.id, name: f.name, hex: f.hex, css: f.css }));
+
+const linings = [
+  { key: 'match', name: 'Matching', hex: null },
+  { key: 'oxblood', name: 'Oxblood', hex: '#6b2228' },
+  { key: 'hunter', name: 'Hunter', hex: '#2c3d31' },
+  { key: 'gold', name: 'Gold', hex: '#9d7f42' },
+  { key: 'sky', name: 'Sky', hex: '#6f8fb0' },
+  { key: 'silver', name: 'Silver', hex: '#c8cad0' },
+];
+const shirts = [
+  { key: 'white', name: 'White', hex: '#f3efe6' },
+  { key: 'sky', name: 'Sky', hex: '#cfdaea' },
+  { key: 'pink', name: 'Pink', hex: '#eed4d5' },
+  { key: 'ivory', name: 'Ivory', hex: '#ece2ca' },
+];
+const ties = [
+  { key: 'oxblood', name: 'Oxblood', hex: '#6b2228' },
+  { key: 'navy', name: 'Navy', hex: '#20294d' },
+  { key: 'silver', name: 'Silver', hex: '#b9bcc4' },
+  { key: 'gold', name: 'Gold', hex: '#9d7f42' },
+  { key: 'forest', name: 'Forest', hex: '#2c3d31' },
+];
+---
+<BaseLayout
+  title="The Drawing Board — Design Your Suit · Sam's Menswear"
+  description="Design your bespoke suit before you book: pick the cloth, lapel, buttons, lining, shirt and tie, and see it drawn live. Then bring the spec to Sam."
+>
+  <section class="page-hero" style="padding-bottom: 0;">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">The Atelier &middot; The Drawing Board</div>
+        <h1>Draw your suit <em>before you book.</em></h1>
+        <p class="lede">No AI guesswork — just the real choices you'd make sitting across from Sam. Pick a cloth and the details; watch it sketch in. Then send the spec ahead so your first fitting starts from a drawing, not a blank page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-design>
+    <div class="container">
+      <div class="dz">
+
+        <!-- ── Live rendering ─────────────────────────────── -->
+        <div class="dz-stage">
+          <div class="dz-canvas">
+            <svg class="suit lap-notch btn-2 sb is-tie sq-on" viewBox="0 0 400 640" role="img" aria-label="Live drawing of your suit" data-suit>
+              <!-- TROUSERS (drawn first, behind jacket hem) -->
+              <g class="ink">
+                <path class="cloth" d="M150 470 L250 470 L246 632 L214 632 L200 500 L186 632 L154 632 Z"/>
+                <path d="M200 500 L200 632" />
+                <path d="M150 470 L250 470" />
+              </g>
+              <!-- JACKET BODY -->
+              <path class="cloth ink" d="M112 96 C 98 150, 86 250, 90 336 C 93 410, 108 470, 132 508 L 200 524 L 268 508 C 292 470, 307 410, 310 336 C 314 250, 302 150, 288 96 C 250 82, 150 82, 112 96 Z"/>
+              <!-- sleeve seams -->
+              <path class="ink" d="M120 120 C 108 200, 104 300, 112 400"/>
+              <path class="ink" d="M280 120 C 292 200, 296 300, 288 400"/>
+              <!-- SHIRT V + collar (between lapels) -->
+              <path class="shirt" d="M186 150 L214 150 L206 306 L194 306 Z"/>
+              <path class="ink" d="M186 150 L200 168 L214 150"/>
+              <!-- TIE -->
+              <g class="tie-wrap">
+                <path class="tie" d="M200 156 L192 172 L196 306 L204 306 L208 172 Z"/>
+                <path class="ink" d="M200 156 L192 172 L196 306 L204 306 L208 172 Z" fill="none"/>
+              </g>
+              <!-- BOW (black tie) -->
+              <g class="bow-wrap">
+                <path class="tie" d="M200 158 L176 148 L176 170 L200 162 L224 170 L224 148 Z"/>
+                <path class="ink" d="M200 158 L176 148 L176 170 L200 162 L224 170 L224 148 Z" fill="none"/>
+              </g>
+              <!-- LINING slivers (revealed at the front edges) -->
+              <path class="lining" d="M200 306 L200 154 L190 152 L197 306 Z"/>
+              <path class="lining" d="M200 306 L200 154 L210 152 L203 306 Z"/>
+              <!-- LAPELS — notch -->
+              <g class="lap lap--notch ink">
+                <path d="M200 306 L180 168 L152 150 L176 158 L188 150"/>
+                <path d="M200 306 L220 168 L248 150 L224 158 L212 150"/>
+              </g>
+              <!-- LAPELS — peak -->
+              <g class="lap lap--peak ink">
+                <path d="M200 306 L178 170 L150 138 L186 162 L190 150"/>
+                <path d="M200 306 L222 170 L250 138 L214 162 L210 150"/>
+              </g>
+              <!-- LAPELS — shawl -->
+              <g class="lap lap--shawl ink">
+                <path d="M200 306 C 176 220, 166 170, 150 150 C 168 152, 182 152, 190 150" fill="none"/>
+                <path d="M200 306 C 224 220, 234 170, 250 150 C 232 152, 218 152, 210 150" fill="none"/>
+              </g>
+              <!-- BUTTONS -->
+              <g class="btns btns--1 ink"><circle cx="200" cy="320" r="5"/></g>
+              <g class="btns btns--2 ink"><circle cx="200" cy="306" r="5"/><circle cx="200" cy="352" r="5"/></g>
+              <g class="btns btns--3 ink"><circle cx="200" cy="288" r="5"/><circle cx="200" cy="322" r="5"/><circle cx="200" cy="356" r="5"/></g>
+              <!-- DB buttons -->
+              <g class="db-btns ink"><circle cx="176" cy="300" r="5"/><circle cx="224" cy="300" r="5"/><circle cx="176" cy="344" r="5"/><circle cx="224" cy="344" r="5"/></g>
+              <!-- pockets -->
+              <g class="ink">
+                <path d="M118 402 L182 392 L184 418 L120 428 Z"/>
+                <path d="M282 402 L218 392 L216 418 L280 428 Z"/>
+              </g>
+              <!-- breast pocket + square -->
+              <path class="ink" d="M150 232 L188 226"/>
+              <g class="psq">
+                <path class="square" d="M158 226 L168 214 L180 224 L172 222 Z"/>
+                <path class="ink" d="M158 226 L168 214 L180 224" fill="none"/>
+              </g>
+            </svg>
+          </div>
+          <div class="dz-spec" data-spec>Navy · single-breasted, 2 button · notch lapel · flat front · matching lining · white shirt · oxblood tie</div>
+        </div>
+
+        <!-- ── Controls ───────────────────────────────────── -->
+        <div class="dz-controls">
+          <div class="dz-group">
+            <span class="dz-label">Start from an occasion</span>
+            <div class="dz-chips" data-opt="preset">
+              <button class="dz-chip" data-val="business" type="button">Business</button>
+              <button class="dz-chip" data-val="wedding" type="button">Wedding</button>
+              <button class="dz-chip" data-val="blacktie" type="button">Black tie</button>
+              <button class="dz-chip" data-val="traditional" type="button">Traditional</button>
+            </div>
+          </div>
+
+          <div class="dz-group">
+            <span class="dz-label">Cloth <a href="/fabrics" class="dz-link">· all {fabrics.length} →</a></span>
+            <div class="dz-chips dz-swatches" data-opt="fabric">
+              {picker.map((f) => (
+                <button class="dz-chip dz-sw" data-val={f.id} type="button" title={f.name}>
+                  <span class="dz-sw-dot" style={`background:${f.css};`}></span>{f.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div class="dz-group">
+            <span class="dz-label">Jacket</span>
+            <div class="dz-chips" data-opt="breast">
+              <button class="dz-chip" data-val="sb" type="button">Single-breasted</button>
+              <button class="dz-chip" data-val="db" type="button">Double-breasted</button>
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Buttons</span>
+            <div class="dz-chips" data-opt="buttons">
+              <button class="dz-chip" data-val="1" type="button">One</button>
+              <button class="dz-chip" data-val="2" type="button">Two</button>
+              <button class="dz-chip" data-val="3" type="button">Three</button>
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Lapel</span>
+            <div class="dz-chips" data-opt="lapel">
+              <button class="dz-chip" data-val="notch" type="button">Notch</button>
+              <button class="dz-chip" data-val="peak" type="button">Peak</button>
+              <button class="dz-chip" data-val="shawl" type="button">Shawl</button>
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Trousers</span>
+            <div class="dz-chips" data-opt="trousers">
+              <button class="dz-chip" data-val="flat" type="button">Flat front</button>
+              <button class="dz-chip" data-val="pleated" type="button">Pleated</button>
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Lining</span>
+            <div class="dz-chips dz-dots" data-opt="lining">
+              {linings.map((l) => (
+                <button class="dz-chip dz-dot" data-val={l.key} data-hex={l.hex} type="button" title={l.name}>
+                  <span class="dz-sw-dot" style={l.hex ? `background:${l.hex};` : 'background:repeating-linear-gradient(45deg,#ccc 0 4px,#eee 4px 8px);'}></span>{l.name}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Shirt</span>
+            <div class="dz-chips dz-dots" data-opt="shirt">
+              {shirts.map((s) => (
+                <button class="dz-chip dz-dot" data-val={s.key} data-hex={s.hex} type="button" title={s.name}>
+                  <span class="dz-sw-dot" style={`background:${s.hex};`}></span>{s.name}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Neckwear</span>
+            <div class="dz-chips dz-dots" data-opt="tie">
+              {ties.map((t) => (
+                <button class="dz-chip dz-dot" data-val={t.key} data-hex={t.hex} data-style="tie" type="button" title={t.name}>
+                  <span class="dz-sw-dot" style={`background:${t.hex};`}></span>{t.name}
+                </button>
+              ))}
+              <button class="dz-chip dz-dot" data-val="bow" data-hex="#1b1b1f" data-style="bow" type="button" title="Black-tie bow">
+                <span class="dz-sw-dot" style="background:#1b1b1f;"></span>Bow
+              </button>
+              <button class="dz-chip dz-dot" data-val="none" data-style="none" type="button" title="Open collar">
+                <span class="dz-sw-dot" style="background:transparent;border:1px dashed var(--rule-strong);"></span>None
+              </button>
+            </div>
+          </div>
+          <div class="dz-group">
+            <span class="dz-label">Pocket square</span>
+            <div class="dz-chips" data-opt="square">
+              <button class="dz-chip" data-val="on" type="button">On</button>
+              <button class="dz-chip" data-val="off" type="button">Off</button>
+            </div>
+          </div>
+
+          <!-- Lead capture -->
+          <div class="dz-lead" data-lead>
+            <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Send your look to Sam</h3>
+            <p class="body-prose" style="font-size: 15px; margin-top: 8px;">I'll have your drawing in hand before you arrive — so the fitting starts from a spec, not a blank page. No obligation.</p>
+            <form class="dz-form" data-look-form>
+              <input type="text" name="name" placeholder="Your name" autocomplete="name" required/>
+              <input type="email" name="email" placeholder="Email" autocomplete="email" required/>
+              <input type="hidden" name="spec" data-spec-field/>
+              <button type="submit" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);">Send me this look</button>
+            </form>
+            <div class="dz-ack" data-look-ack hidden>
+              <div class="dz-ack-seal">✓</div>
+              <p><strong>Saved.</strong> Sam has your look — <span data-ack-spec></span>. Book a fitting and we'll pull the real bolt.</p>
+              <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a fitting with this look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" data-fab-json set:html={JSON.stringify(fabData)}></script>
+  <script>
+    const svg = document.querySelector('[data-suit]');
+    const fabData = JSON.parse(document.querySelector('[data-fab-json]')?.textContent || '[]');
+    if (svg && fabData.length) {
+      const fabById = Object.fromEntries(fabData.map((f) => [f.id, f]));
+      const params = new URLSearchParams(location.search);
+      const deep = params.get('fabric');
+
+      const state = {
+        fabric: fabById[deep] ? deep : (fabData.find((f) => f.name === 'Navy')?.id || fabData[0].id),
+        breast: 'sb', buttons: '2', lapel: 'notch', trousers: 'flat',
+        lining: 'oxblood', shirt: 'white', tie: 'oxblood', tieStyle: 'tie', square: 'on',
+      };
+      const LIN = { match: null, oxblood: '#6b2228', hunter: '#2c3d31', gold: '#9d7f42', sky: '#6f8fb0', silver: '#c8cad0' };
+      const SH = { white: '#f3efe6', sky: '#cfdaea', pink: '#eed4d5', ivory: '#ece2ca' };
+      const TIE = { oxblood: '#6b2228', navy: '#20294d', silver: '#b9bcc4', gold: '#9d7f42', forest: '#2c3d31', bow: '#1b1b1f' };
+      const PRESETS = {
+        business:    { fabricName: 'Navy', breast: 'sb', buttons: '2', lapel: 'notch', trousers: 'flat', lining: 'oxblood', shirt: 'white', tie: 'silver', tieStyle: 'tie', square: 'on' },
+        wedding:     { fabricName: 'Midnight Blue', breast: 'sb', buttons: '2', lapel: 'peak', trousers: 'flat', lining: 'oxblood', shirt: 'white', tie: 'silver', tieStyle: 'tie', square: 'on' },
+        blacktie:    { fabricName: 'Black Barathea Dinner Cloth', breast: 'sb', buttons: '1', lapel: 'shawl', trousers: 'flat', lining: 'silver', shirt: 'white', tie: 'bow', tieStyle: 'bow', square: 'off' },
+        traditional: { fabricName: 'Black', breast: 'sb', buttons: '3', lapel: 'notch', trousers: 'pleated', lining: 'silver', shirt: 'white', tie: 'navy', tieStyle: 'tie', square: 'off' },
+      };
+      const nameById = (id) => fabById[id]?.name || 'Navy';
+      const idByName = (nm) => fabData.find((f) => f.name === nm)?.id;
+
+      function render() {
+        const f = fabById[state.fabric];
+        const cloth = f?.hex || '#20294d';
+        svg.style.setProperty('--cloth', cloth);
+        svg.style.setProperty('--lining', LIN[state.lining] || cloth);
+        svg.style.setProperty('--shirt', SH[state.shirt] || '#f3efe6');
+        svg.style.setProperty('--tie', TIE[state.tie] || '#6b2228');
+        svg.setAttribute('class',
+          `suit lap-${state.lapel} btn-${state.buttons} ${state.breast} ` +
+          `${state.tieStyle === 'bow' ? 'is-bow' : state.tieStyle === 'none' ? 'is-none' : 'is-tie'} ` +
+          `${state.square === 'on' && state.tieStyle !== 'none' ? 'sq-on' : ''}`);
+
+        // sync chip active states
+        document.querySelectorAll('.dz-chips').forEach((grp) => {
+          const opt = grp.dataset.opt;
+          grp.querySelectorAll('.dz-chip').forEach((c) => {
+            let on = false;
+            if (opt === 'fabric') on = c.dataset.val === state.fabric;
+            else if (opt === 'tie') on = (state.tieStyle === 'tie' && c.dataset.val === state.tie) || (state.tieStyle === 'bow' && c.dataset.val === 'bow') || (state.tieStyle === 'none' && c.dataset.val === 'none');
+            else if (opt === 'preset') on = false;
+            else on = c.dataset.val === state[opt];
+            c.classList.toggle('is-active', on);
+          });
+        });
+
+        // spec string
+        const breast = state.breast === 'db' ? 'double-breasted' : 'single-breasted';
+        const btn = { 1: '1 button', 2: '2 button', 3: '3 button' }[state.buttons];
+        const neck = state.tieStyle === 'bow' ? 'black bow' : state.tieStyle === 'none' ? 'open collar' : `${state.tie} tie`;
+        const lining = state.lining === 'match' ? 'matching lining' : `${state.lining} lining`;
+        const spec = `${nameById(state.fabric)} · ${breast}, ${btn} · ${state.lapel} lapel · ${state.trousers} front · ${lining} · ${state.shirt} shirt · ${neck}`;
+        const specEl = document.querySelector('[data-spec]');
+        if (specEl) specEl.textContent = spec;
+        const specField = document.querySelector('[data-spec-field]');
+        if (specField) specField.value = spec;
+        return spec;
+      }
+
+      // wire chips
+      document.querySelectorAll('.dz-chips .dz-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const opt = chip.closest('.dz-chips').dataset.opt;
+          const val = chip.dataset.val;
+          if (opt === 'preset') {
+            const p = PRESETS[val]; if (!p) return;
+            const fid = idByName(p.fabricName); if (fid) state.fabric = fid;
+            state.breast = p.breast; state.buttons = p.buttons; state.lapel = p.lapel;
+            state.trousers = p.trousers; state.lining = p.lining; state.shirt = p.shirt;
+            state.tie = p.tie; state.tieStyle = p.tieStyle; state.square = p.square;
+          } else if (opt === 'fabric') state.fabric = val;
+          else if (opt === 'tie') {
+            const style = chip.dataset.style;
+            state.tieStyle = style;
+            if (style === 'tie') state.tie = val;
+            if (style === 'bow') state.tie = 'bow';
+          } else state[opt] = val;
+          render();
+        });
+      });
+
+      // lead form
+      const form = document.querySelector('[data-look-form]');
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const spec = render();
+        const lead = document.querySelector('[data-lead]');
+        const ack = document.querySelector('[data-look-ack]');
+        const ackSpec = document.querySelector('[data-ack-spec]');
+        if (ackSpec) ackSpec.textContent = spec;
+        form.hidden = true;
+        if (ack) ack.hidden = false;
+        try { localStorage.setItem('sams:look', JSON.stringify({ ...state, spec, at: Date.now() })); } catch {}
+      });
+
+      render();
+    }
+  </script>
+</BaseLayout>

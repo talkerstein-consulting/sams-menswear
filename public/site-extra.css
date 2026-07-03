@@ -466,6 +466,124 @@ body::before {
   padding: 6px 14px;
 }
 
+/* ─── The Cloth Library (/fabrics) ───────────────────────────────────── */
+.fab-filters {
+  border: 1px solid var(--rule);
+  background: var(--paper-cream);
+  padding: clamp(18px, 2.4vw, 26px);
+  display: flex; flex-direction: column; gap: 18px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.fab-flabel {
+  font-family: var(--serif); font-style: italic; font-size: 12px;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--ink-mute);
+  display: block; margin-bottom: 8px;
+}
+.fab-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fab-chip {
+  font-family: var(--serif); font-size: 14px; letter-spacing: .06em;
+  padding: 7px 15px; border: 1px solid var(--rule); background: transparent;
+  color: var(--ink); cursor: pointer; transition: border-color var(--t-fast), background var(--t-fast);
+}
+.fab-chip:hover { border-color: var(--ink-soft); }
+.fab-chip.is-active { border-color: var(--oxblood); background: var(--paper-warm); box-shadow: inset 0 0 0 1px var(--oxblood); }
+.fab-filter-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+.fab-select, .fab-search { flex: 1 1 180px; }
+.fab-select select, .fab-search input {
+  width: 100%; font-family: var(--serif-body); font-size: 16px; padding: 10px 12px;
+  background: var(--paper); border: 1px solid var(--rule-strong); color: var(--ink); outline: none;
+}
+.fab-select select:focus, .fab-search input:focus { border-color: var(--oxblood); }
+.fab-count { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-mute); letter-spacing: .04em; }
+.fab-count [data-fab-count] { font-style: normal; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.fab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+}
+.fab-card[hidden] { display: none; }
+.fab-card { display: flex; flex-direction: column; }
+.fab-sw {
+  aspect-ratio: 5 / 4; border: 1px solid var(--rule); position: relative;
+  box-shadow: inset 0 0 30px rgba(0,0,0,.08);
+}
+.fab-price {
+  position: absolute; top: 8px; right: 10px;
+  font-family: var(--mono, ui-monospace); font-size: 12px; letter-spacing: .1em;
+  color: rgba(255,255,255,.9); text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+.fab-meta { padding-top: 12px; }
+.fab-name { font-family: var(--serif); font-size: 18px; letter-spacing: .01em; color: var(--navy); line-height: 1.15; }
+.fab-sub { font-family: var(--serif-body); font-size: 13px; color: var(--ink-mute); margin-top: 3px; line-height: 1.4; }
+.fab-use {
+  display: inline-block; margin-top: 8px; font-family: var(--serif); font-style: italic;
+  font-size: 13px; letter-spacing: .04em; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 1px;
+}
+.fab-use:hover { color: var(--oxblood); }
+.fab-empty { text-align: center; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-mute); padding: 40px 0; }
+
+/* ─── The Drawing Board (/design) ─────────────────────────────────────── */
+.dz { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(28px, 4vw, 60px); align-items: start; }
+.dz-stage { position: sticky; top: 86px; }
+.dz-canvas { background: var(--paper-cream); border: 1px solid var(--rule); padding: clamp(16px, 3vw, 32px); box-shadow: 0 22px 54px -34px rgba(43,31,18,.5); }
+.dz-canvas .suit { width: 100%; height: auto; display: block; }
+.dz-spec { margin-top: 16px; font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-soft); text-align: center; letter-spacing: .02em; line-height: 1.5; text-wrap: balance; }
+
+/* suit SVG paint */
+.suit .ink { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.suit .cloth { fill: var(--cloth, #20294d); stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.suit .btns circle, .suit .db-btns circle { fill: var(--ink); stroke: none; }
+.suit .shirt { fill: var(--shirt, #f3efe6); stroke: none; }
+.suit .tie { fill: var(--tie, #6b2228); }
+.suit .lining { fill: var(--lining, #6b2228); stroke: none; opacity: .95; }
+.suit .square { fill: var(--tie, #6b2228); stroke: none; }
+:root { --ink: #211c15; }
+
+/* suit variant visibility */
+.suit .lap { display: none; }
+.suit.lap-notch .lap--notch, .suit.lap-peak .lap--peak, .suit.lap-shawl .lap--shawl { display: block; }
+.suit .btns { display: none; }
+.suit.btn-1 .btns--1, .suit.btn-2 .btns--2, .suit.btn-3 .btns--3 { display: block; }
+.suit .db-btns { display: none; }
+.suit.db .db-btns { display: block; }
+.suit.db .btns { display: none; }
+.suit .tie-wrap, .suit .bow-wrap { display: none; }
+.suit.is-tie .tie-wrap { display: block; }
+.suit.is-bow .bow-wrap { display: block; }
+.suit .psq { display: none; }
+.suit.sq-on .psq { display: block; }
+
+/* controls */
+.dz-group { margin-bottom: 20px; }
+.dz-label { font-family: var(--serif); font-style: italic; letter-spacing: .26em; text-transform: uppercase; font-size: 12px; color: var(--ink-mute); display: block; margin-bottom: 10px; }
+.dz-link { color: var(--gold); font-style: normal; letter-spacing: .1em; font-size: 11px; }
+.dz-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.dz-chip {
+  font-family: var(--serif); font-size: 14px; letter-spacing: .05em; padding: 8px 14px;
+  border: 1px solid var(--rule); background: var(--paper-cream); color: var(--ink); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; transition: border-color var(--t-fast), background var(--t-fast);
+}
+.dz-chip:hover { border-color: var(--ink-soft); }
+.dz-chip.is-active { border-color: var(--oxblood); background: var(--paper-warm); box-shadow: inset 0 0 0 1px var(--oxblood); }
+.dz-sw-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--rule-strong); display: inline-block; flex: none; }
+.dz-sw .dz-sw-dot { border-radius: 2px; }
+
+.dz-lead { margin-top: 28px; padding: clamp(20px, 3vw, 28px); background: var(--paper-cream); border: 1px solid var(--rule); border-left: 3px solid var(--oxblood); }
+.dz-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; margin-top: 16px; }
+.dz-form input { font-family: var(--serif-body); font-size: 16px; padding: 12px; background: var(--paper); border: 1px solid var(--rule-strong); color: var(--ink); outline: none; }
+.dz-form input:focus { border-color: var(--oxblood); }
+.dz-form button { white-space: nowrap; }
+.dz-ack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; margin-top: 6px; }
+.dz-ack-seal { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--gold); color: var(--gold); display: grid; place-items: center; font-size: 20px; }
+.dz-ack p { font-family: var(--serif-body); color: var(--ink-soft); margin: 0; }
+
+@media (max-width: 920px) {
+  .dz { grid-template-columns: 1fr; }
+  .dz-stage { position: static; max-width: 420px; margin: 0 auto; }
+  .dz-form { grid-template-columns: 1fr; }
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .feature-grid.cols-3, .feature-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }

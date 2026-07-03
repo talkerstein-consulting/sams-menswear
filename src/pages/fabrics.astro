@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fabrics, categories, colours, tiers } from '../data/fabrics.js';
+
+const total = fabrics.length;
+---
+<BaseLayout
+  title="The Cloth Library — Sam's Menswear · Vaughan"
+  description="Browse Sam's cloth library — worsteds, flannels, tweeds, tuxedo cloth, coatings and shirtings. Filter by colour, pattern and weight, then design your suit."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">The Atelier &middot; Cloth</div>
+        <h1>The <em>cloth library.</em></h1>
+        <p class="lede">A working selection of the cloths I reach for most — {total} of them, from house worsteds to English tweeds and tuxedo barathea. Filter to what you're after, then take it to the drawing board.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight" data-fabrics>
+    <div class="container">
+      <!-- Filter bar -->
+      <div class="fab-filters" data-reveal>
+        <div class="fab-filter-group">
+          <span class="fab-flabel">Category</span>
+          <div class="fab-chips" data-filter="cat">
+            <button class="fab-chip is-active" data-val="all" type="button">All</button>
+            {categories.map((c) => <button class="fab-chip" data-val={c} type="button">{c}</button>)}
+          </div>
+        </div>
+        <div class="fab-filter-row">
+          <label class="fab-select">
+            <span class="fab-flabel">Colour</span>
+            <select data-filter="col">
+              <option value="all">Any colour</option>
+              {colours.map((c) => <option value={c}>{c}</option>)}
+            </select>
+          </label>
+          <label class="fab-select">
+            <span class="fab-flabel">Tier</span>
+            <select data-filter="tier">
+              <option value="all">Any tier</option>
+              {tiers.map((t) => <option value={t.key}>{t.name} ({t.price})</option>)}
+            </select>
+          </label>
+          <label class="fab-search">
+            <span class="fab-flabel">Search</span>
+            <input type="search" data-fab-search placeholder="e.g. navy pinstripe, flannel, oxblood…"/>
+          </label>
+        </div>
+        <div class="fab-count"><span data-fab-count>{total}</span> cloths shown</div>
+      </div>
+
+      <!-- Swatch grid -->
+      <div class="fab-grid" data-fab-grid data-reveal>
+        {fabrics.map((f) => (
+          <article
+            class="fab-card"
+            data-cat={f.category}
+            data-col={f.colour}
+            data-tier={f.tier}
+            data-name={`${f.name} ${f.category} ${f.pattern} ${f.composition}`.toLowerCase()}
+          >
+            <div class="fab-sw" style={`background:${f.css};`}>
+              <span class="fab-price" title={`${f.tierName} tier`}>{tiers.find((t) => t.key === f.tier)?.price}</span>
+            </div>
+            <div class="fab-meta">
+              <div class="fab-name">{f.name}</div>
+              <div class="fab-sub">{f.category} · {f.weightOz}oz · {f.composition}</div>
+              <a class="fab-use" href={`/design?fabric=${f.id}`}>Design with this →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="fab-empty" data-fab-empty hidden>No cloths match that — try clearing a filter.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Cloth is only half of it</span>
+          </div>
+          <h2 class="h-1">See it as a <em>suit.</em></h2>
+          <p class="lede" style="margin-top: 24px;">Pick a cloth, then design the jacket, lapel and lining on the drawing board — or bring the name to your fitting and we'll pull the real bolt.</p>
+        </div>
+        <div class="actions">
+          <a href="/design" class="btn is-primary">Open the drawing board</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or <a href="/book" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);" data-open-booking data-no-transition>book a fitting</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const grid = document.querySelector('[data-fab-grid]');
+    if (grid) {
+      const cards = [...grid.querySelectorAll('.fab-card')];
+      const countEl = document.querySelector('[data-fab-count]');
+      const emptyEl = document.querySelector('[data-fab-empty]');
+      const state = { cat: 'all', col: 'all', tier: 'all', q: '' };
+
+      const apply = () => {
+        let n = 0;
+        for (const card of cards) {
+          const ok =
+            (state.cat === 'all' || card.dataset.cat === state.cat) &&
+            (state.col === 'all' || card.dataset.col === state.col) &&
+            (state.tier === 'all' || card.dataset.tier === state.tier) &&
+            (state.q === '' || card.dataset.name.includes(state.q));
+          card.hidden = !ok;
+          if (ok) n++;
+        }
+        if (countEl) countEl.textContent = String(n);
+        if (emptyEl) emptyEl.hidden = n !== 0;
+      };
+
+      document.querySelectorAll('[data-filter="cat"] .fab-chip').forEach((b) => {
+        b.addEventListener('click', () => {
+          document.querySelectorAll('[data-filter="cat"] .fab-chip').forEach((x) => x.classList.remove('is-active'));
+          b.classList.add('is-active');
+          state.cat = b.dataset.val;
+          apply();
+        });
+      });
+      document.querySelector('[data-filter="col"]')?.addEventListener('change', (e) => { state.col = e.target.value; apply(); });
+      document.querySelector('[data-filter="tier"]')?.addEventListener('change', (e) => { state.tier = e.target.value; apply(); });
+      document.querySelector('[data-fab-search]')?.addEventListener('input', (e) => { state.q = e.target.value.trim().toLowerCase(); apply(); });
+    }
+  </script>
+</BaseLayout>
