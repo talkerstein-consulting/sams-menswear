@@ -1,0 +1,478 @@
+/* ───────────────────────────────────────────────────────────────────────
+   site-extra.css — additive styles for pages beyond the original handoff
+   (About, Process, FAQ, Locations, Journal) + the compiled hero island.
+   The three handoff stylesheets stay byte-for-byte; everything new lives here
+   and reuses the same design tokens.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* ─── Performance ────────────────────────────────────────────────────────
+   The handoff paints the paper-grain via `body::before { position: fixed;
+   mix-blend-mode: multiply }`. A fixed blended layer must be re-composited
+   against fresh backdrop on every scroll frame → visible scroll jank.
+   Pinning it to the document (absolute, scrolls WITH content) keeps the exact
+   look but lets the browser cache it as a single layer. `body` is already
+   position:relative in site.css, so inset:0 still covers the full page. */
+body::before {
+  position: absolute;
+}
+/* The vignette is a plain fixed gradient (cheap on the GPU) — leave it. */
+
+/* Screen-reader-only (visually hidden but accessible) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Cinematic video hero ───────────────────────────────────────────── */
+.hero { background: var(--paper); }
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  /* Warm scrim over the light left third so the copy stays legible */
+  background: linear-gradient(90deg,
+    rgba(242, 237, 225, 0.78) 0%,
+    rgba(242, 237, 225, 0.42) 34%,
+    rgba(242, 237, 225, 0) 62%);
+}
+.hero__overlay .container { width: 100%; }
+.hero__copy { max-width: 34rem; }
+.hero__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(40px, 6.2vw, 92px);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 16px;
+}
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--oxblood);
+}
+.hero__lede { margin-top: 22px; max-width: 30em; }
+.hero__cta { margin-top: 34px; color: var(--ink); border-color: var(--ink); }
+
+@media (max-width: 720px) {
+  .hero__overlay {
+    align-items: flex-end;
+    padding-bottom: 9%;
+    background: linear-gradient(0deg,
+      rgba(242, 237, 225, 0.92) 0%,
+      rgba(242, 237, 225, 0.55) 32%,
+      rgba(242, 237, 225, 0) 62%);
+  }
+  .hero__title { font-size: clamp(34px, 10vw, 58px); }
+  .hero__lede { font-size: clamp(18px, 4.6vw, 22px); }
+}
+
+/* ─── The Bespoke Journey (scroll-driven dressing sequence) ──────────── */
+.journey__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 88px);
+  align-items: start;
+  margin-top: clamp(24px, 3vw, 40px);
+}
+.journey__visual {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.journey__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--rule);
+  background: var(--paper-cream);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -34px rgba(43, 31, 18, 0.5);
+}
+.journey__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+.journey__frame.is-active { opacity: 1; }
+/* progress rail */
+.journey__rail {
+  position: absolute;
+  left: 18px; top: 18px; bottom: 18px;
+  width: 2px;
+  background: var(--rule);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.journey__rail span {
+  width: 6px; height: 6px; margin-left: -2px;
+  border-radius: 50%;
+  background: var(--rule-strong);
+  transition: background var(--t-med), transform var(--t-med);
+}
+.journey__rail span.is-active { background: var(--oxblood); transform: scale(1.5); }
+
+.journey__steps { display: flex; flex-direction: column; }
+.journey__step {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.journey__step-img { display: none; }
+.journey__no {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.journey__title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-top: 14px;
+}
+.journey__title em {
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--oxblood);
+}
+.journey__copy {
+  font-family: var(--serif-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 30em;
+  margin-top: 18px;
+}
+.journey__cta { margin-top: 28px; display: inline-flex; }
+
+@media (prefers-reduced-motion: reduce) {
+  .journey__frame { transition: none; }
+}
+@media (max-width: 900px) {
+  .journey__inner { grid-template-columns: 1fr; gap: 0; }
+  .journey__visual { display: none; }
+  .journey__step {
+    min-height: 0;
+    padding: clamp(28px, 7vw, 48px) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .journey__steps > .journey__step:first-child { border-top: 0; }
+  .journey__step-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 1px solid var(--rule);
+    background: var(--paper-cream);
+    margin-bottom: 22px;
+  }
+}
+
+/* ─── Lookbook tiles carrying real photography ───────────────────────── */
+.lb-tile.has-photo .placeholder {
+  background: linear-gradient(180deg,
+    rgba(20, 16, 10, 0.28) 0%,
+    rgba(20, 16, 10, 0) 34%,
+    rgba(20, 16, 10, 0) 55%,
+    rgba(20, 16, 10, 0.62) 100%);
+}
+.lb-tile.has-photo .corner,
+.lb-tile.has-photo .label,
+.lb-tile.has-photo .meta {
+  color: var(--paper-cream);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Mobile menu — secondary link group ─────────────────────────────── */
+.mobile-menu__secondary {
+  margin-top: 32px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mobile-menu__secondary a {
+  font-family: var(--serif);
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.mobile-menu__secondary a:hover { color: var(--oxblood); }
+
+/* ─── Generic feature grid (used by several new pages) ───────────────── */
+.feature-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.feature-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.feature-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.feature-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.feature-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.feature-grid h3 { margin-top: 8px; text-transform: uppercase; }
+
+/* ─── Journal (blog) ─────────────────────────────────────────────────── */
+.journal-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 44px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.journal-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-cream);
+  border: 1px solid var(--rule);
+  padding: clamp(28px, 3vw, 40px);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--t-med) ease, box-shadow var(--t-med) ease, background var(--t-med) ease;
+}
+.journal-card:hover {
+  transform: translateY(-4px);
+  background: var(--paper-warm);
+  box-shadow: 0 18px 40px -22px rgba(43, 31, 18, 0.45);
+  color: inherit;
+}
+.journal-card__eyebrow {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.journal-card__title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--navy);
+  margin-top: 12px;
+}
+.journal-card__excerpt {
+  font-family: var(--serif-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-top: 14px;
+}
+.journal-card__more {
+  margin-top: auto;
+  padding-top: 22px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.journal-card__more::after {
+  content: '→';
+  font-style: normal;
+  transition: transform var(--t-fast) ease;
+}
+.journal-card:hover .journal-card__more::after { transform: translateX(6px); color: var(--oxblood); }
+.journal-card__date {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 10px;
+}
+
+/* ─── Long-form article (journal entry) ──────────────────────────────── */
+.article {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+.article > * + * { margin-top: 1.35em; }
+.article p {
+  font-family: var(--serif-body);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.article h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--navy);
+  margin-top: 1.8em;
+}
+.article h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 30px);
+  color: var(--ink);
+  margin-top: 1.4em;
+}
+.article ul { padding-left: 1.4em; }
+.article li {
+  font-family: var(--serif-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-top: 0.5em;
+}
+.article strong { color: var(--ink); font-weight: 600; }
+.article em { font-style: italic; }
+.article a { color: var(--oxblood); border-bottom: 1px solid var(--rule-strong); }
+.article hr {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  margin: 2.4em auto;
+  width: 40%;
+}
+.article blockquote {
+  border-left: 2px solid var(--gold);
+  padding-left: 24px;
+  margin-left: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2vw, 26px);
+  color: var(--ink);
+}
+
+/* ─── Locations ──────────────────────────────────────────────────────── */
+.loc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.4vw, 36px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.loc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-cream);
+  border: 1px solid var(--rule);
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--t-med) ease, box-shadow var(--t-med) ease, background var(--t-med) ease;
+}
+.loc-card:hover {
+  transform: translateY(-4px);
+  background: var(--paper-warm);
+  box-shadow: 0 18px 40px -22px rgba(43, 31, 18, 0.45);
+  color: inherit;
+}
+.loc-card__city {
+  font-family: var(--serif);
+  font-size: 28px;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: 1.05;
+}
+.loc-card__headline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--oxblood);
+  margin-top: 6px;
+}
+.loc-card__blurb {
+  font-family: var(--serif-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-top: 14px;
+}
+.loc-card__more {
+  margin-top: auto;
+  padding-top: 22px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+.loc-card__more::after {
+  content: '→';
+  font-style: normal;
+  transition: transform var(--t-fast) ease;
+}
+.loc-card:hover .loc-card__more::after { transform: translateX(6px); color: var(--oxblood); }
+
+/* Chips / tag rows (services offered, nearby areas) */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.chip {
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .feature-grid.cols-3, .feature-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .loc-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .journal-list { grid-template-columns: 1fr; }
+  .feature-grid.cols-2, .feature-grid.cols-3, .feature-grid.cols-4 { grid-template-columns: 1fr; }
+  .loc-grid { grid-template-columns: 1fr; }
+}

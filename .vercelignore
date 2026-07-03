@@ -1,0 +1,6 @@
+_archive
+_handoff
+node_modules
+.git
+dist
+.astro

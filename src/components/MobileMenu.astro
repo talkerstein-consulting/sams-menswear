@@ -1,0 +1,29 @@
+---
+// Full-screen mobile menu drawer. Primary houses + a secondary link group
+// so every page is reachable on mobile without crowding the desktop nav.
+---
+<aside class="mobile-menu" data-mobile-menu>
+  <div class="mobile-menu__head">
+    <a href="/" class="brand">Sam<span class="brand__ampersand">'s</span> Menswear</a>
+    <button class="nav-toggle" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <line x1="5" y1="5" x2="21" y2="21"/>
+        <line x1="21" y1="5" x2="5" y2="21"/>
+      </svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile primary">
+    <a href="/wedding">Wedding <em>Suits</em></a>
+    <a href="/business">Business <em>Suits</em></a>
+    <a href="/custom">Custom <em>Suits &amp; Shirts</em></a>
+    <a href="/traditional">Traditional <em>Menswear</em></a>
+    <a href="/book" data-open-booking data-no-transition><em>Book a</em> Fitting</a>
+  </nav>
+  <nav class="mobile-menu__secondary" aria-label="Mobile secondary">
+    <a href="/about">About Sam</a>
+    <a href="/process">The Process</a>
+    <a href="/journal">Journal</a>
+    <a href="/locations">Locations</a>
+    <a href="/faq">FAQ</a>
+  </nav>
+</aside>

@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="The Process — Sam's Menswear · Vaughan"
+  description="How a bespoke garment is made at Sam's atelier: measure, design, cut, fit, wear. Five conversations, one fit."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">The Bespoke Process</div>
+        <h1>Five conversations. <em>One fit.</em></h1>
+        <p class="lede">A garment is not bought here so much as built — measured, drawn, cut and fitted across a handful of unhurried visits. This is what happens between the first handshake and the finished suit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process strip -->
+  <section class="section tight">
+    <div class="container">
+      <div class="process" data-reveal-stagger>
+        <div class="step">
+          <div class="step__no">Step I</div>
+          <div class="step__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 28 Q12 24 20 26 T35 24"/>
+              <line x1="8" y1="28" x2="8" y2="24"/><line x1="14" y1="27" x2="14" y2="23"/>
+              <line x1="20" y1="26" x2="20" y2="22"/><line x1="26" y1="25" x2="26" y2="22"/>
+              <line x1="32" y1="24" x2="32" y2="21"/>
+            </svg>
+          </div>
+          <div class="step__title">Measure</div>
+          <p class="step__copy">Twenty-six measurements. A long conversation about how you move, sit, and stand.</p>
+        </div>
+        <div class="step">
+          <div class="step__no">Step II</div>
+          <div class="step__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 32 L24 14 L30 20 L12 38 Z"/><line x1="22" y1="14" x2="28" y2="20"/>
+            </svg>
+          </div>
+          <div class="step__title">Design</div>
+          <p class="step__copy">Lapel, button stance, vent, pockets, lining — drawn together in pencil.</p>
+        </div>
+        <div class="step">
+          <div class="step__no">Step III</div>
+          <div class="step__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="29" r="4"/><circle cx="29" cy="29" r="4"/>
+              <path d="M14 26 L34 6"/><path d="M26 26 L6 6"/>
+            </svg>
+          </div>
+          <div class="step__title">Cut</div>
+          <p class="step__copy">Cloth selected, marked in chalk, cut to your pattern alone.</p>
+        </div>
+        <div class="step">
+          <div class="step__no">Step IV</div>
+          <div class="step__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 6 L34 30"/><circle cx="8" cy="8" r="2.6"/>
+              <path d="M14 28 Q22 26 26 32 Q30 38 18 36"/>
+            </svg>
+          </div>
+          <div class="step__title">Fit</div>
+          <p class="step__copy">Two or three fittings. The cloth learns the shape of you.</p>
+        </div>
+        <div class="step">
+          <div class="step__no">Step V</div>
+          <div class="step__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 12 Q20 6 24 6 Q28 6 28 10"/><path d="M20 12 L4 24 L36 24 Z"/>
+              <circle cx="20" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="step__title">Wear</div>
+          <p class="step__copy">Pressed, boxed, and yours — outliving the occasion it was made for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed breakdown -->
+  <section class="section"
+           style="background: linear-gradient(180deg, transparent 0%, var(--paper-cream) 50%, transparent 100%);">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">In detail</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">What each visit <em>actually is.</em></h2>
+        <div class="right">From tape to press</div>
+      </div>
+
+      <div class="feature-grid cols-2" data-reveal-stagger>
+        <div>
+          <div class="feature-num">Step I · Measure</div>
+          <h3 class="h-3">The first conversation</h3>
+          <p class="body-prose" style="margin-top: 12px;">About ninety minutes. Twenty-six measurements, taken by hand. Sam notes your posture, the slope of your shoulders, the way one side sits lower than the other. Bring a jacket you wear often — we'll measure it too, to learn what you already like and what you've been quietly tolerating.</p>
+        </div>
+        <div>
+          <div class="feature-num">Step II · Design</div>
+          <h3 class="h-3">Drawn in pencil</h3>
+          <p class="body-prose" style="margin-top: 12px;">Before a thread is cut, the garment is drawn: single or double-breasted, notch or peak, the button stance, the vent, the pockets, the lining you'd defend. We choose cloth from the house and mill books together, in the light of the room you'll wear it in.</p>
+        </div>
+        <div>
+          <div class="feature-num">Step III · Cut</div>
+          <h3 class="h-3">Chalk on cloth</h3>
+          <p class="body-prose" style="margin-top: 12px;">Your pattern is drafted and the cloth is marked in chalk and cut — to you, not to a size. This is the step that cannot be rushed and cannot be undone, which is why everything before it is so slow.</p>
+        </div>
+        <div>
+          <div class="feature-num">Step IV · Fit</div>
+          <h3 class="h-3">Two or three fittings</h3>
+          <p class="body-prose" style="margin-top: 12px;">Basted, intermediate, final. At each one the garment is put on, marked, opened up and corrected by hand — shoulder, sleeve pitch, drape, break. This is where a suit stops fitting a body and starts fitting <em>your</em> body.</p>
+        </div>
+        <div>
+          <div class="feature-num">Step V · Wear</div>
+          <h3 class="h-3">Pressed &amp; delivered</h3>
+          <p class="body-prose" style="margin-top: 12px;">Finished, pressed, boxed in tissue — and hand-delivered if you're in Vaughan or Thornhill. For weddings, we press the morning of and can walk it into the hall ourselves.</p>
+        </div>
+        <div>
+          <div class="feature-num">After · Kept</div>
+          <h3 class="h-3">The pattern stays</h3>
+          <p class="body-prose" style="margin-top: 12px;">Your pattern remains in the notebook. Reorders are faster — a phone call, a cloth, ten to fourteen days. Bodies change; bring the garment back any time for a re-press or a quiet letting-out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">How long</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">Plan the <em>timing.</em></h2>
+        <div class="right">Lead times, honestly</div>
+      </div>
+      <div class="feature-grid cols-4" data-reveal-stagger>
+        <div>
+          <div class="feature-num">First suit</div>
+          <h3 class="h-4" style="text-transform: uppercase;">8–12 weeks</h3>
+          <p class="body-prose" style="margin-top: 10px; font-size: 15px;">From first measure to delivery, across two or three fittings.</p>
+        </div>
+        <div>
+          <div class="feature-num">Weddings</div>
+          <h3 class="h-4" style="text-transform: uppercase;">9–12 months</h3>
+          <p class="body-prose" style="margin-top: 10px; font-size: 15px;">Start well ahead, especially for a party of groomsmen and fathers.</p>
+        </div>
+        <div>
+          <div class="feature-num">Reorders</div>
+          <h3 class="h-4" style="text-transform: uppercase;">10–14 days</h3>
+          <p class="body-prose" style="margin-top: 10px; font-size: 15px;">Once your pattern is on file, a new shirt or trouser is quick.</p>
+        </div>
+        <div>
+          <div class="feature-num">Alterations</div>
+          <h3 class="h-4" style="text-transform: uppercase;">~5 days</h3>
+          <p class="body-prose" style="margin-top: 10px; font-size: 15px;">Sleeve, hem and trouser work, particularly for existing clients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Start the first conversation</span>
+          </div>
+          <h2 class="h-1">Begin with a <em>fitting.</em></h2>
+          <p class="lede" style="margin-top: 24px;">The first visit is unhurried and costs nothing. We measure, talk cloth, and draw the first garment together.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num">647 · 458 · 0711</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

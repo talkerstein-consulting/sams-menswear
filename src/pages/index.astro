@@ -1,0 +1,399 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Sam's Menswear — Custom Tailoring · Vaughan, Thornhill, Toronto"
+  description="Sam's Menswear — a personal master tailor in Vaughan. Wedding suits, business suits, custom shirts and traditional menswear, measured personally."
+>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <section class="hero" aria-label="Sam's Menswear — the atelier">
+    <video
+      class="hero__video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+      poster="/media/hero-poster.jpg"
+    >
+      <source src="/media/hero.webm" type="video/webm" />
+      <source src="/media/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay">
+      <div class="container">
+        <div class="hero__copy" data-reveal>
+          <div class="eyebrow-rule">Bespoke Tailoring &middot; Vaughan</div>
+          <h1 class="hero__title">Measured. <em>Made.</em> Refined.</h1>
+          <p class="lede hero__lede">A personal master tailor for the men of Vaughan, Thornhill &amp; Toronto — every garment drawn, cut and fitted by hand.</p>
+          <a href="/book" class="btn is-dark hero__cta" data-open-booking data-no-transition>Book a Fitting</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EDITORIAL INTRO ─────────────────────────────────────────── -->
+  <section class="section" id="story">
+    <div class="container">
+      <div class="split wide-right" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="margin-bottom: 24px;">No. 01 &middot; A Personal Tailor</div>
+          <h2 class="h-1" style="text-transform: uppercase;">
+            A suit, <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">cut for one&nbsp;man.</em>
+          </h2>
+        </div>
+        <div>
+          <p class="lede" style="margin-bottom: 24px;">
+            Sam has been measuring shoulders, marking chalk and threading lapels for the men of Vaughan &amp; Thornhill for over twenty years. Every garment is drawn, cut and fitted personally — never outsourced, never rushed.
+          </p>
+          <p class="body-prose">
+            Whether you are standing at the altar, walking into a boardroom, fitting a son for his first kapota, or simply choosing how you want to be remembered when you walk into a room — the work begins the same way. A measuring tape. A pencil. A long conversation about the man inside the cloth.
+          </p>
+          <p class="body-prose" style="margin-top: 24px;">
+            <a href="/book" style="font-style: italic; font-family: var(--serif); letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Begin with a Conversation&nbsp;&nbsp;&rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICE GRID ─────────────────────────────────────────────── -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 02</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
+          For every <em>moment</em> a man dresses for.
+        </h2>
+        <div class="right">Four houses · One tailor</div>
+      </div>
+
+      <div class="service-grid" data-reveal-stagger>
+
+        <a href="/wedding" class="service-card">
+          <div class="service-card__sketch">
+            <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink);">
+              <path d="M28 28 C 26 22, 28 18, 34 16 C 42 14, 58 14, 66 16 C 72 18, 74 22, 72 28"/>
+              <path d="M28 28 L 22 110"/>
+              <path d="M72 28 L 78 110"/>
+              <path d="M22 110 L 78 110"/>
+              <path d="M44 28 L 38 60 L 46 70 L 50 100"/>
+              <path d="M56 28 L 62 60 L 54 70 L 50 100"/>
+              <path d="M50 28 L 42 24 L 42 32 L 50 30 L 58 32 L 58 24 L 50 28 Z" fill="var(--oxblood)" stroke="var(--ink)"/>
+              <circle cx="50" cy="78" r="1.3" fill="currentColor"/>
+              <circle cx="50" cy="90" r="1.3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="service-card__no">No. 01</div>
+          <div class="service-card__title">Wedding <em>Suits</em></div>
+          <p class="service-card__copy">The single most photographed suit of his life. Tuxedos, three-piece in midnight or oxblood, groom &amp; groomsmen drawn together.</p>
+          <div class="service-card__more">Wedding house</div>
+        </a>
+
+        <a href="/business" class="service-card">
+          <div class="service-card__sketch">
+            <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink);">
+              <path d="M28 28 C 26 22, 30 18, 36 16 C 42 14, 58 14, 64 16 C 70 18, 74 22, 72 28"/>
+              <path d="M28 28 L 22 110"/>
+              <path d="M72 28 L 78 110"/>
+              <path d="M22 110 L 78 110"/>
+              <path d="M40 28 L 36 56 L 50 80"/>
+              <path d="M60 28 L 64 56 L 50 80"/>
+              <path d="M40 28 L 50 32 L 60 28"/>
+              <path d="M50 80 L 50 108"/>
+              <path d="M28 86 L 44 84 L 46 92 L 30 94 Z"/>
+              <path d="M72 86 L 56 84 L 54 92 L 70 94 Z"/>
+              <circle cx="50" cy="88" r="1.4" fill="currentColor"/>
+              <circle cx="50" cy="98" r="1.4" fill="currentColor"/>
+              <path d="M48 32 L 46 60 L 50 70 L 54 60 L 52 32 Z" fill="var(--navy)" opacity="0.85"/>
+            </svg>
+          </div>
+          <div class="service-card__no">No. 02</div>
+          <div class="service-card__title">Business <em>Suits</em></div>
+          <p class="service-card__copy">Navy, charcoal, glen check. Cut for ten thousand handshakes and the long Toronto winter.</p>
+          <div class="service-card__more">Business house</div>
+        </a>
+
+        <a href="/custom" class="service-card">
+          <div class="service-card__sketch">
+            <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink);">
+              <path d="M30 30 L 20 26 L 16 36 L 26 42 L 30 110 L 70 110 L 74 42 L 84 36 L 80 26 L 70 30"/>
+              <path d="M30 30 L 42 36 L 50 30 L 58 36 L 70 30"/>
+              <path d="M50 30 L 50 110"/>
+              <circle cx="50" cy="46" r="1" fill="currentColor"/>
+              <circle cx="50" cy="58" r="1" fill="currentColor"/>
+              <circle cx="50" cy="70" r="1" fill="currentColor"/>
+              <circle cx="50" cy="82" r="1" fill="currentColor"/>
+              <circle cx="50" cy="94" r="1" fill="currentColor"/>
+              <path d="M16 36 L 14 50 L 22 52" />
+              <path d="M84 36 L 86 50 L 78 52" />
+            </svg>
+          </div>
+          <div class="service-card__no">No. 03</div>
+          <div class="service-card__title">Custom <em>Shirts</em></div>
+          <p class="service-card__copy">A wardrobe of shirts, each cut from the same pattern of your shoulders. Two-ply Egyptian, mother-of-pearl, monogrammed cuff.</p>
+          <div class="service-card__more">Custom house</div>
+        </a>
+
+        <a href="/traditional" class="service-card">
+          <div class="service-card__sketch">
+            <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink);">
+              <path d="M30 24 C 28 18, 32 14, 38 12 C 46 10, 54 10, 62 12 C 68 14, 72 18, 70 24"/>
+              <path d="M30 24 L 20 114"/>
+              <path d="M70 24 L 80 114"/>
+              <path d="M20 114 L 80 114"/>
+              <path d="M50 24 L 50 114"/>
+              <circle cx="50" cy="38"  r="1.4" fill="currentColor"/>
+              <circle cx="50" cy="54"  r="1.4" fill="currentColor"/>
+              <circle cx="50" cy="70"  r="1.4" fill="currentColor"/>
+              <circle cx="50" cy="86"  r="1.4" fill="currentColor"/>
+              <circle cx="50" cy="102" r="1.4" fill="currentColor"/>
+              <path d="M38 24 L 50 32 L 62 24"/>
+              <ellipse cx="50" cy="6" rx="14" ry="3" fill="var(--ink)" opacity="0.85"/>
+              <rect x="38" y="2" width="24" height="4" rx="0.5" fill="var(--ink)" opacity="0.85"/>
+            </svg>
+          </div>
+          <div class="service-card__no">No. 04</div>
+          <div class="service-card__title">Traditional <em>Menswear</em></div>
+          <p class="service-card__copy">Shabbos suits, bekishe &amp; kapota, bar mitzvah and shtreimel-ready formalwear. Handled with discretion and respect.</p>
+          <div class="service-card__more">Traditional house</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── THE BESPOKE JOURNEY (scroll-driven dressing sequence) ─────── -->
+  <section class="section journey" id="journey"
+           style="background: linear-gradient(180deg, transparent 0%, var(--paper-cream) 50%, transparent 100%);">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 03</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
+          The bespoke <em>journey.</em>
+        </h2>
+        <div class="right">Measure → finished gentleman</div>
+      </div>
+
+      <div class="journey__inner">
+        <!-- Sticky visual — crossfades as you scroll (desktop) -->
+        <div class="journey__visual" aria-hidden="true">
+          <div class="journey__stage">
+            <img class="journey__frame is-active" data-step="0" src="/media/journey/1-measure.webp" alt=""/>
+            <img class="journey__frame" data-step="1" src="/media/journey/2-shirt.webp" alt=""/>
+            <img class="journey__frame" data-step="2" src="/media/journey/3-jacket.webp" alt=""/>
+            <img class="journey__frame" data-step="3" src="/media/journey/4-trousers.webp" alt=""/>
+            <img class="journey__frame" data-step="4" src="/media/journey/5-complete.webp" alt=""/>
+            <div class="journey__rail">
+              <span class="is-active"></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrolling steps -->
+        <div class="journey__steps">
+          <article class="journey__step" data-step="0">
+            <img class="journey__step-img" src="/media/journey/1-measure.webp" alt="A gentleman being measured by the tailor" loading="lazy"/>
+            <div class="journey__no">No. 01 · Measured</div>
+            <h3 class="journey__title">It begins with a <em>conversation.</em></h3>
+            <p class="journey__copy">Twenty-six measurements, taken by hand. Sam learns how you actually move, sit and stand — before a single thread is cut.</p>
+          </article>
+
+          <article class="journey__step" data-step="1">
+            <img class="journey__step-img" src="/media/journey/2-shirt.webp" alt="The customer's bespoke shirt being fitted" loading="lazy"/>
+            <div class="journey__no">No. 02 · The Shirt</div>
+            <h3 class="journey__title">The <em>first layer.</em></h3>
+            <p class="journey__copy">A crisp bespoke shirt, cut from the pattern of your own shoulders — the foundation every finished look is built on.</p>
+          </article>
+
+          <article class="journey__step" data-step="2">
+            <img class="journey__step-img" src="/media/journey/3-jacket.webp" alt="The suit jacket being sketched, cut and fitted" loading="lazy"/>
+            <div class="journey__no">No. 03 · The Jacket</div>
+            <h3 class="journey__title">The jacket <em>takes shape.</em></h3>
+            <p class="journey__copy">Drawn in chalk, basted, and fitted to your frame across two or three visits. The cloth learns the shape of you.</p>
+          </article>
+
+          <article class="journey__step" data-step="3">
+            <img class="journey__step-img" src="/media/journey/4-trousers.webp" alt="The trousers being tailored to the customer" loading="lazy"/>
+            <div class="journey__no">No. 04 · The Trousers</div>
+            <h3 class="journey__title">Cut to <em>your line.</em></h3>
+            <p class="journey__copy">Tailored trousers, finished to your shoe with the right break. The suit comes together as one clean line.</p>
+          </article>
+
+          <article class="journey__step" data-step="4">
+            <img class="journey__step-img" src="/media/journey/5-complete.webp" alt="The finished bespoke suit on the customer" loading="lazy"/>
+            <div class="journey__no">No. 05 · Complete</div>
+            <h3 class="journey__title">The finished <em>gentleman.</em></h3>
+            <p class="journey__copy">Pressed, boxed, and yours. You walk out of the atelier a little taller than you walked in.</p>
+            <div class="journey__cta">
+              <a href="/book" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);" data-open-booking data-no-transition>Begin your fitting</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── LOOKBOOK ────────────────────────────────────────────────── -->
+  <section class="section" id="lookbook">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 04</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
+          From the <em>lookbook.</em>
+        </h2>
+        <div class="right">A folio of recent work</div>
+      </div>
+
+      <div class="lookbook" data-reveal>
+        <div class="lb-tile lb-1 has-photo"><img src="/media/lookbook/bench.jpg" alt="Sam at the tailoring bench, hand-stitching a garment" loading="lazy"/><div class="placeholder"><div class="corner">Folio · I</div><div class="label">At the bench</div><div class="meta">The workshop</div></div></div>
+        <div class="lb-tile lb-2 has-photo"><img src="/media/lookbook/cuffs.png" alt="Custom dress-shirt cuffs" loading="lazy"/><div class="placeholder"><div class="corner">Folio · II</div><div class="label">Cuff &amp; placket</div><div class="meta">Custom shirt detail</div></div></div>
+        <div class="lb-tile lb-3 has-photo"><img src="/media/lookbook/dress-shirt.png" alt="A custom dress shirt, front" loading="lazy"/><div class="placeholder"><div class="corner">Folio · III</div><div class="label">Custom dress shirt</div><div class="meta">Cut from your pattern</div></div></div>
+        <div class="lb-tile lb-4 has-photo"><img src="/media/lookbook/blazer.jpg" alt="A tailored blazer by Sam's Menswear" loading="lazy"/><div class="placeholder"><div class="corner">Folio · IV</div><div class="label">Tailored blazer</div><div class="meta">Soft shoulder</div></div></div>
+        <div class="lb-tile lb-5 has-photo"><img src="/media/lookbook/chesterfield.jpg" alt="A Chesterfield overcoat by Sam's Menswear" loading="lazy"/><div class="placeholder"><div class="corner">Folio · V</div><div class="label">Chesterfield overcoat</div><div class="meta">Winter cloth</div></div></div>
+        <div class="lb-tile lb-6 has-photo"><img src="/media/lookbook/trousers.jpg" alt="Pleated tailored trousers" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VI</div><div class="label">Pleated trousers</div><div class="meta">Cut to the shoe</div></div></div>
+        <div class="lb-tile lb-7 has-photo"><img src="/media/lookbook/alterations.jpg" alt="Final alterations in the fitting room" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VII</div><div class="label">Final alterations</div><div class="meta">The fitting room</div></div></div>
+        <div class="lb-tile lb-8 has-photo"><img src="/media/lookbook/topcoat.jpg" alt="A tailored topcoat" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VIII</div><div class="label">The topcoat</div><div class="meta">House cloth</div></div></div>
+        <div class="lb-tile lb-9 has-photo"><img src="/media/lookbook/overcoat.jpg" alt="A tailored overcoat" loading="lazy"/><div class="placeholder"><div class="corner">Folio · IX</div><div class="label">The overcoat</div><div class="meta">Outerwear</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ────────────────────────────────────────────── -->
+  <section class="section tight" id="testimonials">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 05</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
+          What the <em>men say.</em>
+        </h2>
+        <div class="right">From the fitting room</div>
+      </div>
+
+      <div class="quotes" data-reveal-stagger>
+        <blockquote class="quote">
+          <span class="quote__mark">“</span>
+          <p class="quote__text">Sam doesn't make suits. He makes the version of you who walks taller. Three weddings in his jackets and counting.</p>
+          <div class="quote__attr">D. Friedman · Groom, 2024</div>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="quote__mark">“</span>
+          <p class="quote__text">My father bought his Shabbos suit here in 1996. I bought my son's bar mitzvah suit here last winter. Some things you don't change.</p>
+          <div class="quote__attr">A. Rosenberg · Vaughan</div>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="quote__mark">“</span>
+          <p class="quote__text">Bay Street suit, but every fitting felt like sitting with an uncle. The kind of person who actually remembers your shoulders.</p>
+          <div class="quote__attr">M. Cohen · Toronto</div>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VISIT BLOCK ─────────────────────────────────────────────── -->
+  <section class="section" id="visit">
+    <div class="container">
+      <div class="visit-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="margin-bottom: 24px;">No. 06 · The Atelier</div>
+          <h2 class="h-1" style="text-transform: uppercase;">Visit Sam <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">in Vaughan.</em></h2>
+          <p class="lede" style="margin-top: 24px;">
+            The atelier is a quiet room of wool, light and patience. Visits are by appointment, so the conversation can be unhurried.
+          </p>
+          <dl style="margin-top: 36px; font-family: var(--serif); font-size: 17px; line-height: 1.6;">
+            <dt class="small-tag">Address</dt>
+            <dd style="margin: 4px 0 18px; font-size: 19px; color: var(--ink);">
+              318 Charlton Avenue &middot; Vaughan, Ontario<br/>
+              <span class="chapter-no" style="font-style: italic;">By appointment only</span>
+            </dd>
+            <dt class="small-tag">Telephone</dt>
+            <dd style="margin: 4px 0 18px; font-size: 22px; letter-spacing: 0.06em; color: var(--ink);">647 · 458 · 0711</dd>
+            <dt class="small-tag">Hours</dt>
+            <dd style="margin: 4px 0 0; font-size: 17px; color: var(--ink-soft);">
+              Sun – Thu &middot; by appointment<br/>
+              Friday &middot; until two hours before sundown<br/>
+              <span style="color: var(--ink-mute); font-style: italic;">Closed Shabbos &amp; Yom Tov</span>
+            </dd>
+          </dl>
+          <a href="/book" class="btn is-dark" style="margin-top: 36px; color: var(--ink); border-color: var(--ink);" data-open-booking data-no-transition>Request an appointment</a>
+        </div>
+
+        <div class="visit-map" aria-label="Map placeholder of the atelier in Vaughan">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" style="width:100%; height:100%; display:block;">
+            <defs>
+              <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
+                <path d="M22 0H0V22" fill="none" stroke="rgba(43,31,18,0.06)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+            <g fill="none" stroke="rgba(43,31,18,0.34)" stroke-linecap="round" stroke-width="1.8">
+              <path d="M 0 90 L 400 110"/>
+              <path d="M 0 200 L 400 220"/>
+              <path d="M 120 0 L 100 320"/>
+              <path d="M 260 0 L 280 320"/>
+              <path d="M 60 60 L 380 280" stroke-width="1.2"/>
+            </g>
+            <g fill="none" stroke="rgba(180,138,58,0.5)" stroke-width="3.5" stroke-linecap="round">
+              <path d="M 0 250 Q 200 230 400 260"/>
+            </g>
+            <text x="20" y="100" fill="rgba(43,31,18,0.5)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">RUTHERFORD&nbsp;RD</text>
+            <text x="20" y="210" fill="rgba(43,31,18,0.5)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">CHARLTON&nbsp;AVE</text>
+            <text x="295" y="200" fill="rgba(180,138,58,0.6)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">HWY&nbsp;7</text>
+            <g transform="translate(210 160)">
+              <circle r="22" fill="rgba(107,34,40,0.10)"/>
+              <circle r="14" fill="rgba(107,34,40,0.18)"/>
+              <circle r="6" fill="var(--oxblood)"/>
+              <text x="0" y="-30" text-anchor="middle" fill="var(--ink)" font-family="Cormorant Garamond" font-style="italic" font-size="14" letter-spacing="3">SAM'S&nbsp;ATELIER</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BOOKING CTA ─────────────────────────────────────────────── -->
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">A better fit starts here</span>
+          </div>
+          <h2 class="h-1">Begin with a <em>conversation.</em></h2>
+          <p class="lede" style="margin-top: 24px;">
+            The first fitting costs nothing. Bring a jacket you love &mdash; or one you don't. We'll find out which.
+          </p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num">647 · 458 · 0711</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // The Bespoke Journey — crossfade the sticky visual as each step
+    // crosses the viewport centre. Opacity-only (GPU-cheap), no scroll scrubbing.
+    const frames = document.querySelectorAll('.journey__frame');
+    const dots = document.querySelectorAll('.journey__rail span');
+    const steps = document.querySelectorAll('.journey__step');
+    if (frames.length && steps.length) {
+      const setActive = (i) => {
+        frames.forEach((f) => f.classList.toggle('is-active', f.dataset.step === i));
+        dots.forEach((d, di) => d.classList.toggle('is-active', String(di) === i));
+      };
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.dataset.step); });
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+      );
+      steps.forEach((s) => io.observe(s));
+    }
+  </script>
+
+</BaseLayout>

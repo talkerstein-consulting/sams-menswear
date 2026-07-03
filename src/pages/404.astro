@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Page not found — Sam's Menswear"
+  description="That page has been let out, taken in, or never cut. Find your way back to the atelier."
+>
+  <section class="page-hero" style="text-align: center;">
+    <div class="container">
+      <div data-reveal style="max-width: 44rem; margin: 0 auto;">
+        <div class="eyebrow-rule both" style="justify-content: center;">Error № 404</div>
+        <h1>A thread <em>came loose.</em></h1>
+        <p class="lede" style="margin: 28px auto 0;">The page you're after has been let out, taken in, or was never cut. Let's get you back to the atelier.</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+          <a href="/" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);">Return home</a>
+          <a href="/book" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);" data-open-booking data-no-transition>Book a Fitting</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">Or find</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">The <em>four houses.</em></h2>
+        <div class="right">One tailor</div>
+      </div>
+      <div class="loc-grid" data-reveal-stagger>
+        <a class="loc-card" href="/wedding"><div class="loc-card__city">Wedding</div><div class="loc-card__headline">The suit he'll be remembered in.</div><div class="loc-card__more">Wedding house</div></a>
+        <a class="loc-card" href="/business"><div class="loc-card__city">Business</div><div class="loc-card__headline">For ten thousand handshakes.</div><div class="loc-card__more">Business house</div></a>
+        <a class="loc-card" href="/custom"><div class="loc-card__city">Custom</div><div class="loc-card__headline">One pattern. One body.</div><div class="loc-card__more">Custom house</div></a>
+        <a class="loc-card" href="/traditional"><div class="loc-card__city">Traditional</div><div class="loc-card__headline">For Shabbos, Yom Tov &amp; every simcha.</div><div class="loc-card__more">Traditional house</div></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

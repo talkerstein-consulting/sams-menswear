@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('journal');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const fmt = (d) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<BaseLayout
+  title={`${entry.data.title} — Sam's Menswear`}
+  description={entry.data.excerpt}
+  ogType="article"
+>
+  <article>
+    <section class="page-hero">
+      <div class="container">
+        <div data-reveal style="max-width: 44rem; margin: 0 auto; text-align: center;">
+          <div class="eyebrow-rule both" style="justify-content: center;">{entry.data.eyebrow}</div>
+          <h1 style="text-transform: none;">{entry.data.title}</h1>
+          <p class="chapter-no" style="margin-top: 20px;">
+            {fmt(entry.data.date)}{entry.data.location ? ` · ${entry.data.location}` : ''}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="article" data-reveal>
+          <Content />
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">The next step</span>
+          </div>
+          <h2 class="h-1">Begin with a <em>conversation.</em></h2>
+          <p class="lede" style="margin-top: 24px;">A first fitting is unhurried and costs nothing. Come sit with Sam.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or read <a href="/journal" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">more notes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

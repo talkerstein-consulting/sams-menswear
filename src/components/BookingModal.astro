@@ -1,0 +1,26 @@
+---
+// Booking wizard modal shell. booking.js renders the 5 steps into .bm-body.
+// Present on every page so the "Book a Fitting" CTA works site-wide.
+---
+<div id="booking-modal" class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+  <div class="booking-modal__panel">
+    <div class="bm-head">
+      <div class="bm-progress">
+        <span class="label">Step 1 of 5 · House</span>
+        <span class="dots"></span>
+      </div>
+      <button type="button" class="bm-close" aria-label="Close booking">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line x1="3" y1="3" x2="13" y2="13"/>
+          <line x1="13" y1="3" x2="3" y2="13"/>
+        </svg>
+      </button>
+    </div>
+    <div class="bm-body" id="bm-title"></div>
+    <div class="bm-foot">
+      <button type="button" class="bm-back">Back</button>
+      <div class="bm-summary summary-mini"></div>
+      <button type="button" class="bm-next"><span>Continue</span></button>
+    </div>
+  </div>
+</div>

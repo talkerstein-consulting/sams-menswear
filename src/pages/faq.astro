@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  { q: 'What does a first fitting cost?', a: 'Nothing. The first consultation is unhurried, candid, and obligation-free. If we work together, we quote the garment honestly before any cloth is cut.' },
+  { q: 'How long does a suit take?', a: 'A first bespoke suit takes 8–12 weeks from measure to delivery, across two or three fittings. Wedding work is started 9–12 months out.' },
+  { q: 'How much does a bespoke suit cost?', a: 'It depends entirely on the cloth and the construction, so we quote each commission honestly on the day rather than posting a number that would be wrong for half of clients. The first conversation is where we find the right range for you — with no pressure.' },
+  { q: 'Do you alter suits I bought elsewhere?', a: 'Yes — particularly for our existing clients. Sleeve, hem, and trouser alterations are usually finished within about five business days.' },
+  { q: 'Can you come to my office or home?', a: 'For wedding parties, executives with consistent travel, and clients who would rather host — yes. Sam brings the tape, the cloths, and the notebook to you across the GTA.' },
+  { q: 'Do you coordinate a whole wedding party?', a: 'That is much of what we do. Up to ten groomsmen, fathers and the groom, drawn from the same fabric run with consistent lapel, button and pocket detail, so the photographs read as one tailored line.' },
+  { q: 'Do you make traditional garments?', a: 'Yes — bekishe, kapota, kittel, Shabbos suits, bar-mitzvah and chosson tailoring, handled with discretion and respect. See the Traditional house for the full range.' },
+  { q: 'Is the atelier open on Shabbos or Yom Tov?', a: 'No. We are closed all Shabbos, Yom Tov and chol hamoed. Fridays we close two hours before sundown to give the family time to prepare.' },
+  { q: 'What should I bring to the first visit?', a: 'A jacket you wear often, if you can — we will measure it to learn what you already like. Otherwise, just yourself. For weddings, a photo of the gown, the venue and the colour story helps.' },
+  { q: 'Is parking easy?', a: 'Yes — on-site, with a few spots reserved for clients, five minutes off Highway 7 and a short walk from Rutherford GO.' },
+  { q: 'Do you keep my measurements?', a: 'Always. Your pattern is drafted on the first visit and kept on file. Reorders come faster because we never start from zero again.' },
+  { q: 'How do I book?', a: 'Use the Book a Fitting button anywhere on the site, call 647 · 458 · 0711, or leave your number for a same-business-day callback. Whichever is easiest.' },
+];
+---
+<BaseLayout
+  title="FAQ — Sam's Menswear · Vaughan"
+  description="Honest answers before you book — cost, timing, alterations, wedding parties, traditional garments and Shabbos hours at Sam's Menswear in Vaughan."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">Before you book</div>
+        <h1>A few <em>honest answers.</em></h1>
+        <p class="lede">The questions men ask most often, answered plainly. If yours isn't here, call the atelier — Sam would rather talk it through than have you guess.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="feature-grid cols-2" data-reveal-stagger>
+        {faqs.map((f) => (
+          <div>
+            <h3 class="h-3" style="text-transform: uppercase; color: var(--navy);">{f.q}</h3>
+            <p class="body-prose" style="margin-top: 12px;">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Still have a question?</span>
+          </div>
+          <h2 class="h-1">Just <em>ask Sam.</em></h2>
+          <p class="lede" style="margin-top: 24px;">Leave your number and someone in the family calls back the same business day — or book a first fitting and ask in person.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num">647 · 458 · 0711</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

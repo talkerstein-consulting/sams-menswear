@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('journal')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const fmt = (d) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<BaseLayout
+  title="The Journal — Sam's Menswear · Vaughan"
+  description="Notes from the bench — on cloth, fit, weddings and tradition, from Sam's atelier in Vaughan."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">The Atelier &middot; Notes</div>
+        <h1>From the <em>notebook.</em></h1>
+        <p class="lede">Short essays from the bench — on cloth, fit, the wedding season, and the traditional garments a community lives its life in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="journal-list" data-reveal-stagger>
+        {entries.map((e) => (
+          <a class="journal-card" href={`/journal/${e.id}`}>
+            <div class="journal-card__eyebrow">{e.data.eyebrow}</div>
+            <div class="journal-card__title">{e.data.title}</div>
+            <p class="journal-card__excerpt">{e.data.excerpt}</p>
+            <div class="journal-card__date">{fmt(e.data.date)}{e.data.location ? ` · ${e.data.location}` : ''}</div>
+            <div class="journal-card__more">Read the note</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Enough reading</span>
+          </div>
+          <h2 class="h-1">Begin with a <em>conversation.</em></h2>
+          <p class="lede" style="margin-top: 24px;">The first fitting costs nothing. Bring a jacket you love — or one you don't. We'll find out which.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num">647 · 458 · 0711</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

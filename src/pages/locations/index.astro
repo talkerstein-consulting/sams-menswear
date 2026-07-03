@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { locations } from '../../data/locations.js';
+---
+<BaseLayout
+  title="Locations — Sam's Menswear · Vaughan, Thornhill, Toronto"
+  description="Sam's Menswear serves Vaughan, Thornhill, North York, Toronto, Richmond Hill and Markham — at the atelier or, for parties and executives, wherever you are."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">Across the GTA</div>
+        <h1>Where Sam <em>works.</em></h1>
+        <p class="lede">The atelier is in Vaughan. But for wedding parties, executives and clients who'd rather host, Sam brings the tape and the cloth book to you — across Thornhill, Toronto and the north end.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="loc-grid" data-reveal-stagger>
+        {locations.map((l) => (
+          <a class="loc-card" href={`/locations/${l.slug}`}>
+            <div class="loc-card__city">{l.city}</div>
+            <div class="loc-card__headline">{l.headline}</div>
+            <p class="loc-card__blurb">{l.blurb}</p>
+            <div class="loc-card__more">See {l.city}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Wherever you are</span>
+          </div>
+          <h2 class="h-1">Book at the atelier, <em>or have Sam over.</em></h2>
+          <p class="lede" style="margin-top: 24px;">Tell us where you are and what the occasion is. We'll find the easiest way to get you measured.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num">647 · 458 · 0711</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
