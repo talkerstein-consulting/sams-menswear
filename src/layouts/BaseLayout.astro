@@ -12,6 +12,40 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+
+// Site-wide LocalBusiness + founder — every page carries it (local SEO + AEO/GEO).
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'ClothingStore',
+  '@id': origin + '/#business',
+  name: "Sam's Menswear",
+  description: 'Custom and bespoke tailoring — suits, shirts, wedding and traditional menswear — from a personal master tailor in Vaughan.',
+  url: origin,
+  telephone: '+1-647-458-0711',
+  email: 'samskosher@gmail.com',
+  image: origin + '/media/hero-poster.jpg',
+  priceRange: '$$-$$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '318 Charlton Avenue',
+    addressLocality: 'Vaughan',
+    addressRegion: 'ON',
+    postalCode: 'L4J 6H4',
+    addressCountry: 'CA',
+  },
+  areaServed: ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'],
+  founder: { '@type': 'Person', name: 'Sam Talkar', jobTitle: 'Master Tailor' },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '10:00', closes: '18:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '11:00', closes: '19:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '10:00', closes: '14:00' },
+  ],
+  sameAs: [
+    'https://www.facebook.com/CustomSuitsToronto/',
+    'https://instagram.com/samscustommenswear',
+  ],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -43,6 +77,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="stylesheet" href="/transitions.css" />
     <link rel="stylesheet" href="/booking.css" />
     <link rel="stylesheet" href="/site-extra.css" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
   </head>
   <body>
     <SiteHeader nav={nav} />

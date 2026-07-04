@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqBlock from '../../components/FaqBlock.astro';
+import { getCollection, render } from 'astro:content';
+import { faqs } from '../../data/faqs.js';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('guides');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, all: entries } }));
+}
+
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const fmt = (x) => x.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+// related: explicit slugs, else same-pillar siblings
+let related = [];
+if (d.related?.length) related = d.related.map((s) => all.find((e) => e.id === s)).filter(Boolean);
+if (related.length < 3) {
+  const sibs = all.filter((e) => e.id !== entry.id && e.data.pillar === d.pillar && !related.includes(e));
+  related = [...related, ...sibs].slice(0, 3);
+}
+const faqItems = d.faqCats?.length ? faqs.filter((f) => d.faqCats.includes(f.cat)) : [];
+
+const site = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const articleSchema = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: d.title, description: d.description,
+  dateModified: d.updated.toISOString(),
+  author: { '@type': 'Person', name: 'Sam Talkar', jobTitle: 'Master Tailor', worksFor: { '@type': 'Organization', name: "Sam's Menswear" } },
+  publisher: { '@type': 'Organization', name: "Sam's Menswear" },
+  mainEntityOfPage: url,
+};
+const crumbs = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: site + '/guides' },
+    { '@type': 'ListItem', position: 3, name: d.title, item: url },
+  ],
+};
+---
+<BaseLayout title={`${d.title} — Sam's Menswear`} description={d.description} ogType="article">
+  <article>
+    <section class="page-hero" style="padding-bottom: 0;">
+      <div class="container">
+        <nav class="crumbs" data-reveal aria-label="Breadcrumb">
+          <a href="/">Home</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <em>{d.pillar}</em>
+        </nav>
+        <div data-reveal style="max-width: 46rem;">
+          <div class="eyebrow-rule">{d.eyebrow} · {d.pillar}</div>
+          <h1 style="text-transform: none;">{d.title}</h1>
+          <p class="chapter-no" style="margin-top: 18px;">Updated {fmt(d.updated)} · by Sam Talkar</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: clamp(32px,4vw,52px);">
+      <div class="container">
+        <div class="article" data-reveal>
+          <Content />
+        </div>
+      </div>
+    </section>
+  </article>
+
+  {faqItems.length > 0 && (
+    <section class="section tight" style="background: linear-gradient(180deg, transparent, var(--paper-cream) 50%, transparent);">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div class="chapter-no">Common questions</div>
+          <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">While we're <em>here.</em></h2>
+          <div class="right">Straight answers</div>
+        </div>
+        <div style="max-width: 60rem; margin-top: 32px;" data-reveal><FaqBlock items={faqItems} /></div>
+      </div>
+    </section>
+  )}
+
+  {related.length > 0 && (
+    <section class="section tight">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div class="chapter-no">Keep reading</div>
+          <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">More from the <em>bench.</em></h2>
+          <div class="right">{d.pillar}</div>
+        </div>
+        <div class="journal-list" data-reveal>
+          {related.map((g) => (
+            <a class="journal-card" href={`/guides/${g.id}`}>
+              <div class="journal-card__eyebrow">{g.data.eyebrow}</div>
+              <div class="journal-card__title">{g.data.title}</div>
+              <p class="journal-card__excerpt">{g.data.description}</p>
+              <div class="journal-card__more">Read the guide</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">The next step</span>
+          </div>
+          <h2 class="h-1">Begin with a <em>conversation.</em></h2>
+          <p class="lede" style="margin-top: 24px;">A first fitting is unhurried and costs nothing. Come sit with Sam — or design your suit first.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or <a href="/design" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">open the drawing board</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(crumbs)} />
+</BaseLayout>
