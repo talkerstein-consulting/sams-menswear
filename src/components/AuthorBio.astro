@@ -1,0 +1,27 @@
+---
+// E-E-A-T author box — Sam's real credentials + photo on every guide & journal article.
+// Establishes experience, expertise, authority.
+const { reviewed = true } = Astro.props;
+---
+<aside class="author-bio" data-reveal>
+  <div class="author-bio__portrait">
+    <img src="/media/sam/sam-avatar.webp" alt="Sam Talkar, master tailor, at the Vaughan atelier" loading="lazy" width="64" height="64"/>
+  </div>
+  <div class="author-bio__body">
+    <div class="author-bio__k">{reviewed ? 'Written & reviewed by' : 'Written by'}</div>
+    <div class="author-bio__name">Sam Talkar <span>· Master Tailor, Vaughan</span></div>
+    <p class="author-bio__desc">
+      Sam has cut suits by hand for over thirty years — the last decade-plus from his own atelier
+      in Vaughan, on the Thornhill line. Bespoke and made-to-measure suits, wedding parties for the
+      groom, groomsmen and fathers, and traditional Jewish menswear, for men across the GTA. Every
+      garment is measured, cut and fitted personally — never outsourced.
+    </p>
+    <div class="author-bio__links">
+      <a href="/about">More about Sam</a>
+      <span aria-hidden="true">·</span>
+      <a href="/reviews">4.7★ · 150+ Google reviews</a>
+      <span aria-hidden="true">·</span>
+      <a href="/book" data-open-booking data-no-transition>Book a fitting</a>
+    </div>
+  </div>
+</aside>

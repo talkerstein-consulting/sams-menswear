@@ -20,6 +20,7 @@ const guides = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    tldr: z.string().optional(),        // answer-first "short answer" box at the top (AEO)
     pillar: z.string(),                 // e.g. "Bespoke Suits"
     pillarHref: z.string().optional(),  // link for the pillar (service/guide)
     eyebrow: z.string().default('The Guide'),

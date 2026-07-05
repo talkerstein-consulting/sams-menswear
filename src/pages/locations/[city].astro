@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqBlock from '../../components/FaqBlock.astro';
 import { locations, getLocation } from '../../data/locations.js';
 
 export function getStaticPaths() {
@@ -7,16 +8,53 @@ export function getStaticPaths() {
 }
 
 const { loc } = Astro.props;
+const site = 'https://customsuitandshirt.com';
+const intro = Array.isArray(loc.intro) ? loc.intro : (loc.intro ? [loc.intro] : []);
+
+// Breadcrumb schema — Home › Locations › City
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` },
+    { '@type': 'ListItem', position: 2, name: 'Locations', item: `${site}/locations` },
+    { '@type': 'ListItem', position: 3, name: loc.city, item: `${site}/locations/${loc.slug}` },
+  ],
+};
+
+// Per-city Service schema — local signal, provided by the business, served in this city.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/locations/${loc.slug}#service`,
+  name: `Custom Tailoring in ${loc.city}`,
+  serviceType: 'Bespoke and made-to-measure tailoring',
+  provider: { '@id': `${site}/#business` },
+  areaServed: [
+    { '@type': 'City', name: loc.city },
+    ...((loc.neighbourhoods || []).map((n) => ({ '@type': 'Place', name: n }))),
+  ],
+  url: `${site}/locations/${loc.slug}`,
+  description: loc.blurb,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `Sam's Menswear — ${loc.city}`,
+    itemListElement: (loc.services || []).map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s },
+    })),
+  },
+};
 ---
 <BaseLayout
-  title={`Tailoring in ${loc.city} — Sam's Menswear`}
-  description={`${loc.headline} ${loc.blurb}`}
+  title={loc.metaTitle || `Custom Suits in ${loc.city} — Sam's Menswear`}
+  description={loc.metaDesc || `${loc.headline} ${loc.blurb}`}
 >
   <section class="page-hero">
     <div class="container">
       <div data-reveal>
         <div class="eyebrow-rule">Serving {loc.city}</div>
-        <h1>Tailoring in <em>{loc.city}.</em></h1>
+        <h1>{loc.h1 ? <Fragment set:html={loc.h1} /> : <>Tailoring in <em>{loc.city}.</em></>}</h1>
         <p class="lede">{loc.headline}</p>
       </div>
     </div>
@@ -27,13 +65,33 @@ const { loc } = Astro.props;
       <div class="visit-block" data-reveal>
         <div>
           <p class="body-prose" style="font-size: 20px;">{loc.blurb}</p>
+          {intro.map((p) => <p class="body-prose" style="margin-top: 18px;">{p}</p>)}
 
-          <h4 class="h-4" style="text-transform: uppercase; margin-top: 36px; color: var(--navy);">What Sam does here</h4>
+          <p class="body-prose" style="margin-top: 18px;">
+            For {loc.city} clients, Sam makes
+            <a href="/suits" style="color: var(--ink); border-bottom: 1px solid var(--rule);">custom suits</a>,
+            <a href="/wedding" style="color: var(--ink); border-bottom: 1px solid var(--rule);">wedding suits &amp; tuxedos</a>,
+            <a href="/business" style="color: var(--ink); border-bottom: 1px solid var(--rule);">business suits</a>,
+            <a href="/custom" style="color: var(--ink); border-bottom: 1px solid var(--rule);">custom shirts</a> and
+            <a href="/traditional" style="color: var(--ink); border-bottom: 1px solid var(--rule);">traditional menswear</a> —
+            all measured personally.
+          </p>
+
+          <h2 class="h-4" style="text-transform: uppercase; margin-top: 36px; color: var(--navy);">What Sam does here</h2>
           <div class="chip-row">
             {loc.services.map((s) => <span class="chip">{s}</span>)}
           </div>
 
-          <h4 class="h-4" style="text-transform: uppercase; margin-top: 32px; color: var(--navy);">Also nearby</h4>
+          {loc.neighbourhoods && loc.neighbourhoods.length > 0 && (
+            <>
+              <h2 class="h-4" style="text-transform: uppercase; margin-top: 32px; color: var(--navy);">Neighbourhoods Sam serves</h2>
+              <div class="chip-row">
+                {loc.neighbourhoods.map((n) => <span class="chip">{n}</span>)}
+              </div>
+            </>
+          )}
+
+          <h2 class="h-4" style="text-transform: uppercase; margin-top: 32px; color: var(--navy);">Also nearby</h2>
           <div class="chip-row">
             {loc.nearby.map((n) => <span class="chip">{n}</span>)}
           </div>
@@ -82,6 +140,18 @@ const { loc } = Astro.props;
     </div>
   </section>
 
+  {loc.faqs && loc.faqs.length > 0 && (
+    <section class="section tight">
+      <div class="container">
+        <div data-reveal style="max-width: 760px;">
+          <div class="eyebrow-rule">{loc.city} — good to know</div>
+          <h2 class="h-2" style="margin-bottom: 24px;">Questions from <em>{loc.city}</em> clients</h2>
+          <FaqBlock items={loc.faqs} />
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="section flush">
     <div class="container">
       <div class="booking-block" data-reveal>
@@ -101,4 +171,7 @@ const { loc } = Astro.props;
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 </BaseLayout>

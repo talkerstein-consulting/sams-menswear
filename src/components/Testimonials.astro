@@ -1,0 +1,14 @@
+---
+// Renders real Google reviews in the house .quotes markup.
+// Pass `items` (array from reviews.js) — pre-filtered/sliced by the caller.
+const { items = [] } = Astro.props;
+---
+<div class="quotes" data-reveal-stagger>
+  {items.map((r) => (
+    <blockquote class="quote">
+      <span class="quote__mark">“</span>
+      <p class="quote__text">{r.text}</p>
+      <div class="quote__attr">{r.name} · <span style="color: var(--gold);">★ Google</span></div>
+    </blockquote>
+  ))}
+</div>

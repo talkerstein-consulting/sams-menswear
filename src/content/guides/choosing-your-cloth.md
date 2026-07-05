@@ -1,6 +1,7 @@
 ---
 title: "Choosing your cloth: a plain guide"
 description: "How to choose suit cloth and colour without knowing the jargon — winter vs summer weights, what Super numbers mean, and where to start."
+tldr: "Choosing cloth starts with one question — where and how often will you wear it. Make your first suit navy and your second charcoal, pick the weight for the season, and remember finer Super numbers aren't always better; it depends on how hard the suit will work."
 pillar: "Cloth"
 pillarHref: "/fabrics"
 eyebrow: "Cloth"

@@ -1,0 +1,39 @@
+---
+// ReviewsWall — prominent social-proof block built from REAL Google reviews
+// (src/data/reviews.js). Shows the aggregate, a grid of reviews, and links to
+// the full Google profile. Reusable on the homepage, /reviews, etc.
+//
+// ▶ Want a LIVE auto-updating 100+ review widget instead of the curated grid?
+//   Create a free Google-reviews widget (Elfsight / Trustindex / Shapo),
+//   then drop its <div> + <script> in place of the .rev-grid below.
+import { reviews as allReviews, reviewAggregate } from '../data/reviews.js';
+const { items = allReviews, count = 6 } = Astro.props;
+const shown = items.slice(0, count);
+---
+<div class="reviews-wall" data-reveal>
+  <div class="rev-aggregate rw-agg">
+    <span class="rev-stars">★★★★★</span>
+    <strong>{reviewAggregate.ratingValue}</strong>
+    <span>from <strong style="font-size:18px;">150+</strong> verified 5-star reviews on
+      <a href={reviewAggregate.sourceUrl} target="_blank" rel="noopener" data-no-transition>Google</a></span>
+  </div>
+
+  <div class="rev-grid" data-reveal-stagger>
+    {shown.map((r) => (
+      <div class="rev-card">
+        <div class="rev-card__stars">★★★★★</div>
+        <p class="rev-card__text">{r.text}</p>
+        <div class="rev-card__attr">
+          <strong>{r.name}</strong>
+          <span>★ Verified Google review</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <p class="rw-more">
+    <a href="/reviews">Read more of the letters</a>
+    <span class="rw-sep">·</span>
+    <a href={reviewAggregate.sourceUrl} target="_blank" rel="noopener" data-no-transition>See all 150+ on Google&nbsp;&rarr;</a>
+  </p>
+</div>

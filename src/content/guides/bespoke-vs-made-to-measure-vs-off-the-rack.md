@@ -1,8 +1,9 @@
 ---
 title: "Bespoke vs made-to-measure vs off-the-rack"
 description: "Three terms that get used interchangeably — and shouldn't. What each really means for fit, price and how long your suit lasts."
+tldr: "Off-the-rack is cut to an average and altered toward you; made-to-measure adjusts a factory pattern to your numbers; bespoke drafts a pattern from scratch and is cut by hand. Same word, three very different suits."
 pillar: "Bespoke Suits"
-pillarHref: "/custom"
+pillarHref: "/suits"
 eyebrow: "Know the difference"
 updated: 2026-07-03
 order: 11

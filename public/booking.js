@@ -14,6 +14,7 @@
     contact: 'phone',              // phone | email | text
     note:  '',
     calMonth: new Date(),          // currently shown month
+    submitResult: null,            // { ok, reason } from lead pipe
   };
 
   const HOUSES = [
@@ -117,24 +118,74 @@
     state.date  = null;
     state.time  = null;
     state.note  = '';
+    state.submitResult = null;
     state.calMonth = new Date();
     state.calMonth.setDate(1);
 
+    // Close the /design → /book loop: pre-fill from a saved "look" so the
+    // designed spec rides into the booking instead of evaporating.
+    if (preset.useLook) {
+      try {
+        const look = JSON.parse(localStorage.getItem('sams:look') || 'null');
+        if (look) {
+          if (look.spec) state.note = 'Designed on The Drawing Board — ' + look.spec;
+          if (look.name && !state.name) state.name = look.name;
+          if (look.phone && !state.phone) state.phone = look.phone;
+          if (look.email && !state.email) state.email = look.email;
+        }
+      } catch (e) {}
+    }
+
     modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    if (window.SamsUI && window.SamsUI.lockScroll) window.SamsUI.lockScroll();
+    else document.body.style.overflow = 'hidden';
     render();
   }
   function closeModal() {
     const modal = $('#booking-modal');
     if (!modal) return;
+    if (!modal.classList.contains('is-open')) return;
     modal.classList.remove('is-open');
-    document.body.style.overflow = '';
+    if (window.SamsUI && window.SamsUI.unlockScroll) window.SamsUI.unlockScroll();
+    else document.body.style.overflow = '';
   }
 
   // ── Step navigation ──────────────────────────────────────────────────
   function next() {
     if (!canAdvance()) return;
+    if (state.step === 4) { submitBooking(); return; }   // last step → send lead first
     state.step = Math.min(state.step + 1, 5);
+    render();
+  }
+
+  // Send the booking to the CRM (via lead.js), then show confirmation.
+  async function submitBooking() {
+    const next$ = $('#booking-modal .bm-next');
+    if (next$) {
+      next$.disabled = true;
+      if (next$.firstChild) next$.firstChild.textContent = 'Sending…';
+    }
+    const houseTitle = (HOUSES.find(h => h.id === state.house) || {}).title || state.house || '';
+    const whereTitle = (WHERES.find(w => w.id === state.where) || {}).title || state.where || '';
+    const data = {
+      house: houseTitle,
+      location: whereTitle,
+      preferredDate: state.date ? fmtDate(state.date) : '',
+      preferredTime: state.time || '',
+      name: state.name,
+      phone: state.phone,
+      email: state.email,
+      contactPreference: state.contact,
+      note: state.note,
+    };
+    let result = { ok: false, reason: 'error' };
+    try {
+      result = (window.SamsLead && window.SamsLead.send)
+        ? await window.SamsLead.send('booking', data)
+        : { ok: false, reason: 'no-pipe' };
+    } catch (e) { result = { ok: false, reason: 'error' }; }
+    state.submitResult = result;
+    state.step = 5;
     render();
   }
   function back() {
@@ -498,17 +549,29 @@
   function renderConfirm() {
     const w = el('div', 'bm-step is-active bm-confirm');
     const house = HOUSES.find(h => h.id === state.house);
-    const where = WHERES.find(w => w.id === state.where);
+    const where = WHERES.find(x => x.id === state.where);
     const phoneEmail = [state.phone, state.email].filter(Boolean).join(' · ');
+    const sent = !!(state.submitResult && state.submitResult.ok);
+    const L = window.SamsLead || { PHONE: '+16474580711', PHONE_DISP: '647 · 458 · 0711', mailto: () => '#' };
+    const whenStr = fmtDate(state.date) + (state.time ? ' · ' + state.time : '');
+    const mailHref = L.mailto('Fitting request — ' + (state.name || 'website'), {
+      House: house ? house.title : '', Location: where ? where.title : '', When: whenStr,
+      Name: state.name, Phone: state.phone, Email: state.email,
+      'Best way to confirm': state.contact, Note: state.note,
+    });
+    const mapHref = 'https://maps.google.com/?q=318+Charlton+Avenue+Vaughan+ON';
+    const seal = sent
+      ? `<svg viewBox="0 0 40 40" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20 L 18 28 L 32 12"/></svg>`
+      : `<svg viewBox="0 0 40 40" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 L34 30 H6 Z"/><line x1="20" y1="16" x2="20" y2="23"/><circle cx="20" cy="27" r="0.7" fill="currentColor"/></svg>`;
+    const heading = sent ? 'The atelier <em>has you on the page.</em>' : 'One last step — <em>send it to Sam.</em>';
+    const blurb = sent
+      ? `Sam will personally confirm by ${state.contact === 'email' ? 'email' : state.contact === 'text' ? 'text' : 'phone'} within one business day. We only use your details to arrange the fitting.`
+      : `Your details are ready but haven't reached the atelier's inbox automatically. Tap <strong>Send to Sam</strong> below (it opens your email, already filled in) or call directly — either way you're on the books in seconds.`;
     w.innerHTML = `
-      <div class="seal">
-        <svg viewBox="0 0 40 40" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 20 L 18 28 L 32 12"/>
-        </svg>
-      </div>
-      <div class="chapter-no">Confirmed</div>
-      <h2>The atelier <em>has you on the page.</em></h2>
-      <p class="body-prose">Sam will personally confirm by ${state.contact === 'phone' ? 'phone' : state.contact === 'email' ? 'email' : 'text'} within one business day. If anything changes before then, simply reply.</p>
+      <div class="seal">${seal}</div>
+      <div class="chapter-no">${sent ? 'Confirmed' : 'Almost there'}</div>
+      <h2>${heading}</h2>
+      <p class="body-prose">${blurb}</p>
       <dl class="summary">
         <dt>House</dt><dd>${house ? house.title : '\u2014'}</dd>
         <dt>Location</dt><dd>${where ? where.title : '\u2014'}</dd>
@@ -516,18 +579,21 @@
         <dt>Name</dt><dd>${(state.name || '\u2014').replace(/</g, '&lt;')}</dd>
         <dt colspan="2" style="grid-column: 1 / -1;">Contact</dt><dd style="grid-column: 1 / -1;">${phoneEmail || '\u2014'}</dd>
       </dl>
-      <div class="actions">
-        <button class="btn is-dark" type="button" data-action="another" style="color:var(--ink);border-color:var(--ink);">Book another</button>
-        <button class="bm-next" type="button" data-action="close">Done</button>
+      <div class="actions">${sent
+        ? `<a class="btn is-dark" href="tel:${L.PHONE}" data-no-transition style="color:var(--ink);border-color:var(--ink);">Call the atelier</a>
+           <a class="btn is-dark" href="${mapHref}" target="_blank" rel="noopener" data-no-transition style="color:var(--ink);border-color:var(--ink);">Get directions</a>
+           <button class="bm-next" type="button" data-action="close">Done</button>`
+        : `<a class="btn is-primary" href="${mailHref}" data-action="sent">Send to Sam</a>
+           <a class="btn is-dark" href="tel:${L.PHONE}" data-no-transition style="color:var(--ink);border-color:var(--ink);">Call ${L.PHONE_DISP}</a>`}
       </div>
+      ${sent ? `<p class="bm-crosssell">While you wait — <a href="/design" data-no-transition>sketch your suit</a> so Sam has it in hand before you arrive.</p>` : ''}
     `;
-    w.querySelector('[data-action="another"]').addEventListener('click', () => {
-      // Reset for a new booking
-      state.step = 0; state.house = null; state.where = null;
-      state.date = null; state.time = null; state.note = '';
-      render();
+    const closeBtn = w.querySelector('[data-action="close"]');
+    if (closeBtn) closeBtn.addEventListener('click', () => closeModal());
+    const sentBtn = w.querySelector('[data-action="sent"]');
+    if (sentBtn) sentBtn.addEventListener('click', () => {
+      setTimeout(() => { try { closeModal(); } catch (e) {} }, 500);
     });
-    w.querySelector('[data-action="close"]').addEventListener('click', () => closeModal());
     return w;
   }
 
@@ -546,6 +612,7 @@
         const preset = {
           house: el.getAttribute('data-house') || null,
           where: el.getAttribute('data-where') || null,
+          useLook: el.hasAttribute('data-uselook'),
         };
         openModal(preset);
       });
@@ -567,10 +634,27 @@
     // Quick callback form
     const cb = $('#callback-form');
     if (cb) {
-      cb.addEventListener('submit', (e) => {
+      cb.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const nameEl = cb.querySelector('#cb-name');
+        const phoneEl = cb.querySelector('#cb-phone');
+        const name = nameEl ? nameEl.value : '';
+        const phone = phoneEl ? phoneEl.value : '';
+        const btn = cb.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        let result = { ok: false, reason: 'error' };
+        try {
+          result = (window.SamsLead && window.SamsLead.send)
+            ? await window.SamsLead.send('callback', { name, phone })
+            : { ok: false, reason: 'no-pipe' };
+        } catch (err) { result = { ok: false, reason: 'error' }; }
         const ack = $('#callback-confirm');
         if (ack) {
+          if (!result.ok && window.SamsLead) {
+            const mail = window.SamsLead.mailto('Callback request — ' + (name || 'website'), { Name: name, Phone: phone });
+            ack.innerHTML = 'Thank you' + (name ? ', ' + name.replace(/</g, '&lt;') : '') +
+              '. To lock it in this second, <a href="tel:' + window.SamsLead.PHONE + '" style="color:var(--oxblood);border-bottom:1px solid var(--oxblood);">call ' + window.SamsLead.PHONE_DISP + '</a> or <a href="' + mail + '" style="color:var(--oxblood);border-bottom:1px solid var(--oxblood);">email your number</a> — Sam calls back the same business day.';
+          }
           ack.hidden = false;
           cb.style.opacity = '0.5';
           cb.style.pointerEvents = 'none';

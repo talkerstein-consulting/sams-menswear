@@ -1,16 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { reviews } from '../data/reviews.js';
+const famReview = reviews[4]; // Adam Gilbert — father & son, real Google review
 ---
 <BaseLayout
   title="About Sam — Sam's Menswear · Vaughan"
-  description="Sam is a personal master tailor in Vaughan — over two decades cutting suits by hand for the men of Vaughan, Thornhill and Toronto. Never outsourced, never rushed."
+  description="Sam is a personal master tailor in Vaughan — 30+ years cutting suits by hand for the men of Vaughan, Thornhill and Toronto. Never outsourced, never rushed."
 >
   <section class="page-hero">
     <div class="container">
       <div data-reveal>
         <div class="eyebrow-rule">The Tailor</div>
         <h1>One man, <em>one tape,</em> one notebook.</h1>
-        <p class="lede">Sam has been measuring shoulders and marking chalk for the men of Vaughan and Thornhill for over twenty years. Every garment is drawn, cut and fitted personally — never outsourced, never rushed.</p>
+        <p class="lede">Sam has been measuring shoulders and marking chalk for over thirty years — the last decade-plus from his own atelier in Vaughan, on the Thornhill line. Every garment is drawn, cut and fitted personally — never outsourced, never rushed.</p>
       </div>
     </div>
   </section>
@@ -31,28 +33,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
         </div>
         <div>
-          <div style="aspect-ratio: 4 / 5; background: var(--paper-cream); border: 1px solid var(--rule); padding: 28px; position: relative; overflow: hidden;">
-            <div class="crop-marks"></div>
-            <svg viewBox="0 0 260 320" style="width:100%; height:100%; display:block;" preserveAspectRatio="xMidYMid meet">
-              <g fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <!-- shears -->
-                <circle cx="70" cy="240" r="16"/>
-                <circle cx="104" cy="240" r="16"/>
-                <path d="M82 228 L 200 96"/>
-                <path d="M96 232 L 214 100"/>
-                <path d="M200 96 L 214 100"/>
-                <!-- measuring tape curl -->
-                <path d="M40 70 C 100 40, 160 100, 210 60" stroke-width="6" stroke="var(--gold)" opacity="0.65"/>
-                <path d="M40 70 C 100 40, 160 100, 210 60" stroke-width="1" stroke="var(--ink)" opacity="0.5"/>
-                <!-- pencil -->
-                <path d="M60 150 L 150 190"/>
-                <path d="M60 150 L 52 156 L 60 162 Z" fill="var(--oxblood)" stroke="none"/>
-              </g>
-              <g font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="var(--ink-mute)" letter-spacing="2">
-                <text x="130" y="300" text-anchor="middle">Measured personally.</text>
-              </g>
-            </svg>
-          </div>
+          <figure class="wed-portrait">
+            <img src="/media/sam/sam-portrait.webp" alt="Sam Talkar, master tailor, tape measure around his neck, sketching a pattern at the atelier in Vaughan" loading="lazy"/>
+            <figcaption>Sam Talkar — measured personally, cut by one pair of hands</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -102,13 +86,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- Sam at work (real photos) -->
+  <section class="section tight">
+    <div class="container">
+      <figure class="almanac-banner" data-reveal>
+        <img src="/media/sam/sam-consult.webp" alt="Sam sitting with a client, choosing cloth and details over the lookbook at the Vaughan atelier" loading="lazy"/>
+      </figure>
+    </div>
+  </section>
+
   <!-- Pull quote -->
   <section class="section tight">
     <div class="container">
       <div data-reveal style="max-width: 40rem; margin: 0 auto; text-align: center;">
         <span class="quote__mark" style="position: static; display: block; text-align: center;">“</span>
-        <p class="quote__text" style="font-size: clamp(24px, 3vw, 34px); text-align: center;">My father bought his Shabbos suit here in 1996. I bought my son's bar mitzvah suit here last winter. Some things you don't change.</p>
-        <div class="quote__attr" style="margin-top: 20px;">A. Rosenberg · Vaughan</div>
+        <p class="quote__text" style="font-size: clamp(23px, 2.8vw, 32px); text-align: center;">{famReview.text}</p>
+        <div class="quote__attr" style="margin-top: 20px;">{famReview.name} · <span style="color: var(--gold);">★ Google review</span></div>
       </div>
     </div>
   </section>

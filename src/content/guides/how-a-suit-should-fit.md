@@ -1,6 +1,7 @@
 ---
 title: "How a suit should fit: the tailor's checklist"
 description: "The six things that decide whether a suit fits — shoulders, chest, sleeve, length, waist and trouser break — and the one that matters most."
+tldr: "A suit fits when the shoulder seam sits clean at the edge of your shoulder, the chest closes without an X-shaped pull, and a little shirt cuff shows past the jacket. Shoulders matter most, because they are the hardest thing to alter after."
 pillar: "Fit"
 pillarHref: "/guides"
 eyebrow: "Fit"

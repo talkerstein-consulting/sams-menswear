@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const site = 'https://customsuitandshirt.com';
+const gta = ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'];
+
+const recipients = [
+  { href: '/guides/gift-a-suit-to-your-son', t: 'your son' },
+  { href: '/guides/gift-a-suit-to-your-son-in-law', t: 'your son-in-law' },
+  { href: '/guides/grooms-gift-a-suit', t: 'the groom' },
+  { href: '/guides/gift-your-husband-a-suit', t: 'your husband' },
+  { href: '/guides/fathers-day-gift-a-suit', t: 'your father' },
+  { href: '/guides/graduation-gift-first-suit', t: 'a graduate' },
+];
+
+const occasions = [
+  { href: '/guides/grooms-gift-a-suit', e: 'The wedding', t: 'A groom’s gift', d: 'Give him the suit he’s married in — kept for every occasion after.' },
+  { href: '/guides/gift-the-interview-suit', e: 'The first job', t: 'Interview & new job', d: 'The suit that walks him into the room already looking like he belongs.' },
+  { href: '/guides/graduation-gift-first-suit', e: 'Graduation', t: 'His first real suit', d: 'The gift that outlasts the diploma — a proper suit for adult life.' },
+  { href: '/guides/milestone-birthday-suit-gift', e: 'The big birthday', t: 'A milestone he keeps', d: '30, 40, 50, 60 — a gift he still wears years later, not one he re-gifts.' },
+  { href: '/guides/fathers-day-gift-a-suit', e: "Father's Day", t: 'Beyond the tie', d: 'Give Dad the afternoon and the suit — an experience, not another gadget.' },
+  { href: '/guides/gift-for-the-man-who-has-everything', e: 'Just because', t: 'The man who has everything', d: 'The rare gift that’s both deeply personal and genuinely useful.' },
+];
+
+const readingForGiver = [
+  { href: '/guides/is-a-custom-suit-a-good-gift', t: 'Is a custom suit a good gift? An honest answer' },
+  { href: '/guides/how-to-gift-a-suit-without-his-size', t: "How to gift a suit when you don't know his size" },
+  { href: '/guides/how-a-suit-gift-certificate-works', t: 'How a suit gift certificate works' },
+  { href: '/guides/gift-a-custom-suit', t: 'Gifting a custom suit — the full picture' },
+  { href: '/guides/corporate-gifting-a-suit', t: 'Corporate gifting: reward a top performer' },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/gift#service`,
+  name: 'The Gift of Style — Made-to-Measure Gift Certificate',
+  serviceType: 'Made-to-measure clothing gift certificate',
+  provider: { '@id': `${site}/#business` },
+  areaServed: gta.map((c) => ({ '@type': 'City', name: c })),
+  url: `${site}/gift`,
+  description: 'Give the gift of style — a made-to-measure shirt, trousers, jacket, suit or a whole wardrobe from Sam in Vaughan, plus a one-hour wardrobe consultation. The recipient is fitted personally; the garment is drafted to his measurements. The perfect gift for a wedding, a first job, a milestone, or the man who has everything.',
+};
+
+const faqs = [
+  { q: 'What can I give as a gift?', a: 'Anything Sam makes — a custom dress shirt, trousers, a jacket or sport coat, a full suit or tuxedo, or a complete wardrobe. Not sure what he’d want? An open-value gift certificate lets him choose. Every gift includes a one-hour wardrobe consultation with Sam.' },
+  { q: 'Can you gift a custom garment if you don’t know his size?', a: 'Yes — you never need his measurements. The recipient is measured by Sam at his own fitting, so everything is drafted to his exact body. You simply reserve the gift and we prepare a certificate in his name.' },
+  { q: 'How does a suit gift certificate work?', a: 'You reserve the gift; the recipient receives a gift certificate and note; he books his own fitting at the Vaughan atelier or has Sam travel to him across the GTA; the suit is made to his measurements and kept on a pattern for future orders.' },
+  { q: 'What if he wants something different than I’d pick?', a: 'That’s the point of a made-to-measure gift — the recipient chooses the cloth, cut and details with Sam, so it ends up exactly what he wants. You’re giving the experience and the suit, not guessing his taste.' },
+  { q: 'How long does it take?', a: 'A made-to-measure suit is crafted over several weeks and a couple of fittings — it’s an experience, not an off-the-shelf item. If the gift is for a dated occasion like a wedding, reserve it with time to spare and we’ll plan the timeline together.' },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const breadcrumb = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
+    { '@type': 'ListItem', position: 2, name: 'The Gift of Style', item: site + '/gift' },
+  ],
+};
+---
+<BaseLayout
+  title="The Gift of Style — Gift a Custom Suit, Shirt or Wardrobe | Sam's Menswear"
+  description="Give the gift of style from Sam's Menswear in Vaughan — a made-to-measure shirt, trousers, jacket, suit or a whole wardrobe, plus a 1-hour wardrobe consultation. He's fitted personally; you never need his size. Serving Toronto & the GTA."
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal style="max-width: 46rem;">
+        <div class="eyebrow-rule">The Gift</div>
+        <h1>The gift of <em>style.</em></h1>
+        <p class="lede">The perfect gift for the man in your life — made-to-measure, cut for him by hand. A custom shirt, a pair of trousers, a jacket, a full suit, or his whole wardrobe. Every gift includes a <strong style="font-weight:600;">one-hour wardrobe consultation</strong> with Sam: you reserve it, he's fitted in person, and you never even need his size.</p>
+        <div class="hero-cta-row">
+          <a href="#reserve" class="btn is-primary">Reserve the gift</a>
+          <a href="tel:+16474580711" class="hero-cta-call" data-no-transition>or call 647 · 458 · 0711</a>
+        </div>
+        <p class="cta-trust">★ 4.7 · 150+ Google reviews · Includes a 1-hour wardrobe consultation · No size needed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY + PORTRAIT -->
+  <section class="section tight">
+    <div class="container">
+      <div class="split wide-left" data-reveal>
+        <div>
+          <p class="body-prose" style="margin-bottom: 18px;">Most gifts for men end up in a drawer. A garment made to his own measurements doesn’t — he wears it to the wedding, the interview, the anniversary dinner, and remembers who gave it every time. It’s a rare gift that’s both deeply personal and genuinely useful, and unlike a gadget or a gift card to nowhere, it’s an <em>experience</em>: an unhurried hour at the bench with a tailor who actually cares.</p>
+          <p class="body-prose">You don’t need to know his size, his taste, or his schedule. Every gift begins with a one-hour wardrobe consultation — Sam talks it through with him, measures him, and helps him choose. Gift a single piece, a full suit, or a whole wardrobe; the value is yours to set, or make it an open-value gift certificate. Honest, and never rushed.</p>
+          <p style="margin-top: 16px;">
+            <a href="/guides/is-a-custom-suit-a-good-gift" data-no-transition style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Is a custom suit a good gift? &nbsp;&rarr;</a>
+          </p>
+        </div>
+        <div>
+          <figure class="wed-portrait">
+            <img src="/media/art/gift-hero.webp" alt="A finished tailored suit folded in an elegant gift box tied with ribbon" loading="lazy"/>
+            <figcaption>The gift of a suit</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECIPIENTS -->
+  <section class="section tight">
+    <div class="container">
+      <div data-reveal style="max-width: 52rem;">
+        <div class="eyebrow-rule">For the man in your life</div>
+        <h2 class="h-2" style="text-transform: uppercase; margin-top: 8px;">A gift for <em>him.</em></h2>
+        <div class="gift-chips">
+          {recipients.map((r) => (
+            <a class="gift-chip" href={r.href}>For <em>{r.t}</em></a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">How gifting works</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">Simple to <em>give.</em></h2>
+        <div class="right">No size · No guesswork</div>
+      </div>
+      <div class="gift-steps" data-reveal-stagger>
+        <div class="gift-step">
+          <h3>Reserve the gift</h3>
+          <p>A shirt, trousers, a jacket, a full suit, a whole wardrobe, or an open-value gift certificate — every gift includes a one-hour wardrobe consultation. Set it below or with a quick call; Sam confirms everything with you first.</p>
+        </div>
+        <div class="gift-step">
+          <h3>He gets the note</h3>
+          <p>We prepare a personal gift certificate in his name — to hand him yourself, or for us to send. No price on it unless you want one.</p>
+        </div>
+        <div class="gift-step">
+          <h3>He books his fitting</h3>
+          <p>He comes to the Vaughan atelier, or Sam travels to him across the GTA. Sam measures him and walks him through cloth, cut and details.</p>
+        </div>
+        <div class="gift-step">
+          <h3>It's made to him</h3>
+          <p>Whatever he chooses is drafted to his body, finished by hand, and kept on a pattern — so the next piece begins where this one left off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND IMAGE -->
+  <section class="section tight">
+    <div class="container">
+      <figure class="gift-band" data-reveal>
+        <img src="/media/art/gift-certificate.webp" alt="A handwritten gift certificate with a wax seal beside a tailor's measuring tape" loading="lazy"/>
+      </figure>
+    </div>
+  </section>
+
+  <!-- OCCASIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">Perfect for</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">Every reason a man <em>deserves one.</em></h2>
+        <div class="right">Read the giver’s guide</div>
+      </div>
+      <div class="rgrid rgrid-3" style="margin-top: clamp(36px,4vw,60px); gap: clamp(18px,2vw,30px);" data-reveal-stagger>
+        {occasions.map((o) => (
+          <a class="gift-occ" href={o.href}>
+            <span class="gift-occ__eyebrow">{o.e}</span>
+            <span class="gift-occ__title">{o.t}</span>
+            <span class="gift-occ__desc">{o.d}</span>
+            <span class="gift-occ__more">Read the guide &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVE FORM -->
+  <section class="section" id="reserve">
+    <div class="container">
+      <div class="split wide-left" data-reveal>
+        <div>
+          <div class="eyebrow-rule">Reserve the gift</div>
+          <h2 class="h-2" style="text-transform: uppercase; margin-top: 8px;">Give the gift <em>of style.</em></h2>
+          <p class="body-prose" style="margin-top: 18px;">Tell Sam who it’s for and what you have in mind — a single piece, a suit, or a whole wardrobe. He’ll confirm the details with you, arrange payment, and prepare a gift certificate (with the one-hour consultation included) in the recipient’s name — nothing is charged until you’ve spoken. Prefer to talk it through? Call <a href="tel:+16474580711" data-no-transition style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">647 · 458 · 0711</a>.</p>
+          <p class="body-prose" style="margin-top: 14px; font-size: 15px; color: var(--ink-mute);">A bespoke suit is made over several weeks — for a dated occasion like a wedding, reserve with time to spare and Sam will plan the timeline with you.</p>
+        </div>
+        <div>
+          <form class="gift-form" data-gift-form>
+            <input class="gift-full" type="text" name="giverName" placeholder="Your name" autocomplete="name" required/>
+            <input type="email" name="giverEmail" placeholder="Your email" autocomplete="email" required/>
+            <input type="tel" name="giverPhone" placeholder="Your phone (so Sam can call)" autocomplete="tel"/>
+            <input class="gift-full" type="text" name="recipientName" placeholder="Recipient's name" required/>
+            <input type="email" name="recipientEmail" placeholder="Recipient's email (optional)"/>
+            <select name="occasion" aria-label="Occasion" required>
+              <option value="" disabled selected>What's the occasion?</option>
+              <option>Wedding — the groom</option>
+              <option>Graduation</option>
+              <option>New job / interview</option>
+              <option>Milestone birthday</option>
+              <option>Father's Day</option>
+              <option>Anniversary</option>
+              <option>Just because</option>
+              <option>Corporate gift</option>
+              <option>Other</option>
+            </select>
+            <select name="gift" aria-label="What you'd like to give" required>
+              <option value="" disabled selected>What would you like to give?</option>
+              <option>A full suit</option>
+              <option>A tuxedo</option>
+              <option>A custom dress shirt</option>
+              <option>Custom trousers</option>
+              <option>A jacket / sport coat</option>
+              <option>A complete wardrobe</option>
+              <option>An open-value gift certificate</option>
+              <option>Just the wardrobe consultation</option>
+              <option>Not sure yet — advise me</option>
+            </select>
+            <textarea class="gift-full" name="message" placeholder="A message for the recipient (optional) — we can add it to the gift note"></textarea>
+            <input class="gift-hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+            <button type="submit" class="btn is-primary">Reserve this gift</button>
+          </form>
+          <div class="gift-ack" data-gift-ack hidden>
+            <p class="body-prose" data-gift-ack-msg style="margin: 0;"></p>
+            <p class="body-prose" data-gift-fallback hidden style="margin-top: 12px; font-size: 15px;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- READING FOR THE GIVER -->
+  <section class="section tight">
+    <div class="container">
+      <div data-reveal style="max-width: 60ch;">
+        <div class="eyebrow-rule">Reading for the giver</div>
+        <ul class="prose-list" style="margin-top: 16px;">
+          {readingForGiver.map((r) => (
+            <li><a href={r.href} style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">{r.t}</a></li>
+          ))}
+        </ul>
+        <p class="body-prose" style="margin-top: 14px;"><a href="/guides" style="font-family: var(--serif); font-style: italic;">All gifting guides &amp; the rest of the library &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">The perfect gift for the perfect man</span>
+          </div>
+          <h2 class="h-1">Give something <em>he'll keep.</em></h2>
+          <p class="lede" style="margin-top: 24px;">Reserve the gift now, or call Sam to talk it through. Nothing is charged until you’ve spoken.</p>
+        </div>
+        <div class="actions">
+          <a href="#reserve" class="btn is-primary">Reserve the gift</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or call directly
+            <div class="num"><a href="tel:+16474580711" data-no-transition style="color: inherit;">647 · 458 · 0711</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+
+  <script is:inline>
+    (() => {
+      // ── Gift reservation flow ────────────────────────────────────────────
+      //  ▶ TO TAKE PAYMENT ONLINE: paste a Stripe/Square Payment Link below.
+      //    When set, a "Pay & reserve" button links straight to checkout.
+      //    Until then, the form routes the gift to Sam (via SamsLead → GHL, or
+      //    the email/call fallback) and he arranges payment personally.
+      var GIFT_PAYMENT_LINK = '';
+
+      var form = document.querySelector('[data-gift-form]');
+      if (!form) return;
+      var val = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var ack = document.querySelector('[data-gift-ack]');
+        var ackMsg = document.querySelector('[data-gift-ack-msg]');
+        var fallback = document.querySelector('[data-gift-fallback]');
+
+        // Honeypot — bots fill this; humans never see it.
+        if (val('company')) { form.hidden = true; if (ack) ack.hidden = false; if (ackMsg) ackMsg.innerHTML = '<strong>Thank you.</strong>'; return; }
+
+        var data = {
+          giverName: val('giverName'), giverEmail: val('giverEmail'), giverPhone: val('giverPhone'),
+          recipientName: val('recipientName'), recipientEmail: val('recipientEmail'),
+          occasion: val('occasion'), gift: val('gift'), message: val('message'),
+        };
+
+        var result = { ok: false };
+        try {
+          result = (window.SamsLead && window.SamsLead.send)
+            ? await window.SamsLead.send('gift-reservation', data)
+            : { ok: false };
+        } catch (err) { result = { ok: false }; }
+
+        form.hidden = true;
+        if (ack) ack.hidden = false;
+
+        var who = data.recipientName || 'your recipient';
+        if (result.ok) {
+          if (ackMsg) ackMsg.innerHTML = '<strong>Reserved — thank you.</strong> Sam will email you within a day to confirm the details, arrange payment, and prepare a gift certificate for ' + who + '. Nothing is charged until you’ve spoken.';
+          if (GIFT_PAYMENT_LINK && fallback) { fallback.innerHTML = 'Prefer to pay now? <a href="' + GIFT_PAYMENT_LINK + '">Reserve &amp; pay online &rarr;</a>'; fallback.hidden = false; }
+        } else {
+          if (ackMsg) ackMsg.innerHTML = '<strong>Almost there — one tap to send it to Sam.</strong> Your gift details are ready; send them so Sam can confirm and arrange a gift certificate for ' + who + '.';
+          if (window.SamsLead && fallback) {
+            var mail = window.SamsLead.mailto('Gift a suit — for ' + who, {
+              'Your name': data.giverName, 'Your email': data.giverEmail, 'Your phone': data.giverPhone,
+              Recipient: data.recipientName, "Recipient's email": data.recipientEmail,
+              Occasion: data.occasion, Gift: data.gift, Message: data.message,
+            });
+            fallback.innerHTML = 'To reach Sam now: <a href="' + mail + '">email your gift</a> or <a href="tel:' + window.SamsLead.PHONE + '">call ' + window.SamsLead.PHONE_DISP + '</a>.';
+            fallback.hidden = false;
+          }
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

@@ -591,3 +591,14 @@
   .bm-foot { padding: 16px 20px; }
   .bm-step h2 { font-size: clamp(26px, 8vw, 36px); }
 }
+/* Short / landscape viewports: drop the fixed floor and dots regardless of width */
+@media (max-height: 640px) {
+  .booking-modal__panel { min-height: auto; }
+  .bm-progress { display: none; }
+}
+/* Confirmation cross-sell line */
+.bm-crosssell {
+  margin-top: 18px;
+  font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-mute);
+}
+.bm-crosssell a { color: var(--oxblood); border-bottom: 1px solid var(--oxblood); }

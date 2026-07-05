@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqBlock from '../../components/FaqBlock.astro';
+import AuthorBio from '../../components/AuthorBio.astro';
 import { getCollection, render } from 'astro:content';
 import { faqs } from '../../data/faqs.js';
 
@@ -22,15 +23,29 @@ if (related.length < 3) {
   related = [...related, ...sibs].slice(0, 3);
 }
 const faqItems = d.faqCats?.length ? faqs.filter((f) => d.faqCats.includes(f.cat)) : [];
+const pillarImg = {
+  'Weddings': '/media/art/guide-weddings.webp',
+  'Business & Professional': '/media/art/guide-business.webp',
+  'Care & the long run': '/media/art/guide-care.webp',
+  'Traditional / Jewish menswear': '/media/art/guide-traditional.webp',
+  'Cloth': '/media/art/guide-cloth.webp',
+  'Dressing for your profession': '/media/art/guide-business.webp',
+  'Bespoke Suits': '/media/art/guide-bespoke.webp',
+  'Fit': '/media/art/guide-fit.webp',
+  'The Service': '/media/art/guide-service.webp',
+}[d.pillar];
 
 const site = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
 const url = new URL(Astro.url.pathname, Astro.site).href;
+const published = (d.published || d.updated).toISOString();
 const articleSchema = {
   '@context': 'https://schema.org', '@type': 'Article',
   headline: d.title, description: d.description,
+  image: site + '/media/hero-poster.jpg',
+  datePublished: published,
   dateModified: d.updated.toISOString(),
-  author: { '@type': 'Person', name: 'Sam Talkar', jobTitle: 'Master Tailor', worksFor: { '@type': 'Organization', name: "Sam's Menswear" } },
-  publisher: { '@type': 'Organization', name: "Sam's Menswear" },
+  author: { '@id': site + '/#sam' },
+  publisher: { '@id': site + '/#org' },
   mainEntityOfPage: url,
 };
 const crumbs = {
@@ -38,7 +53,8 @@ const crumbs = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
     { '@type': 'ListItem', position: 2, name: 'Guides', item: site + '/guides' },
-    { '@type': 'ListItem', position: 3, name: d.title, item: url },
+    { '@type': 'ListItem', position: 3, name: d.pillar, item: site + d.pillarHref },
+    { '@type': 'ListItem', position: 4, name: d.title, item: url },
   ],
 };
 ---
@@ -47,20 +63,34 @@ const crumbs = {
     <section class="page-hero" style="padding-bottom: 0;">
       <div class="container">
         <nav class="crumbs" data-reveal aria-label="Breadcrumb">
-          <a href="/">Home</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <em>{d.pillar}</em>
+          <a href="/">Home</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <a href={d.pillarHref}>{d.pillar}</a> <span>/</span> <em>{d.title}</em>
         </nav>
         <div data-reveal style="max-width: 46rem;">
           <div class="eyebrow-rule">{d.eyebrow} · {d.pillar}</div>
           <h1 style="text-transform: none;">{d.title}</h1>
           <p class="chapter-no" style="margin-top: 18px;">Updated {fmt(d.updated)} · by Sam Talkar</p>
         </div>
+        {pillarImg && (
+          <div class="guide-hero-img" data-reveal>
+            <img src={pillarImg} alt={`${d.pillar} — Sam's Menswear`} loading="eager"/>
+          </div>
+        )}
       </div>
     </section>
 
     <section class="section" style="padding-top: clamp(32px,4vw,52px);">
       <div class="container">
+        {d.tldr && (
+          <aside class="tldr" data-reveal aria-label="The short answer">
+            <span class="tldr__label">The short answer</span>
+            <p>{d.tldr}</p>
+          </aside>
+        )}
         <div class="article" data-reveal>
           <Content />
+        </div>
+        <div style="max-width: 46rem; margin-top: clamp(32px,5vw,56px);">
+          <AuthorBio />
         </div>
       </div>
     </section>

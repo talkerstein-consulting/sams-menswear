@@ -1,0 +1,122 @@
+---
+// Renders a garment category page from a garments.js entry.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqBlock from './FaqBlock.astro';
+const { g } = Astro.props;
+const site = 'https://customsuitandshirt.com';
+const gta = ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'];
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/${g.slug}#service`,
+  name: g.serviceName,
+  serviceType: g.serviceType,
+  provider: { '@id': `${site}/#business` },
+  employee: { '@id': `${site}/#sam` },
+  areaServed: gta.map((c) => ({ '@type': 'City', name: c })),
+  url: `${site}/${g.slug}`,
+  description: g.serviceDesc,
+};
+---
+<BaseLayout title={g.metaTitle} description={g.metaDesc}>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal style="max-width: 46rem;">
+        <div class="eyebrow-rule">{g.eyebrow}</div>
+        <h1>{g.title}</h1>
+        <p class="lede">{g.lede}</p>
+        <div class="hero-cta-row">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <a href="tel:+16474580711" class="hero-cta-call" data-no-transition>or call 647 · 458 · 0711</a>
+        </div>
+        <p class="cta-trust">★ 4.7 · 150+ Google reviews · First fitting free &amp; no-obligation</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="split wide-left" data-reveal>
+        <div>
+          {g.intro.map((p) => <p class="body-prose" style="margin-bottom: 18px;">{p}</p>)}
+          <p style="margin-top: 14px;">
+            <a href="/design" data-no-transition style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Design yours on The Drawing Board&nbsp;&nbsp;&rarr;</a>
+          </p>
+        </div>
+        <div>
+          <figure class="wed-portrait">
+            <img src={g.image} alt={g.imageAlt} loading="lazy"/>
+            <figcaption>{g.title}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">What you choose</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">Made to <em>your specification.</em></h2>
+        <div class="right">Drawn &amp; cut by hand</div>
+      </div>
+      <div class="feature-grid cols-2" data-reveal-stagger>
+        {g.details.map((d, i) => (
+          <div>
+            <div class="feature-num">№ {['I','II','III','IV','V','VI'][i]}</div>
+            <h3 class="h-3">{d.t}</h3>
+            <p class="body-prose" style="margin-top: 12px;">{d.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="body-prose" data-reveal style="max-width: 60ch; margin-top: clamp(28px,4vw,44px);">{g.cloth} <a href="/fabrics" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">Explore the cloth library &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div data-reveal style="max-width: 60ch;">
+        <div class="eyebrow-rule">Keep reading</div>
+        <ul class="prose-list" style="margin-top: 16px;">
+          {g.relatedGuides.map((r) => <li><a href={r.href} style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">{r.label}</a></li>)}
+          {g.relatedHouses.map((r) => <li><a href={r.href} style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">{r.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {g.faqs && g.faqs.length > 0 && (
+    <section class="section tight" style="background: linear-gradient(180deg, transparent, var(--paper-cream) 50%, transparent);">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div class="chapter-no">Common questions</div>
+          <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">Good to <em>know.</em></h2>
+          <div class="right">Straight answers</div>
+        </div>
+        <div style="max-width: 60rem; margin-top: 32px;" data-reveal><FaqBlock items={g.faqs} /></div>
+      </div>
+    </section>
+  )}
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Begin</span>
+          </div>
+          <h2 class="h-1">Have {g.title.toLowerCase()} <em>made for you.</em></h2>
+          <p class="lede" style="margin-top: 24px;">The first fitting is unhurried and costs nothing — at the Vaughan atelier, or Sam comes to you across the GTA.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or <a href="/design" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">design your suit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+</BaseLayout>

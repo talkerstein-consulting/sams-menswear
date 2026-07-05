@@ -1,10 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const site = 'https://customsuitandshirt.com';
+const gta = ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'];
+// Service node — provided by the #business, served across the GTA.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/custom#service`,
+  name: 'Custom Suits & Shirts',
+  serviceType: 'Bespoke and made-to-measure tailoring',
+  provider: { '@id': `${site}/#business` },
+  areaServed: gta.map((c) => ({ '@type': 'City', name: c })),
+  url: `${site}/custom`,
+  description: 'A wardrobe of custom suits, jackets, trousers and shirts drafted from one personal pattern that Sam keeps on file — measured by hand at the Vaughan atelier and reordered in days.',
+};
 ---
 <BaseLayout
   nav="custom"
-  title="Custom Suits & Shirts — Sam's Menswear · Vaughan"
-  description="Custom suits, jackets, trousers and shirts. Built one body at a time at Sam's atelier in Vaughan."
+  title="Custom Suits & Shirts in Vaughan & the GTA — Sam's Menswear"
+  description="Custom suits, jackets, trousers and shirts drafted from one personal pattern — built by hand at Sam's atelier in Vaughan, serving Thornhill, Toronto & the GTA."
 >
 
   <section class="page-hero">
@@ -13,6 +28,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="eyebrow-rule">House № 03 &middot; Custom</div>
         <h1>One pattern. <em>One body.</em></h1>
         <p class="lede">A wardrobe of suits, jackets, trousers and shirts — drafted from a single pattern of your shoulders, your stance, the way you actually move through a day.</p>
+        <div class="hero-cta-row">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <a href="tel:+16474580711" class="hero-cta-call" data-no-transition>or call 647 · 458 · 0711</a>
+        </div>
+        <p class="cta-trust">★ 4.7 · 150+ Google reviews · First fitting free &amp; no-obligation</p>
       </div>
     </div>
   </section>
@@ -83,7 +103,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="right">A short menu, infinite combinations</div>
       </div>
 
-      <div data-reveal-stagger style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); margin-top: clamp(40px, 5vw, 72px);">
+      <div data-reveal-stagger class="rgrid rgrid-3" style="margin-top: clamp(40px, 5vw, 72px);">
 
         <!-- Collars -->
         <div>
@@ -213,6 +233,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p class="body-prose" style="margin-top: 12px;">Annual re-measure. The pattern is amended. Old garments can be brought in for adjustments at any time.</p>
         </div>
       </div>
+
+      <p class="body-prose" data-reveal style="margin-top: 40px; max-width: 60ch;">
+        New to custom work? Read
+        <a href="/guides/bespoke-vs-made-to-measure-vs-off-the-rack" style="color: var(--ink); border-bottom: 1px solid var(--rule-strong);">bespoke vs made-to-measure</a>
+        and
+        <a href="/guides/how-a-suit-should-fit" style="color: var(--ink); border-bottom: 1px solid var(--rule-strong);">how a suit should actually fit</a>
+        — or explore the <a href="/fabrics" style="color: var(--ink); border-bottom: 1px solid var(--rule-strong);">cloth library</a> before you book.
+      </p>
     </div>
   </section>
 
@@ -237,5 +265,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 
 </BaseLayout>

@@ -1,10 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FaqBlock from '../components/FaqBlock.astro';
+import { reviews } from '../data/reviews.js';
+import { faqs } from '../data/faqs.js';
+
+const weddingFaqs = faqs.filter((f) => f.cat === 'Weddings');
+
+const site = 'https://customsuitandshirt.com';
+const gta = ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'];
+// Service node — provided by the #business, served across the GTA.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/wedding#service`,
+  name: 'Custom Wedding Suits & Tuxedos',
+  serviceType: 'Custom wedding suit and tuxedo tailoring',
+  provider: { '@id': `${site}/#business` },
+  areaServed: gta.map((c) => ({ '@type': 'City', name: c })),
+  url: `${site}/wedding`,
+  description: 'Bespoke wedding suits and tuxedos for the groom, groomsmen and both fathers — measured personally by Sam and coordinated as one tailored party. Made to fit, never rented.',
+};
 ---
 <BaseLayout
   nav="wedding"
-  title="Wedding Suits — Sam's Menswear · Vaughan"
-  description="Wedding suits and tuxedos, measured personally by Sam. Groom, groomsmen, fathers — fitted from one tape."
+  title="Wedding Suits & Tuxedos — Vaughan, Thornhill & the GTA"
+  description="Custom wedding suits and tuxedos for the groom, groomsmen and fathers — measured personally by Sam in Vaughan, Thornhill and across the GTA. Made to fit, never rented."
 >
 
   <!-- PAGE HERO -->
@@ -14,6 +35,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="eyebrow-rule">House № 01 &middot; Wedding</div>
         <h1>The suit he <em>will be remembered in.</em></h1>
         <p class="lede">A wedding suit is the single most photographed garment of a man's life. Sam draws each one personally — lapel, cuff, button-stance and lining — from the groom's first measure to the groomsmen's last fitting.</p>
+        <div class="hero-cta-row">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <a href="tel:+16474580711" class="hero-cta-call" data-no-transition>or call 647 · 458 · 0711</a>
+        </div>
+        <p class="cta-trust">★ 4.7 · 150+ Google reviews · First fitting free &amp; no-obligation</p>
       </div>
     </div>
   </section>
@@ -31,46 +57,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Tuxedos in midnight wool with satin peak lapels. Three-piece suits in deep navy, charcoal, oxblood, or hunter green. Morning coats for the traditional. Cummerbunds, waistcoats, bow ties and braces, all from the house cloth.
           </p>
           <p style="margin-top: 32px;">
-            <a href="/book" style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Begin a wedding consultation&nbsp;&nbsp;&rarr;</a>
+            <a href="/book" data-open-booking data-no-transition style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Begin a wedding consultation&nbsp;&nbsp;&rarr;</a>
           </p>
         </div>
         <div>
-          <div style="aspect-ratio: 4 / 5; background: var(--paper-cream); border: 1px solid var(--rule); padding: 24px; position: relative; overflow: hidden;">
-            <div class="crop-marks"></div>
-            <svg viewBox="0 0 280 360" style="width: 100%; height: 100%; display: block;" preserveAspectRatio="xMidYMid meet">
-              <g fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M70 90 C 80 70, 120 60, 140 60 C 160 60, 200 70, 210 90"/>
-                <path d="M126 92 C 110 130, 90 170, 76 200 C 70 215, 80 222, 100 225 C 122 230, 138 248, 140 270"/>
-                <path d="M154 92 C 170 130, 190 170, 204 200 C 210 215, 200 222, 180 225 C 158 230, 142 248, 140 270"/>
-                <path d="M70 90 C 56 140, 50 200, 56 270 C 60 310, 70 340, 84 348"/>
-                <path d="M210 90 C 224 140, 230 200, 224 270 C 220 310, 210 340, 196 348"/>
-                <path d="M84 348 L 196 348"/>
-                <path d="M140 270 L 140 346"/>
-                <circle cx="140" cy="270" r="3.5"/>
-                <circle cx="140" cy="300" r="3.5"/>
-                <circle cx="140" cy="330" r="3.5"/>
-                <path d="M80 310 L 132 304 L 134 322 L 82 328 Z"/>
-                <path d="M200 310 L 148 304 L 146 322 L 198 328 Z"/>
-                <path d="M140 88 L 122 80 L 122 96 L 140 92 L 158 96 L 158 80 L 140 88 Z" fill="var(--oxblood)" stroke="var(--ink)" stroke-width="1.2"/>
-                <rect x="136" y="84" width="8" height="14" fill="var(--oxblood-deep)" stroke="var(--ink)" stroke-width="1"/>
-                <circle cx="100" cy="180" r="5" fill="var(--oxblood)" stroke="var(--ink)" stroke-width="0.8"/>
-                <circle cx="100" cy="180" r="2" fill="var(--gold)"/>
-              </g>
-              <g fill="rgba(28, 37, 64, 0.18)">
-                <path d="M70 92 C 56 140, 50 200, 56 270 C 60 310, 70 340, 84 348 L 132 348 L 140 270 C 138 248, 122 230, 100 225 C 80 222, 70 215, 76 200 C 90 170, 110 130, 126 92 Z"/>
-                <path d="M210 92 C 224 140, 230 200, 224 270 C 220 310, 210 340, 196 348 L 148 348 L 140 270 C 142 248, 158 230, 180 225 C 200 222, 210 215, 204 200 C 190 170, 170 130, 154 92 Z"/>
-              </g>
-              <g font-family="Cormorant Garamond" font-style="italic" font-size="10" fill="var(--ink-mute)" letter-spacing="2">
-                <text x="34" y="80">peak lapel</text>
-                <line x1="60" y1="80" x2="74" y2="100" stroke="var(--ink-mute)" stroke-width="0.6"/>
-                <text x="218" y="200">midnight</text>
-                <line x1="216" y1="200" x2="200" y2="220" stroke="var(--ink-mute)" stroke-width="0.6"/>
-                <text x="38" y="220">boutonniere</text>
-                <line x1="84" y1="220" x2="100" y2="190" stroke="var(--ink-mute)" stroke-width="0.6"/>
-                <text x="142" y="56" text-anchor="middle">№ 01 · The Groom</text>
-              </g>
-            </svg>
-          </div>
+          <figure class="wed-portrait">
+            <img src="/media/art/wedding-groom.webp" alt="The groom in a deep-navy three-piece wedding suit, drawn at the atelier" loading="lazy"/>
+            <figcaption>№ 01 · The Groom</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -104,18 +98,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="section-head" data-reveal>
         <div class="chapter-no">No. 03</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">From the <em>wedding folio.</em></h2>
-        <div class="right">Recent grooms</div>
+        <div class="right">Grooms, parties &amp; black tie</div>
       </div>
       <div class="lookbook" data-reveal>
-        <div class="lb-tile lb-1"><div class="placeholder"><div class="corner">Folio · I</div><div class="label">Groom in three-piece midnight navy</div><div class="meta">King Edward Hotel · Toronto</div></div></div>
-        <div class="lb-tile lb-2"><div class="placeholder"><div class="corner">Folio · II</div><div class="label">Boutonniere &amp; lapel</div><div class="meta">Wedding detail</div></div></div>
-        <div class="lb-tile lb-3"><div class="placeholder"><div class="corner">Folio · III</div><div class="label">Best man &amp; brothers</div><div class="meta">Wedding party</div></div></div>
-        <div class="lb-tile lb-4"><div class="placeholder"><div class="corner">Folio · IV</div><div class="label">Bow tie &amp; satin lapel</div><div class="meta">Black tie detail</div></div></div>
-        <div class="lb-tile lb-5"><div class="placeholder"><div class="corner">Folio · V</div><div class="label">First look, navy three-piece</div><div class="meta">Outdoor ceremony</div></div></div>
-        <div class="lb-tile lb-6"><div class="placeholder"><div class="corner">Folio · VI</div><div class="label">Cufflinks &amp; french cuff</div><div class="meta">Custom shirt detail</div></div></div>
-        <div class="lb-tile lb-7"><div class="placeholder"><div class="corner">Folio · VII</div><div class="label">Father &amp; son, the morning of</div><div class="meta">Wedding preparation</div></div></div>
-        <div class="lb-tile lb-8"><div class="placeholder"><div class="corner">Folio · VIII</div><div class="label">Pocket square &amp; trouser break</div><div class="meta">Final fitting</div></div></div>
-        <div class="lb-tile lb-9"><div class="placeholder"><div class="corner">Folio · IX</div><div class="label">Tuxedo, single satin button</div><div class="meta">Black tie · 2025</div></div></div>
+        <div class="lb-tile lb-1 has-photo"><img src="/media/art/wedding-groomsmen.webp" alt="A groom and his groomsmen in coordinated navy suits" loading="lazy"/><div class="placeholder"><div class="corner">Folio · I</div><div class="label">The wedding party</div><div class="meta">Groom &amp; groomsmen, coordinated</div></div></div>
+        <div class="lb-tile lb-2 has-photo"><img src="/media/art/wedding-tuxedo.webp" alt="A black tuxedo with satin peak lapel and bow tie" loading="lazy"/><div class="placeholder"><div class="corner">Folio · II</div><div class="label">Black tie</div><div class="meta">Satin peak lapel &amp; bow</div></div></div>
+        <div class="lb-tile lb-3 has-photo"><img src="/media/art/wedding-father-son.webp" alt="A groom and his father in coordinated navy suits" loading="lazy"/><div class="placeholder"><div class="corner">Folio · III</div><div class="label">Father &amp; son</div><div class="meta">The morning of</div></div></div>
+        <div class="lb-tile lb-4 has-photo"><img src="/media/lookbook/dress-shirt.png" alt="A custom dress shirt" loading="lazy"/><div class="placeholder"><div class="corner">Folio · IV</div><div class="label">Custom dress shirt</div><div class="meta">Cut from your pattern</div></div></div>
+        <div class="lb-tile lb-5 has-photo"><img src="/media/lookbook/trousers.jpg" alt="Pleated tailored trousers" loading="lazy"/><div class="placeholder"><div class="corner">Folio · V</div><div class="label">Pleated trousers</div><div class="meta">Cut to the shoe</div></div></div>
+        <div class="lb-tile lb-6 has-photo"><img src="/media/lookbook/chesterfield.jpg" alt="A Chesterfield overcoat by Sam's Menswear" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VI</div><div class="label">Chesterfield overcoat</div><div class="meta">Winter cloth</div></div></div>
+        <div class="lb-tile lb-7 has-photo"><img src="/media/lookbook/alterations.jpg" alt="Final alterations in the fitting room" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VII</div><div class="label">Final alterations</div><div class="meta">The fitting room</div></div></div>
+        <div class="lb-tile lb-8 has-photo"><img src="/media/lookbook/topcoat.jpg" alt="A tailored topcoat" loading="lazy"/><div class="placeholder"><div class="corner">Folio · VIII</div><div class="label">The topcoat</div><div class="meta">House cloth</div></div></div>
+        <div class="lb-tile lb-9 has-photo"><img src="/media/lookbook/overcoat.jpg" alt="A tailored overcoat" loading="lazy"/><div class="placeholder"><div class="corner">Folio · IX</div><div class="label">The overcoat</div><div class="meta">Outerwear</div></div></div>
       </div>
     </div>
   </section>
@@ -165,30 +159,109 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- WHY NOT RENT -->
+  <section class="section"
+           style="background: linear-gradient(180deg, transparent 0%, var(--paper-cream) 40%, transparent 100%);">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 05</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 20ch;">Why not just <em>rent it?</em></h2>
+        <div class="right">The case against the rental</div>
+      </div>
+
+      <p class="body-prose" data-reveal style="max-width: 58ch; margin-bottom: 40px; font-size: 20px;">
+        A rental feels cheaper on the day. Then the photos come back. A tuxedo or suit rental is cut for the average of every man who wore it before you — and on the most photographed day of your life, the camera sees every compromise. Here's the honest comparison.
+      </p>
+
+      <div class="feature-grid cols-2" data-reveal-stagger>
+        <div style="border-top: 2px solid var(--rule-strong); padding-top: 20px;">
+          <div class="feature-num" style="color: var(--ink-mute);">The rental</div>
+          <h3 class="h-3" style="margin-bottom: 16px;">What you actually get</h3>
+          <ul class="prose-list">
+            <li>Cut for a crowd, adjusted toward you — never truly your fit.</li>
+            <li>The same handful of styles half the season's weddings wear.</li>
+            <li>Day-of risk: wrong size shipped, last wearer's stain, no time to fix it.</li>
+            <li>A few hundred dollars for one night — and you keep nothing.</li>
+            <li>No tailor of your own when something goes wrong.</li>
+          </ul>
+        </div>
+        <div style="border-top: 2px solid var(--oxblood); padding-top: 20px;">
+          <div class="feature-num" style="color: var(--oxblood);">Made by Sam</div>
+          <h3 class="h-3" style="margin-bottom: 16px;">What you keep</h3>
+          <ul class="prose-list">
+            <li>Built to your twenty-six measurements — the shoulders are yours.</li>
+            <li>Your cloth, your lapel, your details. One of one.</li>
+            <li>Three fittings and a tailor on call right up to the morning of.</li>
+            <li>Yours forever — worn again at every event after the wedding.</li>
+            <li>Divided across those wears, it costs less than renting twice.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p data-reveal style="margin-top: 36px;">
+        <a href="/guides/custom-vs-rental-wedding-suit" style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Read the honest custom-vs-rental math&nbsp;&nbsp;&rarr;</a>
+      </p>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="section tight">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="chapter-no">No. 05</div>
+        <div class="chapter-no">No. 06</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">From the <em>groom's side.</em></h2>
         <div class="right">Letters, after the wedding</div>
       </div>
-      <div class="quotes" data-reveal-stagger>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">Sam made the suit. My wife says I made the speech. The photos make it look like the suit made both.</p>
-          <div class="quote__attr">J. Halberstam · Groom, 2025</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">Twelve men, one fitting. Every father, brother and best man stood in the same line and looked like they belonged to one family — which is the whole point.</p>
-          <div class="quote__attr">E. Stein · Groom &amp; brother of two</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">It cost more than my first car. Six years later, the car is gone and the suit still fits. Best decision I made for the wedding.</p>
-          <div class="quote__attr">B. Friedman · Toronto</div>
-        </blockquote>
+      <Testimonials items={[reviews[1], reviews[3], reviews[5]]} />
+    </div>
+  </section>
+
+  <!-- WEDDING LIBRARY + FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 07</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 20ch;">The wedding <em>reading room.</em></h2>
+        <div class="right">Everything a groom needs to know</div>
+      </div>
+
+      <div class="wed-guides" data-reveal-stagger>
+        <a class="wed-guide" href="/guides/the-grooms-suit">
+          <span class="wed-guide__k">The Groom</span>
+          <span class="wed-guide__t">The groom's suit, done right</span>
+          <span class="wed-guide__d">Colour, cloth, custom vs rental, and the timeline for the outfit you'll see in photos forever.</span>
+        </a>
+        <a class="wed-guide" href="/guides/the-custom-tuxedo">
+          <span class="wed-guide__k">Tuxedos</span>
+          <span class="wed-guide__t">The custom tuxedo</span>
+          <span class="wed-guide__d">Why a tuxedo is the last thing you should rent — and what a made one gets you.</span>
+        </a>
+        <a class="wed-guide" href="/guides/coordinating-groomsmen">
+          <span class="wed-guide__k">Groomsmen</span>
+          <span class="wed-guide__t">Coordinating the party</span>
+          <span class="wed-guide__d">Matching vs coordinating, setting the groom apart, and the out-of-town problem.</span>
+        </a>
+        <a class="wed-guide" href="/guides/father-of-the-bride-and-groom-suit">
+          <span class="wed-guide__k">The Fathers</span>
+          <span class="wed-guide__t">Father of the bride &amp; groom</span>
+          <span class="wed-guide__d">How to dress the dads and fathers-in-law so the family photos read as one line.</span>
+        </a>
+        <a class="wed-guide" href="/guides/black-tie-wedding-attire">
+          <span class="wed-guide__k">Dress Codes</span>
+          <span class="wed-guide__t">Black tie, decoded</span>
+          <span class="wed-guide__d">What black tie, black tie optional and formal actually mean — and how to nail each.</span>
+        </a>
+        <a class="wed-guide" href="/guides/wedding-suit-timeline">
+          <span class="wed-guide__k">Timeline</span>
+          <span class="wed-guide__t">The wedding suit timeline</span>
+          <span class="wed-guide__d">When to start, fitting by fitting, so nothing is rushed near the date.</span>
+        </a>
+      </div>
+
+      <div data-reveal style="max-width: 760px; margin-top: 64px;">
+        <div class="eyebrow-rule">Wedding questions</div>
+        <h3 class="h-2" style="margin-bottom: 24px;">Grooms, groomsmen &amp; fathers — <em>answered.</em></h3>
+        <FaqBlock items={weddingFaqs} />
       </div>
     </div>
   </section>
@@ -216,5 +289,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 
 </BaseLayout>

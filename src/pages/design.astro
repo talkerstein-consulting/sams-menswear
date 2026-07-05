@@ -51,6 +51,13 @@ const ties = [
         <div class="dz-stage">
           <div class="dz-canvas">
             <svg class="suit lap-notch btn-2 sb is-tie sq-on" viewBox="0 0 400 640" role="img" aria-label="Live drawing of your suit" data-suit>
+              <!-- Real-cloth fill: a fabric photo mapped onto the garment shapes.
+                   Set by render() when the chosen cloth has a woven-texture tile. -->
+              <defs>
+                <pattern id="cloth-tex" patternUnits="userSpaceOnUse" width="400" height="640">
+                  <image data-cloth-img href="" x="-40" y="-20" width="480" height="680" preserveAspectRatio="xMidYMid slice"/>
+                </pattern>
+              </defs>
               <!-- TROUSERS (drawn first, behind jacket hem) -->
               <g class="ink">
                 <path class="cloth" d="M150 470 L250 470 L246 632 L214 632 L200 500 L186 632 L154 632 Z"/>
@@ -214,18 +221,24 @@ const ties = [
 
           <!-- Lead capture -->
           <div class="dz-lead" data-lead>
-            <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Send your look to Sam</h3>
+            <h2 class="h-4" style="text-transform: uppercase; color: var(--navy);">Send your look to Sam</h2>
             <p class="body-prose" style="font-size: 15px; margin-top: 8px;">I'll have your drawing in hand before you arrive — so the fitting starts from a spec, not a blank page. No obligation.</p>
             <form class="dz-form" data-look-form>
               <input type="text" name="name" placeholder="Your name" autocomplete="name" required/>
+              <input type="tel" name="phone" placeholder="Phone (so Sam can call)" autocomplete="tel"/>
               <input type="email" name="email" placeholder="Email" autocomplete="email" required/>
+              <label class="dz-when">When do you need it?
+                <input type="date" name="eventdate" aria-label="When do you need it?"/>
+              </label>
               <input type="hidden" name="spec" data-spec-field/>
+              <input type="text" name="company" class="dz-hp" tabindex="-1" autocomplete="off" aria-hidden="true"/>
               <button type="submit" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);">Send me this look</button>
             </form>
             <div class="dz-ack" data-look-ack hidden>
               <div class="dz-ack-seal">✓</div>
-              <p><strong>Saved.</strong> Sam has your look — <span data-ack-spec></span>. Book a fitting and we'll pull the real bolt.</p>
-              <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a fitting with this look</a>
+              <p data-ack-lead><strong>Saved.</strong> Sam has your look — <span data-ack-spec></span>. Book a fitting and we'll pull the real bolt.</p>
+              <p class="dz-fallback" data-look-fallback hidden style="font-size:14px;margin-top:4px;"></p>
+              <a href="/book" class="btn is-primary" data-open-booking data-no-transition data-uselook>Book a fitting with this look</a>
             </div>
           </div>
         </div>
@@ -251,6 +264,14 @@ const ties = [
       const LIN = { match: null, oxblood: '#6b2228', hunter: '#2c3d31', gold: '#9d7f42', sky: '#6f8fb0', silver: '#c8cad0' };
       const SH = { white: '#f3efe6', sky: '#cfdaea', pink: '#eed4d5', ivory: '#ece2ca' };
       const TIE = { oxblood: '#6b2228', navy: '#20294d', silver: '#b9bcc4', gold: '#9d7f42', forest: '#2c3d31', bow: '#1b1b1f' };
+      // Real woven-cloth photos, mapped by fabric id. Others fall back to the flat colour.
+      const TILES = {
+        f001: '/media/cloth/f001.webp', f003: '/media/cloth/f003.webp',
+        f021: '/media/cloth/f021.webp', f024: '/media/cloth/f024.webp',
+        f090: '/media/cloth/f090.webp', f104: '/media/cloth/f104.webp',
+        f142: '/media/cloth/f142.webp',
+      };
+      const clothImg = svg.querySelector('[data-cloth-img]');
       const PRESETS = {
         business:    { fabricName: 'Navy', breast: 'sb', buttons: '2', lapel: 'notch', trousers: 'flat', lining: 'oxblood', shirt: 'white', tie: 'silver', tieStyle: 'tie', square: 'on' },
         wedding:     { fabricName: 'Midnight Blue', breast: 'sb', buttons: '2', lapel: 'peak', trousers: 'flat', lining: 'oxblood', shirt: 'white', tie: 'silver', tieStyle: 'tie', square: 'on' },
@@ -267,10 +288,14 @@ const ties = [
         svg.style.setProperty('--lining', LIN[state.lining] || cloth);
         svg.style.setProperty('--shirt', SH[state.shirt] || '#f3efe6');
         svg.style.setProperty('--tie', TIE[state.tie] || '#6b2228');
+        // Real cloth: swap the drawn suit's fill to the fabric photo when we have one.
+        const tex = TILES[state.fabric];
+        if (clothImg) clothImg.setAttribute('href', tex || '');
         svg.setAttribute('class',
           `suit lap-${state.lapel} btn-${state.buttons} ${state.breast} ` +
           `${state.tieStyle === 'bow' ? 'is-bow' : state.tieStyle === 'none' ? 'is-none' : 'is-tie'} ` +
-          `${state.square === 'on' && state.tieStyle !== 'none' ? 'sq-on' : ''}`);
+          `${state.square === 'on' && state.tieStyle !== 'none' ? 'sq-on' : ''} ` +
+          `${tex ? 'has-tex' : ''}`);
 
         // sync chip active states
         document.querySelectorAll('.dz-chips').forEach((grp) => {
@@ -322,16 +347,44 @@ const ties = [
 
       // lead form
       const form = document.querySelector('[data-look-form]');
-      form?.addEventListener('submit', (e) => {
+      form?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const val = (n) => { const el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+        // Honeypot: real users never fill this. Silently pretend success for bots.
+        if (val('company')) { form.hidden = true; const a = document.querySelector('[data-look-ack]'); if (a) a.hidden = false; return; }
         const spec = render();
-        const lead = document.querySelector('[data-lead]');
+        const name = val('name'), email = val('email'), phone = val('phone'), eventdate = val('eventdate');
+        // Lead scoring: an event within ~6 weeks is a call-now lead.
+        let urgency = 'nurture';
+        if (eventdate) {
+          const days = Math.round((new Date(eventdate) - new Date()) / 86400000);
+          urgency = days <= 42 ? 'HOT — call now' : days <= 120 ? 'warm' : 'nurture';
+        }
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        // Persist for the "book with this look" handoff no matter what.
+        try { localStorage.setItem('sams:look', JSON.stringify({ ...state, spec, name, phone, email, eventdate, at: Date.now() })); } catch {}
+        let result = { ok: false };
+        try {
+          result = (window.SamsLead && window.SamsLead.send)
+            ? await window.SamsLead.send('design-look', { name, phone, email, eventdate, urgency, spec })
+            : { ok: false };
+        } catch (err) { result = { ok: false }; }
         const ack = document.querySelector('[data-look-ack]');
         const ackSpec = document.querySelector('[data-ack-spec]');
+        const ackLead = document.querySelector('[data-ack-lead]');
         if (ackSpec) ackSpec.textContent = spec;
+        if (!result.ok) {
+          // Honest ack — we did NOT reach Sam automatically; make the real path primary.
+          if (ackLead) ackLead.innerHTML = '<strong>Your look is ready.</strong> One tap sends it to Sam — <span data-ack-spec>' + spec + '</span>';
+          if (window.SamsLead) {
+            const mail = window.SamsLead.mailto('My suit look — ' + (name || 'website'), { Name: name, Phone: phone, Email: email, 'Need by': eventdate, Look: spec });
+            const fb = document.querySelector('[data-look-fallback]');
+            if (fb) { fb.innerHTML = 'To reach Sam right now: <a href="' + mail + '">email your look</a> or <a href="tel:' + window.SamsLead.PHONE + '">call ' + window.SamsLead.PHONE_DISP + '</a>.'; fb.hidden = false; }
+          }
+        }
         form.hidden = true;
         if (ack) ack.hidden = false;
-        try { localStorage.setItem('sams:look', JSON.stringify({ ...state, spec, at: Date.now() })); } catch {}
       });
 
       render();
