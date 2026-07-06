@@ -765,6 +765,142 @@ a:hover { color: var(--oxblood); }
   overflow: hidden;
 }
 
+/* ─── Visit block · envelope / invitation ────────────────────────── */
+.visit-envelope {
+  background:
+    radial-gradient(130% 90% at 50% 0%, var(--paper-cream) 0%, var(--paper-warm) 58%, var(--paper-deep) 100%);
+  box-shadow:
+    0 34px 66px -38px rgba(33, 28, 21, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+/* faint diagonal back-flap seams of the envelope */
+.visit-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), rgba(33, 28, 21, 0.05) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom left,  transparent calc(50% - 0.5px), rgba(33, 28, 21, 0.05) 50%, transparent calc(50% + 0.5px));
+}
+/* the enclosed card = the real map */
+.env-card {
+  position: absolute;
+  inset: clamp(12px, 2.6%, 18px);
+  z-index: 1;
+  background: var(--paper);
+  border: 1px solid rgba(33, 28, 21, 0.26);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.4),
+    0 20px 36px -22px rgba(33, 28, 21, 0.6);
+  overflow: hidden;
+}
+.env-card::after {           /* thin gold keyline, like an invitation border */
+  content: "";
+  position: absolute;
+  inset: 5px;
+  z-index: 3;
+  border: 1px solid rgba(157, 127, 66, 0.42);
+  pointer-events: none;
+}
+.env-map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: sepia(0.12) saturate(0.9) contrast(1.02) brightness(1.01);
+}
+/* opened top flap of the envelope */
+.env-flap {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  top: clamp(12px, 2.6%, 18px);
+  left: clamp(12px, 2.6%, 18px);
+  right: clamp(12px, 2.6%, 18px);
+  height: clamp(52px, 17%, 74px);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, var(--paper-deep) 0%, var(--paper-warm) 100%);
+  filter: drop-shadow(0 7px 8px rgba(33, 28, 21, 0.4));
+}
+/* wax seal at the point of the flap */
+.env-seal {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  top: clamp(44px, 15.5%, 66px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(38px, 11%, 48px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 5.4%, 23px);
+  line-height: 1;
+  color: rgba(247, 243, 233, 0.94);
+  background: radial-gradient(circle at 38% 30%, #8c3036 0%, var(--oxblood) 46%, var(--oxblood-deep) 100%);
+  border: 1px solid rgba(74, 21, 27, 0.55);
+  box-shadow:
+    0 6px 13px -4px rgba(74, 21, 27, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+}
+.env-seal::before {          /* embossed inner ring */
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px dashed rgba(247, 243, 233, 0.42);
+}
+/* postage stamp, top-right corner */
+.env-stamp {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  top: clamp(18px, 6%, 28px);
+  right: clamp(18px, 6%, 28px);
+  width: clamp(38px, 11%, 46px);
+  height: clamp(46px, 13%, 56px);
+  transform: rotate(4deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: var(--paper-cream);
+  border: 1.5px dashed rgba(33, 28, 21, 0.34);
+  box-shadow: 0 4px 9px -4px rgba(33, 28, 21, 0.55);
+}
+.env-stamp::before {         /* inner oxblood frame */
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 0.8px solid rgba(107, 34, 40, 0.42);
+}
+.env-stamp__mono {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(13px, 3.6%, 16px);
+  color: var(--oxblood);
+  line-height: 1;
+}
+.env-stamp__loc {
+  font-family: var(--serif);
+  font-size: clamp(5.5px, 1.6%, 7px);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .env-card { transition: box-shadow 0.4s ease, transform 0.4s ease; }
+  .visit-envelope:hover .env-card { transform: translateY(-2px); box-shadow: 0 4px 0 rgba(255,255,255,0.4), 0 26px 44px -22px rgba(33,28,21,0.66); }
+}
+
 /* ─── Fabric library teaser ──────────────────────────────────────── */
 
 .swatch-rail {

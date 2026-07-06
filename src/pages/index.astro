@@ -402,34 +402,21 @@ import { reviews } from '../data/reviews.js';
           <a href="/book" class="btn is-dark" style="margin-top: 36px; color: var(--ink); border-color: var(--ink);" data-open-booking data-no-transition>Request an appointment</a>
         </div>
 
-        <div class="visit-map" aria-label="Map placeholder of the atelier in Vaughan">
-          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" style="width:100%; height:100%; display:block;">
-            <defs>
-              <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
-                <path d="M22 0H0V22" fill="none" stroke="rgba(43,31,18,0.06)" stroke-width="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)"/>
-            <g fill="none" stroke="rgba(43,31,18,0.34)" stroke-linecap="round" stroke-width="1.8">
-              <path d="M 0 90 L 400 110"/>
-              <path d="M 0 200 L 400 220"/>
-              <path d="M 120 0 L 100 320"/>
-              <path d="M 260 0 L 280 320"/>
-              <path d="M 60 60 L 380 280" stroke-width="1.2"/>
-            </g>
-            <g fill="none" stroke="rgba(180,138,58,0.5)" stroke-width="3.5" stroke-linecap="round">
-              <path d="M 0 250 Q 200 230 400 260"/>
-            </g>
-            <text x="20" y="100" fill="rgba(43,31,18,0.5)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">RUTHERFORD&nbsp;RD</text>
-            <text x="20" y="210" fill="rgba(43,31,18,0.5)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">CHARLTON&nbsp;AVE</text>
-            <text x="295" y="200" fill="rgba(180,138,58,0.6)" font-family="Cormorant Garamond" font-style="italic" font-size="11" letter-spacing="2">HWY&nbsp;7</text>
-            <g transform="translate(210 160)">
-              <circle r="22" fill="rgba(107,34,40,0.10)"/>
-              <circle r="14" fill="rgba(107,34,40,0.18)"/>
-              <circle r="6" fill="var(--oxblood)"/>
-              <text x="0" y="-30" text-anchor="middle" fill="var(--ink)" font-family="Cormorant Garamond" font-style="italic" font-size="14" letter-spacing="3">SAM'S&nbsp;ATELIER</text>
-            </g>
-          </svg>
+        <div class="visit-map visit-envelope" aria-label="Map to Sam's atelier at 318 Charlton Avenue, Vaughan, Ontario">
+          <div class="env-card">
+            <iframe
+              class="env-map-frame"
+              title="Map to Sam's atelier — 318 Charlton Avenue, Vaughan, Ontario"
+              src="https://www.google.com/maps/embed?pb=!1m3!2m1!1s318+Charlton+Ave,+Thornhill,+ON+L4J+6H4!6i16"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <span class="env-flap" aria-hidden="true"></span>
+          <span class="env-stamp" aria-hidden="true">
+            <span class="env-stamp__mono">SM</span>
+            <span class="env-stamp__loc">Vaughan</span>
+          </span>
+          <span class="env-seal" aria-hidden="true">S</span>
         </div>
       </div>
     </div>
