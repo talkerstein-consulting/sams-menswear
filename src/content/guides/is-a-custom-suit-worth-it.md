@@ -1,8 +1,9 @@
 ---
 title: "Is a custom suit worth it? An honest answer"
 description: "When a custom suit is worth the money and when it isn't — from a tailor who'll talk you out of overspending."
+tldr: "Yes, for a hard-to-fit body, a wedding, or a man who wears a suit most weeks. For a suit worn twice a year on an average build, a well-altered off-the-rack is the honest answer, and a good tailor will say so."
 pillar: "Bespoke Suits"
-pillarHref: "/custom"
+pillarHref: "/suits"
 eyebrow: "Cost & value"
 updated: 2026-07-03
 order: 12

@@ -12,29 +12,66 @@ for (const g of all) {
   if (!p) { p = { name: g.data.pillar, items: [] }; pillars.push(p); }
   p.items.push(g);
 }
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+// pillar → header illustration (falls back to none)
+const pillarImg = {
+  'Weddings': '/media/art/guide-weddings.webp',
+  'Business & Professional': '/media/art/guide-business.webp',
+  'Care & the long run': '/media/art/guide-care.webp',
+  'Traditional / Jewish menswear': '/media/art/guide-traditional.webp',
+  'Cloth': '/media/art/guide-cloth.webp',
+  'Dressing for your profession': '/media/art/guide-business.webp',
+  'Bespoke Suits': '/media/art/guide-bespoke.webp',
+  'Fit': '/media/art/guide-fit.webp',
+  'The Service': '/media/art/guide-service.webp',
+  'Gifting': '/media/art/guide-gifting.webp',
+};
 ---
 <BaseLayout
   title="Guides — Bespoke Tailoring, Explained | Sam's Menswear"
-  description="Plain-spoken guides from a tailor of 30 years: what a custom suit costs, bespoke vs made-to-measure, how a suit should fit, cloth, weddings and more."
+  description="Plain-spoken tailoring guides from a Vaughan tailor of 30 years: what a custom suit costs, bespoke vs made-to-measure, how a suit should fit, cloth, weddings and more."
 >
-  <section class="page-hero">
+  <section class="page-hero" style="padding-bottom: 0;">
     <div class="container">
       <div data-reveal>
         <div class="eyebrow-rule">The Atelier · Guides</div>
         <h1>Tailoring, <em>explained.</em></h1>
-        <p class="lede">Thirty years of answers, written down. What things cost, how long they take, how a suit should actually fit, and how to choose the cloth — the conversations I have at the bench, minus the sales gloss.</p>
+        <p class="lede">Thirty years of answers, written down — what things cost, how long they take, how a suit should actually fit, how to dress a wedding party. The conversations Sam has at the bench, minus the sales gloss.</p>
+      </div>
+      <div class="guides-hero" data-reveal>
+        <img src="/media/art/guide-cloth.webp" alt="Rolled suiting cloth and swatches at the atelier" loading="eager"/>
       </div>
     </div>
   </section>
 
   <section class="section tight">
     <div class="container">
+      <!-- Search + jump nav -->
+      <div class="guides-tools" data-reveal>
+        <div class="guides-search">
+          <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M14 14 L18 18" stroke-linecap="round"/></svg>
+          <input type="search" id="guide-search" placeholder="Search the guides — cost, fit, weddings, cloth…" aria-label="Search guides" autocomplete="off"/>
+        </div>
+        <nav class="faq-index guides-nav" aria-label="Jump to a topic">
+          {pillars.map((p) => (
+            <a href={`#${slug(p.name)}`}>{p.name} <span>{p.items.length}</span></a>
+          ))}
+        </nav>
+      </div>
+
+      <p class="guides-empty" data-guides-empty hidden>No guides match that — try "wedding", "fit", "cost" or "cloth".</p>
+
       {pillars.map((p) => (
-        <div class="guide-pillar" data-reveal>
-          <h2 class="faq-cat__h">{p.name}</h2>
+        <div class="guide-pillar" id={slug(p.name)} data-pillar data-reveal>
+          <div class="pillar-head">
+            <h2 class="faq-cat__h" style="margin-bottom: 0; border: 0;">{p.name}</h2>
+            {pillarImg[p.name] && (
+              <div class="pillar-banner"><img src={pillarImg[p.name]} alt={`${p.name} — Sam's Menswear`} loading="lazy"/></div>
+            )}
+          </div>
           <div class="journal-list">
             {p.items.map((g) => (
-              <a class="journal-card" href={`/guides/${g.id}`}>
+              <a class="journal-card" href={`/guides/${g.id}`} data-guide={`${g.data.title} ${g.data.description} ${g.data.pillar} ${g.data.eyebrow}`.toLowerCase()}>
                 <div class="journal-card__eyebrow">{g.data.eyebrow}</div>
                 <div class="journal-card__title">{g.data.title}</div>
                 <p class="journal-card__excerpt">{g.data.description}</p>
@@ -66,4 +103,30 @@ for (const g of all) {
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const input = document.getElementById('guide-search');
+      if (!input) return;
+      const cards = [...document.querySelectorAll('.journal-card[data-guide]')];
+      const pillarsEls = [...document.querySelectorAll('[data-pillar]')];
+      const empty = document.querySelector('[data-guides-empty]');
+      const nav = document.querySelector('.guides-nav');
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        let any = false;
+        cards.forEach((c) => {
+          const hit = !q || c.dataset.guide.includes(q);
+          c.style.display = hit ? '' : 'none';
+          if (hit) any = true;
+        });
+        pillarsEls.forEach((p) => {
+          const visible = [...p.querySelectorAll('.journal-card')].some((c) => c.style.display !== 'none');
+          p.style.display = visible ? '' : 'none';
+        });
+        if (empty) empty.hidden = any;
+        if (nav) nav.style.display = q ? 'none' : '';
+      });
+    })();
+  </script>
 </BaseLayout>

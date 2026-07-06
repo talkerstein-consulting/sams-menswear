@@ -1,6 +1,7 @@
 ---
 title: "The wedding suit timeline: when to start"
 description: "When to order a wedding suit, how the months break down, coordinating out-of-town groomsmen, tux vs suit, and whether a rush is possible."
+tldr: "Start your wedding suit 9 to 12 months before the date. That window isn't sewing time — it's room to choose cloth, coordinate the party and fit unhurried. A rush in 3 to 4 weeks is sometimes possible, but early means choosing rather than settling."
 pillar: "Weddings"
 pillarHref: "/wedding"
 eyebrow: "Weddings"

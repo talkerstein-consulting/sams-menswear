@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ReviewsWall from '../components/ReviewsWall.astro';
+import { reviews } from '../data/reviews.js';
 ---
 <BaseLayout
   title="Sam's Menswear — Custom Tailoring · Vaughan, Thornhill, Toronto"
@@ -27,6 +29,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h1 class="hero__title">Measured. <em>Made.</em> Refined.</h1>
           <p class="lede hero__lede">A personal master tailor for the men of Vaughan, Thornhill &amp; Toronto — every garment drawn, cut and fitted by hand.</p>
           <a href="/book" class="btn is-dark hero__cta" data-open-booking data-no-transition>Book a Fitting</a>
+          <p class="cta-trust hero__trust">★ 4.7 · 150+ Google reviews · First fitting free &amp; no-obligation</p>
         </div>
       </div>
     </div>
@@ -41,16 +44,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h2 class="h-1" style="text-transform: uppercase;">
             A suit, <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">cut for one&nbsp;man.</em>
           </h2>
+          <figure class="wed-portrait" style="margin-top: 32px;">
+            <img src="/media/sam/sam-outdoor.webp" alt="Sam Talkar, master tailor and owner of Sam's Menswear in Vaughan" loading="lazy"/>
+            <figcaption>Sam Talkar · Master Tailor, Vaughan</figcaption>
+          </figure>
         </div>
         <div>
           <p class="lede" style="margin-bottom: 24px;">
-            Sam has been measuring shoulders, marking chalk and threading lapels for the men of Vaughan &amp; Thornhill for over twenty years. Every garment is drawn, cut and fitted personally — never outsourced, never rushed.
+            Sam has been measuring shoulders, marking chalk and threading lapels for over thirty years — the last decade-plus from the studio in Vaughan. Every garment is drawn, cut and fitted personally, by hand — never outsourced, never rushed.
           </p>
           <p class="body-prose">
             Whether you are standing at the altar, walking into a boardroom, fitting a son for his first kapota, or simply choosing how you want to be remembered when you walk into a room — the work begins the same way. A measuring tape. A pencil. A long conversation about the man inside the cloth.
           </p>
+          <p class="body-prose" style="margin-top: 18px;">
+            There is no showroom floor and no sales team. One tailor, one client at a time, a wall of cloth. You're measured by the man who will actually cut your suit — twenty-six measurements taken by hand, kept in a notebook, and returned to every time you come back. It's the old way, and for a garment you'll wear for a decade, it's still the best way.
+          </p>
+          <p class="body-prose" style="margin-top: 18px;">
+            Clients come from across the GTA — Vaughan, Thornhill, Toronto, North York, Richmond Hill and Markham — for the first suit that ever truly fit. Most never go back to buying off the rack.
+          </p>
           <p class="body-prose" style="margin-top: 24px;">
-            <a href="/book" style="font-style: italic; font-family: var(--serif); letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Begin with a Conversation&nbsp;&nbsp;&rarr;</a>
+            <a href="/book" data-open-booking data-no-transition style="font-style: italic; font-family: var(--serif); letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Begin with a Conversation&nbsp;&nbsp;&rarr;</a>
           </p>
         </div>
       </div>
@@ -163,12 +176,99 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- ─── BY GARMENT ──────────────────────────────────────────────── -->
+  <section class="section" id="garments">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 03</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">
+          Or shop by <em>garment.</em>
+        </h2>
+        <div class="right">Everything Sam makes by hand</div>
+      </div>
+
+      <div class="gcard-grid rgrid rgrid-3" data-reveal-stagger>
+        <a href="/suits" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-suit.webp" alt="Illustration of a two-piece bespoke suit" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ I</span><span class="gcard__label">Suits</span><span class="gcard__desc">Two- &amp; three-piece, cut to one body.</span></div>
+        </a>
+        <a href="/tuxedos" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-tuxedo.webp" alt="Illustration of a black-tie tuxedo" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ II</span><span class="gcard__label">Tuxedos</span><span class="gcard__desc">Black tie, done properly — never rented.</span></div>
+        </a>
+        <a href="/trousers" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-trousers.webp" alt="Illustration of tailored trousers" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ III</span><span class="gcard__label">Trousers</span><span class="gcard__desc">Cut to your rise, seat and break.</span></div>
+        </a>
+        <a href="/dress-shirts" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-dress-shirt.webp" alt="Illustration of a custom dress shirt"loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ IV</span><span class="gcard__label">Dress Shirts</span><span class="gcard__desc">Your collar, your cuff, your pattern.</span></div>
+        </a>
+        <a href="/short-sleeve-shirts" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-short-sleeve.webp" alt="Illustration of a short-sleeved shirt" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ V</span><span class="gcard__label">Short-Sleeved Shirts</span><span class="gcard__desc">Warm-weather tailoring that still fits.</span></div>
+        </a>
+        <a href="/outerwear" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-outerwear.webp" alt="Illustration of a tailored topcoat" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ VI</span><span class="gcard__label">Outerwear</span><span class="gcard__desc">Topcoats &amp; overcoats for the long winter.</span></div>
+        </a>
+        <a href="/kapotas" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-kapotas.webp" alt="Illustration of a traditional kapota coat" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ VII</span><span class="gcard__label">Kapotas &amp; Traditional</span><span class="gcard__desc">Bekishe, kapota, kittel &amp; the Shabbos suit.</span></div>
+        </a>
+        <a href="/kids-teen-suits" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-kids-teen.webp" alt="Illustration of a boy's tailored suit" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ VIII</span><span class="gcard__label">Kids &amp; Teen Suits</span><span class="gcard__desc">Bar-mitzvah &amp; first suits, with growing room.</span></div>
+        </a>
+        <a href="/casual" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-casual.webp" alt="Illustration of a casual sport coat" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ IX</span><span class="gcard__label">Casual &amp; Sport Coats</span><span class="gcard__desc">Soft jackets, chinos &amp; weekend tailoring.</span></div>
+        </a>
+        <a href="/vegan" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-vegan.webp" alt="Illustration of a vegan tailored suit" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ X</span><span class="gcard__label">Vegan Tailoring</span><span class="gcard__desc">Plant-based &amp; cruelty-free, cut by hand.</span></div>
+        </a>
+        <a href="/womens" class="gcard">
+          <div class="gcard__img"><img src="/media/art/garment-womens.webp" alt="Illustration of a women's tailored suit" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ XI</span><span class="gcard__label">Women's Suits &amp; Skirts</span><span class="gcard__desc">Bespoke tailoring cut for a woman's frame.</span></div>
+        </a>
+        <a href="/wedding" class="gcard">
+          <div class="gcard__img"><img src="/media/art/wedding-groom.webp" alt="Illustration of a groom's wedding suit" loading="lazy"/></div>
+          <div class="gcard__body"><span class="gcard__no">№ XII</span><span class="gcard__label">Weddings</span><span class="gcard__desc">Groom, groomsmen &amp; both fathers, coordinated.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GIFT A SUIT (teaser) ─────────────────────────────────────── -->
+  <section class="section tight" id="gift-teaser">
+    <div class="container">
+      <div class="visit-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="margin-bottom: 24px;">The Gift</div>
+          <h2 class="h-1" style="text-transform: uppercase;">The gift of <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">style.</em></h2>
+          <p class="lede" style="margin-top: 24px;">
+            The perfect gift for the man in your life — a custom shirt, trousers, a jacket, a full suit, or his whole wardrobe, plus a one-hour wardrobe consultation with Sam. You reserve it; he’s fitted personally. You never even need his size.
+          </p>
+          <div class="hero-cta-row" style="margin-top: 28px;">
+            <a href="/gift" class="btn is-dark" style="color: var(--ink); border-color: var(--ink);">Give the gift of style</a>
+            <a href="/guides/is-a-custom-suit-a-good-gift" class="hero-cta-call" data-no-transition>Is it a good gift? &rarr;</a>
+          </div>
+        </div>
+        <figure class="wed-portrait" style="margin: 0;">
+          <img src="/media/art/gift-hero.webp" alt="A tailored garment folded in a ribboned gift box — the gift of style from Sam's Menswear" loading="lazy"/>
+          <figcaption>A garment, or the whole wardrobe</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── THE BESPOKE JOURNEY (scroll-driven dressing sequence) ─────── -->
   <section class="section journey" id="journey"
            style="background: linear-gradient(180deg, transparent 0%, var(--paper-cream) 50%, transparent 100%);">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="chapter-no">No. 03</div>
+        <div class="chapter-no">No. 04</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
           The bespoke <em>journey.</em>
         </h2>
@@ -238,7 +338,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section" id="lookbook">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="chapter-no">No. 04</div>
+        <div class="chapter-no">No. 05</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
           From the <em>lookbook.</em>
         </h2>
@@ -263,30 +363,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section tight" id="testimonials">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="chapter-no">No. 05</div>
+        <div class="chapter-no">No. 06</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 16ch;">
           What the <em>men say.</em>
         </h2>
-        <div class="right">From the fitting room</div>
+        <div class="right">4.7★ · 150+ on Google</div>
       </div>
 
-      <div class="quotes" data-reveal-stagger>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">Sam doesn't make suits. He makes the version of you who walks taller. Three weddings in his jackets and counting.</p>
-          <div class="quote__attr">D. Friedman · Groom, 2024</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">My father bought his Shabbos suit here in 1996. I bought my son's bar mitzvah suit here last winter. Some things you don't change.</p>
-          <div class="quote__attr">A. Rosenberg · Vaughan</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">Bay Street suit, but every fitting felt like sitting with an uncle. The kind of person who actually remembers your shoulders.</p>
-          <div class="quote__attr">M. Cohen · Toronto</div>
-        </blockquote>
-      </div>
+      <ReviewsWall items={reviews} count={6} />
     </div>
   </section>
 
@@ -295,7 +379,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <div class="visit-block" data-reveal>
         <div>
-          <div class="eyebrow-rule" style="margin-bottom: 24px;">No. 06 · The Atelier</div>
+          <div class="eyebrow-rule" style="margin-bottom: 24px;">No. 07 · The Atelier</div>
           <h2 class="h-1" style="text-transform: uppercase;">Visit Sam <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">in Vaughan.</em></h2>
           <p class="lede" style="margin-top: 24px;">
             The atelier is a quiet room of wool, light and patience. Visits are by appointment, so the conversation can be unhurried.
@@ -307,7 +391,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="chapter-no" style="font-style: italic;">By appointment only</span>
             </dd>
             <dt class="small-tag">Telephone</dt>
-            <dd style="margin: 4px 0 18px; font-size: 22px; letter-spacing: 0.06em; color: var(--ink);">647 · 458 · 0711</dd>
+            <dd style="margin: 4px 0 18px;"><a href="tel:+16474580711" data-no-transition style="font-size: 22px; letter-spacing: 0.06em; color: var(--ink); border-bottom: 1px solid var(--rule);">647 · 458 · 0711</a></dd>
             <dt class="small-tag">Hours</dt>
             <dd style="margin: 4px 0 0; font-size: 17px; color: var(--ink-soft);">
               Sun – Thu &middot; by appointment<br/>
@@ -368,7 +452,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
           <div class="contact-tag" style="margin-top: 12px;">
             Or call directly
-            <div class="num">647 · 458 · 0711</div>
+            <div class="num"><a href="tel:+16474580711" data-no-transition style="color: inherit;">647 · 458 · 0711</a></div>
           </div>
         </div>
       </div>

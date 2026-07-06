@@ -286,6 +286,22 @@
         location.href = href;
       });
     }, true);
+
+    // Back/forward-cache fix: when a page is restored from bfcache (e.g. the
+    // browser Back button), it comes back frozen with the "leaving" overlay
+    // still active — a stuck covered screen. Clear it on restore, and reset any
+    // menu/scroll-lock that was open when the page was cached.
+    window.addEventListener('pageshow', (e) => {
+      if (!e.persisted) return;
+      const ov = document.getElementById('page-transition');
+      if (ov) ov.classList.remove('is-active');
+      try { sessionStorage.removeItem('pt:incoming'); } catch {}
+      const menu = document.querySelector('[data-mobile-menu]');
+      if (menu) menu.classList.remove('is-open');
+      const modal = document.getElementById('booking-modal');
+      if (modal) modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
   }
 
   if (document.readyState === 'loading') {

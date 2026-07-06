@@ -1,5 +1,7 @@
 ---
-// Sticky site header + primary nav. `nav` marks the current section.
+// Sticky site header + primary nav with a full-width "Explore" mega menu.
+// `nav` marks the current section.
+import { reviewAggregate } from '../data/reviews.js';
 const { nav } = Astro.props;
 const items = [
   { href: '/wedding', label: 'Wedding', key: 'wedding' },
@@ -8,6 +10,43 @@ const items = [
   { href: '/traditional', label: 'Traditional', key: 'traditional' },
 ];
 const bookCurrent = nav === 'book';
+
+// Mega-menu content
+const houses = [
+  { href: '/wedding', t: 'Wedding Suits', d: 'Groom, groomsmen & fathers' },
+  { href: '/business', t: 'Business Suits', d: 'Boardroom & everyday' },
+  { href: '/custom', t: 'Custom Suits & Shirts', d: 'One pattern, one body' },
+  { href: '/traditional', t: 'Traditional Menswear', d: 'Bekishe, kapota, kittel' },
+];
+const garments = [
+  { href: '/suits', t: 'Custom Suits', d: 'Two- & three-piece, made to you' },
+  { href: '/tuxedos', t: 'Tuxedos', d: 'Black tie, done right' },
+  { href: '/trousers', t: 'Trousers', d: 'Your rise & break' },
+  { href: '/dress-shirts', t: 'Dress Shirts', d: 'Your collar & cuff' },
+  { href: '/short-sleeve-shirts', t: 'Short-Sleeved Shirts', d: 'Warm-weather cut' },
+  { href: '/outerwear', t: 'Outerwear', d: 'Topcoats & overcoats' },
+  { href: '/casual', t: 'Casual & Sport Coats', d: 'Weekend tailoring' },
+  { href: '/kapotas', t: 'Kapotas & Traditional', d: 'Bekishe, kapota, kittel' },
+  { href: '/kids-teen-suits', t: 'Kids & Teen Suits', d: 'Bar-mitzvah & first suits' },
+  { href: "/womens", t: "Women's Suits & Skirts", d: 'Cut for her frame' },
+  { href: '/vegan', t: 'Vegan Tailoring', d: 'Plant-based & cruelty-free' },
+];
+const guides = [
+  { href: '/guides/the-grooms-suit', t: "The groom's suit" },
+  { href: '/guides/how-a-suit-should-fit', t: 'How a suit should fit' },
+  { href: '/guides/what-a-custom-suit-costs', t: 'What a custom suit costs' },
+  { href: '/guides/custom-vs-rental-wedding-suit', t: 'Custom vs rental' },
+  { href: '/guides/choosing-your-cloth', t: 'Choosing your cloth' },
+];
+const atelier = [
+  { href: '/gift', t: 'The Gift of Style', d: 'A garment, or the whole wardrobe' },
+  { href: '/design', t: 'Design Your Suit', d: 'The Drawing Board' },
+  { href: '/fabrics', t: 'The Cloth Library', d: '~200 fabrics' },
+  { href: '/almanac', t: 'The Almanac', d: '101 tales from the bench' },
+  { href: '/reviews', t: 'Reviews', d: '4.7★ · 150+ on Google' },
+  { href: '/locations', t: 'Locations', d: 'Across the GTA' },
+  { href: '/about', t: 'About Sam', d: '30+ years' },
+];
 ---
 <header class="site-header" data-site-header>
   <div class="site-header__inner">
@@ -18,6 +57,9 @@ const bookCurrent = nav === 'book';
       {items.map((it) => (
         <a href={it.href} class={nav === it.key ? 'is-current' : undefined}>{it.label}</a>
       ))}
+      <div class="mega-trigger" data-mega>
+        <button type="button" class="mega-btn" aria-expanded="false" aria-haspopup="true">Explore <span class="mega-caret" aria-hidden="true">▾</span></button>
+      </div>
       <a
         href="/book"
         class={`nav-cta${bookCurrent ? ' is-current' : ''}`}
@@ -33,5 +75,43 @@ const bookCurrent = nav === 'book';
         <line x1="3" y1="18" x2="23" y2="18"/>
       </svg>
     </button>
+  </div>
+
+  <!-- Full-width mega panel -->
+  <div class="mega-panel" data-mega-panel aria-hidden="true">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-h">By Occasion</div>
+        {houses.map((h) => (
+          <a class="mega-link" href={h.href}><span class="mega-link__t">{h.t}</span><span class="mega-link__d">{h.d}</span></a>
+        ))}
+      </div>
+      <div class="mega-col">
+        <div class="mega-h">By Garment</div>
+        {garments.map((g) => (
+          <a class="mega-link" href={g.href}><span class="mega-link__t">{g.t}</span><span class="mega-link__d">{g.d}</span></a>
+        ))}
+      </div>
+      <div class="mega-col">
+        <div class="mega-h">Guides</div>
+        {guides.map((g) => (
+          <a class="mega-link" href={g.href}><span class="mega-link__t">{g.t}</span></a>
+        ))}
+        <a class="mega-more" href="/guides">All guides &amp; the journal &rarr;</a>
+      </div>
+      <div class="mega-col">
+        <div class="mega-h">The Atelier</div>
+        {atelier.map((a) => (
+          <a class="mega-link" href={a.href}><span class="mega-link__t">{a.t}</span><span class="mega-link__d">{a.d}</span></a>
+        ))}
+      </div>
+      <div class="mega-col mega-cta">
+        <div class="mega-h">Begin</div>
+        <p class="mega-cta__lede">A first fitting is unhurried, honest, and costs nothing.</p>
+        <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+        <div class="mega-cta__trust">★ {reviewAggregate.ratingValue} · 150+ Google reviews</div>
+        <a href="tel:+16474580711" class="mega-cta__call" data-no-transition>647 · 458 · 0711</a>
+      </div>
+    </div>
   </div>
 </header>

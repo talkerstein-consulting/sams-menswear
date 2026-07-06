@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorBio from '../../components/AuthorBio.astro';
+import { themes, getTheme, almanacDisclaimer } from '../../data/almanac.js';
+
+export function getStaticPaths() {
+  return themes.map((t) => ({ params: { slug: t.slug }, props: { theme: t } }));
+}
+const { theme } = Astro.props;
+const site = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+const idx = themes.findIndex((t) => t.slug === theme.slug);
+const next = themes[(idx + 1) % themes.length];
+const paras = (s) => String(s || '').split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
+const breadcrumb = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
+    { '@type': 'ListItem', position: 2, name: 'The Almanac', item: site + '/almanac' },
+    { '@type': 'ListItem', position: 3, name: theme.title, item: `${site}/almanac/${theme.slug}` },
+  ],
+};
+---
+<BaseLayout
+  title={`${theme.title} — The Almanac | Sam's Menswear`}
+  description={theme.description}
+  ogType="article"
+>
+  <article>
+    <section class="page-hero" style="padding-bottom: 0;">
+      <div class="container">
+        <nav class="crumbs" data-reveal aria-label="Breadcrumb">
+          <a href="/">Home</a> <span>/</span> <a href="/almanac">The Almanac</a> <span>/</span> <em>{theme.title}</em>
+        </nav>
+        <div data-reveal style="max-width: 46rem;">
+          <div class="eyebrow-rule">Chapter {String(idx + 1).padStart(2, '0')} · The Almanac</div>
+          <h1 style="text-transform: none;">{theme.title}</h1>
+          <p class="lede" style="margin-top: 14px;">{theme.teaser}</p>
+          <p class="almanac-note">{almanacDisclaimer}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: clamp(20px,3vw,32px); padding-bottom: 0;">
+      <div class="container">
+        <figure class="almanac-banner" data-reveal>
+          <img src={`/media/art/almanac-${theme.slug}.webp`} alt={`Chapter illustration — ${theme.title}`}/>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: clamp(28px,4vw,44px);">
+      <div class="container">
+        <div class="tale-list" data-reveal>
+          {theme.tales.map((t) => (
+            <article class="tale">
+              <div class="tale__num">№ {String(t.num).padStart(3, '0')}</div>
+              <h2 class="tale__title">{t.title}</h2>
+              <div class="tale__who">{t.who}</div>
+              {paras(t.body).map((p) => <p class="tale__body">{p}</p>)}
+              <p class="tale__lesson">{t.lesson} {t.guide && (<a href={t.guide}>Read more &rarr;</a>)}</p>
+            </article>
+          ))}
+        </div>
+
+        <div style="max-width: 46rem; margin-top: clamp(36px,5vw,60px);">
+          <AuthorBio reviewed={false} />
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Your story</span>
+          </div>
+          <h2 class="h-1">Start yours <em>the right way.</em></h2>
+          <p class="lede" style="margin-top: 24px;">The first fitting is free, unhurried and honest. Or keep reading — <a href={`/almanac/${next.slug}`} style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">{next.title}</a>.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or <a href="/almanac" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">back to the Almanac</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+</BaseLayout>

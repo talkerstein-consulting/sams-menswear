@@ -1,8 +1,9 @@
 ---
 title: "How long does a custom suit take?"
 description: "Real timelines for made-to-measure and bespoke, how many fittings to expect, wedding lead times, and whether a rush is possible."
+tldr: "A first bespoke suit takes about 8 to 12 weeks across two or three fittings; made-to-measure is quicker at roughly 4 to 8 weeks with one or two. Weddings should start 9 to 12 months out, and a rush is sometimes possible in 3 to 4 weeks."
 pillar: "Bespoke Suits"
-pillarHref: "/custom"
+pillarHref: "/suits"
 eyebrow: "Timeline"
 updated: 2026-07-03
 order: 13

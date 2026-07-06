@@ -949,6 +949,25 @@ a:hover { color: var(--oxblood); }
   color: rgba(247, 238, 215, 0.5);
 }
 .footer-meta em { font-style: italic; letter-spacing: 0.08em; text-transform: none; color: rgba(247, 238, 215, 0.7); }
+.footer-legal {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(247, 238, 215, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(247, 238, 215, 0.4);
+}
+.footer-legal a { color: rgba(247, 238, 215, 0.6); }
+.footer-legal a:hover { color: var(--gold-soft); }
+.footer-legal__credit { margin-left: auto; letter-spacing: 0.1em; color: rgba(247, 238, 215, 0.5); }
+.footer-legal__credit a { color: var(--gold-soft); border-bottom: 1px solid rgba(180, 138, 58, 0.4); }
+@media (max-width: 560px) { .footer-legal__credit { margin-left: 0; } }
 
 /* ─── Tape divider (a thin tape strip used as a section break) ──── */
 
@@ -1046,11 +1065,18 @@ a:hover { color: var(--oxblood); }
   padding: 24px var(--gutter) 48px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;                 /* long menus scroll inside — never overflow the box */
   transform: translateY(-100%);
-  transition: transform 380ms cubic-bezier(0.5, 0, 0.2, 1);
+  visibility: hidden;               /* don't paint at all while closed */
+  transition: transform 380ms cubic-bezier(0.5, 0, 0.2, 1), visibility 0s linear 380ms;
   pointer-events: none;
 }
-.mobile-menu.is-open { transform: none; pointer-events: auto; }
+.mobile-menu.is-open {
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 380ms cubic-bezier(0.5, 0, 0.2, 1), visibility 0s;
+}
 .mobile-menu__head {
   display: flex; justify-content: space-between; align-items: center;
   padding-bottom: 32px;
@@ -1085,7 +1111,7 @@ a:hover { color: var(--oxblood); }
   .quotes { grid-template-columns: 1fr; gap: 32px; }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .main-nav, .nav-cta { display: none; }
   .nav-toggle { display: flex; }
 }

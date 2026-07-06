@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { reviews, reviewAggregate, reviewSchema } from '../data/reviews.js';
+const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+---
+<BaseLayout
+  title="Reviews — Sam's Menswear · 4.7★ on Google · Vaughan"
+  description="Real Google reviews for Sam's Menswear — grooms, fathers and sons, and off-the-rack converts on the fit, honesty and ahead-of-schedule delivery."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">From the fitting room</div>
+        <h1>What the <em>men say.</em></h1>
+        <div class="rev-aggregate">
+          <span class="rev-stars" aria-hidden="true">★★★★★</span>
+          <strong>{reviewAggregate.ratingValue}</strong> average · {reviewAggregate.reviewCount}+ Google reviews
+          <a href={reviewAggregate.sourceUrl} target="_blank" rel="noopener" data-no-transition>Read them on Google →</a>
+        </div>
+        <p class="lede" style="margin-top: 22px;">These are real, Google-verified reviews — grooms who found Sam weeks before the wedding, fathers ordering with their sons, and men who'd given up on off-the-rack. The words are theirs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="rev-filter" data-reveal role="tablist" aria-label="Filter reviews">
+        <button class="rev-chip is-active" data-filter="all" type="button">All</button>
+        <button class="rev-chip" data-filter="wedding" type="button">Weddings &amp; tuxedos</button>
+        <button class="rev-chip" data-filter="family" type="button">Fathers &amp; family</button>
+        <button class="rev-chip" data-filter="fit" type="button">Alterations &amp; fit</button>
+        <button class="rev-chip" data-filter="first" type="button">First-timers</button>
+      </div>
+      <div class="rev-grid" data-reveal>
+        {reviews.map((r) => {
+          const t = (r.tag + ' ' + r.text).toLowerCase();
+          const tags = [
+            /wedding|tuxedo|groom|chuppah/.test(t) ? 'wedding' : '',
+            /father|family|son|dad|husband/.test(t) ? 'family' : '',
+            /alter|weight|off-the-rack|off the rack|baggy|resiz|shoulder/.test(t) ? 'fit' : '',
+            /first/.test(t) ? 'first' : '',
+          ].filter(Boolean).join(' ');
+          return (
+            <blockquote class="rev-card" data-tags={tags}>
+              <div class="rev-card__stars">{'★'.repeat(r.rating)}</div>
+              <p class="rev-card__text">{r.text}</p>
+              <div class="rev-card__attr"><strong>{r.name}</strong><span>{r.tag} · Google</span></div>
+            </blockquote>
+          );
+        })}
+      </div>
+      <p class="rev-more" data-reveal>
+        These are a dozen of Sam's <strong>150+ five-star</strong> Google reviews.
+        <a href={reviewAggregate.sourceUrl} target="_blank" rel="noopener" data-no-transition>Read all of them on Google&nbsp;&rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const chips = [...document.querySelectorAll('.rev-chip')];
+      const cards = [...document.querySelectorAll('.rev-card[data-tags]')];
+      chips.forEach((chip) => chip.addEventListener('click', () => {
+        chips.forEach((c) => c.classList.toggle('is-active', c === chip));
+        const f = chip.dataset.filter;
+        cards.forEach((c) => { c.style.display = (f === 'all' || c.dataset.tags.includes(f)) ? '' : 'none'; });
+      }));
+    })();
+  </script>
+
+  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema(origin))} />
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Your turn</span>
+          </div>
+          <h2 class="h-1">Join them at the <em>bench.</em></h2>
+          <p class="lede" style="margin-top: 24px;">The first fitting is free and unhurried — at the Vaughan studio, or Sam comes to you. Design your suit first if you like.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or <a href="/design" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">design your suit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

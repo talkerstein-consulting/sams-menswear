@@ -1,10 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { reviews } from '../data/reviews.js';
+
+const site = 'https://customsuitandshirt.com';
+const gta = ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'];
+// Service node — provided by the #business, served across the GTA.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site}/business#service`,
+  name: 'Business & Professional Suits',
+  serviceType: 'Custom business suit tailoring',
+  provider: { '@id': `${site}/#business` },
+  areaServed: gta.map((c) => ({ '@type': 'City', name: c })),
+  url: `${site}/business`,
+  description: 'Made-to-measure business suits for the boardroom, Bay Street and the working week — navy, charcoal and glen check, cut personally by Sam for a wardrobe worn for years.',
+};
 ---
 <BaseLayout
   nav="business"
-  title="Business Suits — Sam's Menswear · Vaughan"
-  description="Business suits for the boardroom, Bay Street and the long Toronto winter. Cut personally by Sam in Vaughan."
+  title="Business Suits in Vaughan & the GTA — Sam's Menswear"
+  description="Custom business suits for the boardroom and Bay Street — navy, charcoal and glen check, cut personally by Sam in Vaughan and across Thornhill & the GTA. Made to fit."
 >
 
   <section class="page-hero">
@@ -13,6 +30,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="eyebrow-rule">House № 02 &middot; Business</div>
         <h1>For ten thousand <em>handshakes.</em></h1>
         <p class="lede">The business suit is a uniform a man wears for thirty years of his working life. It should fit him from across the room and from across the negotiating table. Sam draws yours so it does both.</p>
+        <div class="hero-cta-row">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <a href="tel:+16474580711" class="hero-cta-call" data-no-transition>or call 647 · 458 · 0711</a>
+        </div>
+        <p class="cta-trust">★ 4.7 · 150+ Google reviews · First fitting free &amp; no-obligation</p>
       </div>
     </div>
   </section>
@@ -36,6 +58,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- DRESSING FOR YOUR PROFESSION -->
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">The working world</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 20ch;">Dressing for <em>your profession.</em></h2>
+        <div class="right">Seven fields · one honest tailor</div>
+      </div>
+      <p class="body-prose" data-reveal style="max-width: 58ch; margin-bottom: 32px;">Every field reads a suit differently — what earns trust in a courtroom would overdo it on a sales call, and what works on Bay Street isn't what works showing houses all weekend. Here's how Sam dresses each.</p>
+      <div class="wed-guides" data-reveal-stagger>
+        <a class="wed-guide" href="/guides/dressing-for-senior-management"><span class="wed-guide__k">Senior Management</span><span class="wed-guide__t">Quiet authority</span><span class="wed-guide__d">Command the room without trying — better cloth, impeccable fit, nothing loud.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-sales"><span class="wed-guide__k">Sales</span><span class="wed-guide__t">Sharp, never intimidating</span><span class="wed-guide__d">Credible and trusted without ever out-dressing the client.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-real-estate"><span class="wed-guide__k">Real Estate</span><span class="wed-guide__t">Polished &amp; mobile</span><span class="wed-guide__d">You are the brand — dressed to your market, built to move all day.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-finance"><span class="wed-guide__k">Finance</span><span class="wed-guide__t">Quietly expensive</span><span class="wed-guide__d">Understated, precise, hierarchy-aware — the Bay Street code.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-law"><span class="wed-guide__k">Law</span><span class="wed-guide__t">Authority &amp; credibility</span><span class="wed-guide__d">Reading the courtroom, the boardroom and the client, in cloth.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-entrepreneurs"><span class="wed-guide__k">Entrepreneurs</span><span class="wed-guide__t">The founder's uniform</span><span class="wed-guide__d">One great suit that dresses up to pitch and down to build.</span></a>
+        <a class="wed-guide" href="/guides/dressing-for-medicine"><span class="wed-guide__k">Medicine</span><span class="wed-guide__t">Trust under the coat</span><span class="wed-guide__d">Clean, comfortable, built for a long day — patients notice.</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- Two-up: The Working Wardrobe -->
   <section class="section">
     <div class="container">
@@ -45,12 +88,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="right">A five-day rotation</div>
       </div>
 
-      <div data-reveal-stagger style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: clamp(40px, 5vw, 72px);">
+      <div data-reveal-stagger class="rgrid rgrid-5" style="margin-top: clamp(40px, 5vw, 72px);">
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="aspect-ratio: 3 / 4; background: var(--navy); position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3), inset 8px 8px 24px rgba(0,0,0,0.18); background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 3px);">
             <span style="position: absolute; bottom: 12px; left: 12px; font-family: var(--serif); font-style: italic; color: var(--paper-cream); font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;">Mon</span>
           </div>
-          <h4 class="h-4" style="text-transform: uppercase; color: var(--navy);">Plain Navy</h4>
+          <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Plain Navy</h3>
           <p class="body-prose" style="font-size: 14px; line-height: 1.5;">The everyday weapon. Worn with a white shirt and silk knit tie.</p>
         </div>
 
@@ -58,7 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="aspect-ratio: 3 / 4; background: #2a2520; position: relative; background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 28px), repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 3px);">
             <span style="position: absolute; bottom: 12px; left: 12px; font-family: var(--serif); font-style: italic; color: var(--paper-cream); font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;">Tue</span>
           </div>
-          <h4 class="h-4" style="text-transform: uppercase; color: var(--navy);">Charcoal Chalk</h4>
+          <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Charcoal Chalk</h3>
           <p class="body-prose" style="font-size: 14px; line-height: 1.5;">A fine white stripe widens the shoulders by a half-inch. Authority cloth.</p>
         </div>
 
@@ -66,7 +109,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="aspect-ratio: 3 / 4; background: #353c2c; position: relative; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 14px), repeating-linear-gradient(0deg,  rgba(255,255,255,0.07) 0 1px, transparent 1px 14px);">
             <span style="position: absolute; bottom: 12px; left: 12px; font-family: var(--serif); font-style: italic; color: var(--paper-cream); font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;">Wed</span>
           </div>
-          <h4 class="h-4" style="text-transform: uppercase; color: var(--navy);">Glen Check</h4>
+          <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Glen Check</h3>
           <p class="body-prose" style="font-size: 14px; line-height: 1.5;">Earned. Worn after partnership. Reads as quiet wealth, not as fashion.</p>
         </div>
 
@@ -74,7 +117,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="aspect-ratio: 3 / 4; background: #1c2540; position: relative; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 6px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.10) 0 2px, transparent 2px 6px);">
             <span style="position: absolute; bottom: 12px; left: 12px; font-family: var(--serif); font-style: italic; color: var(--paper-cream); font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;">Thu</span>
           </div>
-          <h4 class="h-4" style="text-transform: uppercase; color: var(--navy);">Navy Birdseye</h4>
+          <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Navy Birdseye</h3>
           <p class="body-prose" style="font-size: 14px; line-height: 1.5;">A textured weave that reads as navy across the room and complex up close.</p>
         </div>
 
@@ -82,7 +125,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="aspect-ratio: 3 / 4; background: #6b2228; position: relative; background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);">
             <span style="position: absolute; bottom: 12px; left: 12px; font-family: var(--serif); font-style: italic; color: var(--paper-cream); font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;">Fri</span>
           </div>
-          <h4 class="h-4" style="text-transform: uppercase; color: var(--navy);">Oxblood Jacket</h4>
+          <h3 class="h-4" style="text-transform: uppercase; color: var(--navy);">Oxblood Jacket</h3>
           <p class="body-prose" style="font-size: 14px; line-height: 1.5;">Sport coat for the half-day Friday. Worn with grey wool trousers, no tie.</p>
         </div>
       </div>
@@ -134,31 +177,75 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- CUSTOM LININGS + MONOGRAM -->
+  <section class="section" style="background: linear-gradient(180deg, transparent 0%, var(--paper-cream) 50%, transparent 100%);">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 04</div>
+        <h2 class="h-1" style="text-transform: uppercase; max-width: 22ch;">The lining — where a working suit <em>gets personal.</em></h2>
+        <div class="right">Bemberg · cupro · your mark</div>
+      </div>
+
+      <div class="split wide-left" data-reveal>
+        <div>
+          <p class="lede" style="margin-bottom: 20px;">The outside of a business suit should be quiet — navy, charcoal, nothing shouting across the boardroom. The inside is where it's allowed to have a private opinion. The lining is the one place a working man gets to be bold, because only he knows it's there.</p>
+          <p class="body-prose">We line in breathable <em>Bemberg</em> or <em>cupro</em> — natural-fibre linings that let a suit vent through a long day instead of trapping the heat a synthetic would. Choose the mood: a deep oxblood, a hunter green, a midnight paisley, a quiet stripe, or a flash of colour that catches only when you reach for your phone.</p>
+
+          <h3 class="h-3" style="text-transform: uppercase; color: var(--navy); margin-top: 34px;">Your monogram, woven in</h3>
+          <p class="body-prose" style="margin-top: 12px;">
+            Over the inside breast pocket, we'll add your mark: your initials, a wedding date, a child's name, a family crest — or your own company's logo, embroidered or printed into the lining silk. A small, private signature that turns a suit from <em>a</em> suit into <em>yours</em>. It's the detail a man quietly shows a friend when he hangs his jacket on the back of a chair.
+          </p>
+          <ul class="prose-list" style="margin-top: 18px;">
+            <li>Initials or a monogram over the breast pocket</li>
+            <li>A date, a name, or a few words that mean something</li>
+            <li>A family crest or your company logo, matched to the cloth</li>
+            <li>Contrast lining, piping and functional (working) cuff buttons to match</li>
+          </ul>
+          <p style="margin-top: 28px;">
+            <a href="/book" data-open-booking data-no-transition style="font-family: var(--serif); font-style: italic; letter-spacing: 0.18em; text-transform: uppercase; font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;">Design your lining with Sam&nbsp;&nbsp;&rarr;</a>
+          </p>
+        </div>
+
+        <div>
+          <div class="lining-card" data-reveal>
+            <div class="crop-marks"></div>
+            <svg viewBox="0 0 300 380" style="width:100%; height:100%; display:block;" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A jacket interior showing a custom oxblood lining with a monogram over the breast pocket">
+              <!-- jacket outer shell (ink) -->
+              <path d="M60 40 L40 70 L52 360 L150 372 L248 360 L260 70 L240 40 L180 58 L150 50 L120 58 Z" fill="var(--charcoal)" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round"/>
+              <!-- lining panel (oxblood) -->
+              <path d="M78 66 L150 84 L150 356 L70 346 Z" fill="var(--oxblood)" stroke="var(--ink)" stroke-width="1"/>
+              <path d="M222 66 L150 84 L150 356 L230 346 Z" fill="var(--oxblood-deep)" stroke="var(--ink)" stroke-width="1"/>
+              <!-- centre fold -->
+              <path d="M150 84 L150 356" stroke="var(--ink)" stroke-width="1" opacity="0.5"/>
+              <!-- lining sheen lines -->
+              <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
+                <path d="M90 90 L92 340"/><path d="M110 92 L112 342"/><path d="M210 90 L208 340"/><path d="M190 92 L188 342"/>
+              </g>
+              <!-- inside breast pocket -->
+              <rect x="86" y="150" width="52" height="12" fill="none" stroke="var(--gold-soft)" stroke-width="1.4"/>
+              <!-- monogram -->
+              <text x="112" y="132" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="34" fill="var(--gold-soft)">S</text>
+              <text x="112" y="188" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="9" letter-spacing="3" fill="rgba(255,255,255,0.55)">YOUR MARK</text>
+              <!-- lapels -->
+              <path d="M120 58 L150 84 L150 50 Z" fill="var(--charcoal)" stroke="var(--ink)" stroke-width="1.4"/>
+              <path d="M180 58 L150 84 L150 50 Z" fill="var(--charcoal)" stroke="var(--ink)" stroke-width="1.4"/>
+            </svg>
+            <div class="lining-card__cap">The inside breast — your monogram, your lining</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="section tight">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="chapter-no">No. 04</div>
+        <div class="chapter-no">No. 05</div>
         <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">From <em>Bay Street.</em></h2>
         <div class="right">Letters from the working week</div>
       </div>
-      <div class="quotes" data-reveal-stagger>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">I've worn the same Sam navy three days a week for six years. The lining is on its third oxblood. My junior partners ask where I got it. I never tell them.</p>
-          <div class="quote__attr">L. Kaplan · Partner, Bay St.</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">Sam asked me how I sit, how I cross my legs, whether I carry my phone in my right or left pocket. Nobody had ever asked. The suit answered every question I didn't know I had.</p>
-          <div class="quote__attr">S. Glick · Toronto</div>
-        </blockquote>
-        <blockquote class="quote">
-          <span class="quote__mark">“</span>
-          <p class="quote__text">I bought three suits before the IPO. Two for the road show, one for the morning. The road show went better than the morning. I blame the suits less than I should.</p>
-          <div class="quote__attr">D. Markowitz · Tech executive</div>
-        </blockquote>
-      </div>
+      <Testimonials items={[reviews[6], reviews[9], reviews[11]]} />
     </div>
   </section>
 
@@ -183,5 +270,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 
 </BaseLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { themes, almanacDisclaimer, totalTales } from '../../data/almanac.js';
+const site = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+const count = totalTales() || 101;
+const breadcrumb = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
+    { '@type': 'ListItem', position: 2, name: 'The Almanac', item: site + '/almanac' },
+  ],
+};
+const collection = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  name: 'The Almanac — Tales from the Fitting Room',
+  description: 'An anonymized almanac of true-to-life cautionary tales and triumphs from thirty years at Sam\'s bench in Vaughan.',
+  isPartOf: { '@id': site + '/#website' },
+  author: { '@id': site + '/#sam' },
+};
+---
+<BaseLayout
+  title="The Almanac — Tales from the Fitting Room | Sam's Menswear"
+  description="101 true-to-life tales from thirty years at Sam's bench in Vaughan — rental disasters, last-minute panics, weddings saved and quiet triumphs. Names invented, lessons real."
+>
+  <section class="page-hero">
+    <div class="container">
+      <div data-reveal style="max-width: 52rem;">
+        <div class="eyebrow-rule">The Atelier · The Almanac</div>
+        <h1>Tales from the <em>fitting room.</em></h1>
+        <p class="lede">Thirty years at the bench leaves you with stories — the grooms who left it too late, the rentals that fit nobody, the suit that finally fit a man who'd given up, the wedding saved with days to spare. Here are {count} of them.</p>
+        <p class="almanac-note">{almanacDisclaimer}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="almanac-grid" data-reveal-stagger>
+        {themes.map((t, i) => (
+          <a class="almanac-card" href={`/almanac/${t.slug}`}>
+            <div class="almanac-card__img"><img src={`/media/art/almanac-${t.slug}.webp`} alt={`Chapter illustration — ${t.title}`} loading="lazy"/></div>
+            <div class="almanac-card__body">
+              <div class="almanac-card__num">Chapter {String(i + 1).padStart(2, '0')}</div>
+              <div class="almanac-card__title">{t.title}</div>
+              <p class="almanac-card__teaser">{t.teaser}</p>
+              <div class="almanac-card__more">{t.tales.length ? `${t.tales.length} tales` : 'Read the tales'} &rarr;</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section flush">
+    <div class="container">
+      <div class="booking-block" data-reveal>
+        <div>
+          <div class="eyebrow-rule" style="color: var(--gold-soft); margin-bottom: 28px;">
+            <span style="background: var(--navy-deep);">Write a better ending</span>
+          </div>
+          <h2 class="h-1">Don't become <em>a cautionary tale.</em></h2>
+          <p class="lede" style="margin-top: 24px;">Most of these stories end badly for one reason: the man waited, or trusted a counter that didn't care. The first fitting with Sam is free and honest. Start there.</p>
+        </div>
+        <div class="actions">
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition>Book a Fitting</a>
+          <div class="contact-tag" style="margin-top: 12px;">
+            Or read the <a href="/guides" style="color: var(--gold-soft); border-bottom: 1px solid var(--gold-soft);">guides</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collection)} />
+</BaseLayout>

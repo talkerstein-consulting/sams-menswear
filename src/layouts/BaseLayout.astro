@@ -3,6 +3,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import BookingModal from '../components/BookingModal.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { reviewAggregate } from '../data/reviews.js';
 
 const {
   title = "Sam's Menswear — Custom Tailoring · Vaughan, Thornhill, Toronto",
@@ -13,6 +14,7 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://customsuitandshirt.com';
+const ogImage = origin + '/media/hero-poster.jpg';
 
 // Site-wide LocalBusiness + founder — every page carries it (local SEO + AEO/GEO).
 const business = {
@@ -36,6 +38,12 @@ const business = {
   },
   areaServed: ['Vaughan', 'Thornhill', 'Toronto', 'North York', 'Richmond Hill', 'Markham', 'Woodbridge'],
   founder: { '@type': 'Person', name: 'Sam Talkar', jobTitle: 'Master Tailor' },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: reviewAggregate.ratingValue,
+    reviewCount: reviewAggregate.reviewCount,
+    bestRating: '5',
+  },
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '10:00', closes: '18:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '11:00', closes: '19:00' },
@@ -46,6 +54,59 @@ const business = {
     'https://instagram.com/samscustommenswear',
   ],
 };
+
+// Organization + WebSite entity graph — brand disambiguation + Article.publisher target.
+const entityGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': origin + '/#org',
+      name: "Sam's Menswear",
+      url: origin,
+      logo: { '@type': 'ImageObject', url: origin + '/favicon.svg' },
+      image: ogImage,
+      email: 'samskosher@gmail.com',
+      telephone: '+1-647-458-0711',
+      founder: { '@type': 'Person', name: 'Sam Talkar' },
+      sameAs: [
+        'https://www.facebook.com/CustomSuitsToronto/',
+        'https://instagram.com/samscustommenswear',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': origin + '/#website',
+      url: origin,
+      name: "Sam's Menswear",
+      publisher: { '@id': origin + '/#org' },
+      inLanguage: 'en-CA',
+    },
+    {
+      '@type': 'Person',
+      '@id': origin + '/#sam',
+      name: 'Sam Talkar',
+      jobTitle: 'Master Tailor',
+      image: origin + '/media/sam/sam-portrait.webp',
+      worksFor: { '@id': origin + '/#org' },
+      url: origin + '/about',
+      description: 'Bespoke and made-to-measure tailor with over 30 years of experience, working from his atelier in Vaughan, Ontario, on the Thornhill line.',
+      knowsAbout: [
+        'Bespoke tailoring', 'Made-to-measure suits', 'Wedding suits and tuxedos',
+        'Groomsmen and father-of-the-bride tailoring', 'Traditional Jewish menswear',
+        'Suit fit and alterations', 'Business and professional dress',
+      ],
+    },
+  ],
+};
+
+// ── Analytics & Google Search Console (fill in AFTER deploy) ───────────────
+//  ▶ GA4: paste your Measurement ID (e.g. 'G-XXXXXXXXXX'). Empty = no tag loaded.
+const GA_MEASUREMENT_ID = 'G-SWVP87BNED';
+//  ▶ Search Console: paste the content value from the "HTML tag" verification
+//    method (google-site-verification). Empty = nothing rendered.
+//    Alternatively verify by DNS TXT, or by the sitemap already in robots.txt.
+const GSC_VERIFICATION = '';
 ---
 <!doctype html>
 <html lang="en">
@@ -56,13 +117,18 @@ const business = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f2ede1" />
+    {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Sam's Menswear" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Sam's Menswear — bespoke tailoring in Vaughan" />
+    <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
@@ -78,7 +144,22 @@ const business = {
     <link rel="stylesheet" href="/booking.css" />
     <link rel="stylesheet" href="/site-extra.css" />
 
+    <noscript>
+      <style>
+        [data-reveal], [data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
+        .journey__visual { display: none !important; }
+      </style>
+    </noscript>
+
     <script type="application/ld+json" set:html={JSON.stringify(business)} />
+    <script type="application/ld+json" set:html={JSON.stringify(entityGraph)} />
+
+    {GA_MEASUREMENT_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}></script>
+      </>
+    )}
   </head>
   <body>
     <SiteHeader nav={nav} />
@@ -93,6 +174,7 @@ const business = {
 
     <script src="/site.js" is:inline></script>
     <script src="/transitions.js" is:inline></script>
+    <script src="/lead.js" is:inline></script>
     <script src="/booking.js" is:inline></script>
   </body>
 </html>

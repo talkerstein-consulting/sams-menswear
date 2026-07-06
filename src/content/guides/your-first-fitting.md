@@ -1,6 +1,7 @@
 ---
 title: "Your first fitting: what to expect"
 description: "Never had a suit made? Here's exactly what happens at the first visit — how long, what to bring, and why it costs nothing."
+tldr: "Your first fitting takes about 90 minutes and is free, with no obligation. We talk about how you will use the suit, take twenty-six measurements by hand, and choose cloth together across three price shelves. Bring your usual shoes, shirt and a rough budget."
 pillar: "The Process"
 pillarHref: "/process"
 eyebrow: "First-timer"
