@@ -17,7 +17,7 @@ export const garments = [
     intro: [
       "A custom suit starts with a pattern drawn to your own shoulders, stance and stride — not a factory size adjusted after the fact. That single difference is why a custom suit sits clean when you reach, sit and stand, and why it still looks right in year five. Whether you want made-to-measure or full bespoke, every custom suit Sam cuts begins the same way: measured by hand, in Vaughan.",
       "Two-piece or three, single or double-breasted, notch, peak or shawl — every choice is made with you, and once your pattern is on file, the next suit begins from it. Sam will tell you honestly which tier (made-to-measure or full bespoke) is the right spend for how often you'll wear it.",
-      "Every suit is fully customized to you — two-piece or three, single or double-breasted, your cloth, lining and buttons. And Toronto clients don't trade a workday for a fitting: Sam cuts by hand at the Vaughan atelier on the Thornhill line and brings the tape, the cloth books and the fitting to your Toronto office, condo or home. Tailored suits for Bay Street, Yorkville and across the GTA, kept on a pattern for life.",
+      "Every suit is fully customized to you — two-piece or three, single or double-breasted, your cloth, lining and buttons. And Toronto clients don't trade a workday for a fitting: Sam cuts by hand at the Vaughan studio on the Thornhill line and brings the tape, the cloth books and the fitting to your Toronto office, condo or home. Tailored suits for Bay Street, Yorkville and across the GTA, kept on a pattern for life.",
     ],
     details: [
       { t: 'Two-piece, three-piece & separates', d: 'The classic two-piece, a three-piece with waistcoat, or an odd jacket cut to pair with grey trousers.' },
@@ -133,7 +133,7 @@ export const garments = [
     imageAlt: 'A crisp white bespoke dress shirt with spread collar and French cuff',
     intro: [
       "A collar that sits without gaping, a cuff that shows the right quarter-inch past your jacket, a body cut to you rather than to a neck-size-and-a-guess. A custom dress shirt is the quiet upgrade a man notices every single morning.",
-      "Choose the collar (spread, point, cutaway, button-down), the cuff (barrel or French), the placket, the pocket or none, and a monogram if you like. Sam makes custom dress shirts at the Vaughan atelier and brings the fitting to Toronto clients by appointment; the first takes a few weeks, and every one after is a phone call, because your pattern is kept.",
+      "Choose the collar (spread, point, cutaway, button-down), the cuff (barrel or French), the placket, the pocket or none, and a monogram if you like. Sam makes custom dress shirts at the Vaughan studio and brings the fitting to Toronto clients by appointment; the first takes a few weeks, and every one after is a phone call, because your pattern is kept.",
     ],
     details: [
       { t: 'Your collar', d: 'Spread, point, cutaway or button-down — cut to your neck and how you wear a tie (or don’t).' },
@@ -154,7 +154,7 @@ export const garments = [
     serviceName: 'Custom Dress Shirts',
     serviceDesc: "Custom dress shirts in Vaughan and across Toronto — your collar, cuff and fit in two-ply cotton, with a monogram and a kept pattern for easy reorders.",
     faqs: [
-      { q: 'Where can I get custom dress shirts in Toronto or Vaughan?', a: "I make custom dress shirts to measure at the Vaughan atelier and travel to Toronto clients by appointment. Your collar, cuff and body are cut to you, and your pattern is kept so reorders take a phone call." },
+      { q: 'Where can I get custom dress shirts in Toronto or Vaughan?', a: "I make custom dress shirts to measure at the Vaughan studio and travel to Toronto clients by appointment. Your collar, cuff and body are cut to you, and your pattern is kept so reorders take a phone call." },
       { q: 'Is a custom dress shirt worth it over off-the-rack?', a: "If a store collar gapes, the body billows or the cuff swallows your watch — yes. A shirt cut to your neck, shoulders and arm length is the quiet upgrade you notice every morning, and it's reorderable once the pattern exists." },
       { q: 'How many custom shirts should I start with?', a: "Most men start with two or three in white and blue to prove the pattern, then reorder in stripes and weekend cloths. There's no minimum with me — begin with one if you like." },
       { q: 'What collar and cuff should I choose?', a: "Spread or point for a tie, button-down for softer days, cutaway if you like a wide knot; barrel cuff for everyday, French for links. I'll steer you by your neck, your face and how you actually dress." },

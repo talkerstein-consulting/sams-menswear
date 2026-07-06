@@ -799,9 +799,9 @@ a:hover { color: var(--oxblood); }
 .env-card::after {           /* thin gold keyline, like an invitation border */
   content: "";
   position: absolute;
-  inset: 5px;
+  inset: 6px;
   z-index: 3;
-  border: 1px solid rgba(157, 127, 66, 0.42);
+  border: 1px solid rgba(157, 127, 66, 0.55);
   pointer-events: none;
 }
 .env-map-frame {
@@ -819,20 +819,22 @@ a:hover { color: var(--oxblood); }
   top: clamp(12px, 2.6%, 18px);
   left: clamp(12px, 2.6%, 18px);
   right: clamp(12px, 2.6%, 18px);
-  height: clamp(52px, 17%, 74px);
+  height: clamp(44px, 14%, 66px);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(180deg, var(--paper-deep) 0%, var(--paper-warm) 100%);
-  filter: drop-shadow(0 7px 8px rgba(33, 28, 21, 0.4));
+  background: linear-gradient(180deg,
+    var(--gold-soft) 0, var(--gold-soft) 1.5px,
+    var(--paper-deep) 1.5px, var(--paper-warm) 100%);
+  filter: drop-shadow(0 8px 9px rgba(33, 28, 21, 0.34));
 }
 /* wax seal at the point of the flap */
 .env-seal {
   position: absolute;
   z-index: 5;
   pointer-events: none;
-  top: clamp(44px, 15.5%, 66px);
+  top: clamp(36px, 12%, 56px);
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(38px, 11%, 48px);
+  width: clamp(36px, 10%, 46px);
   aspect-ratio: 1;
   border-radius: 50%;
   display: grid;

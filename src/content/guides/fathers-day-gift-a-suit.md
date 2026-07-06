@@ -24,7 +24,7 @@ Here's what to know going in — a proper suit isn't overnighted. A bespoke garm
 
 That's honestly the better version. Instead of a thing that's over in the unwrapping, he gets:
 
-- **A fitting of his own** — at Sam's Vaughan atelier, or Sam comes to him anywhere across the GTA.
+- **A fitting of his own** — at Sam's Vaughan studio, or Sam comes to him anywhere across the GTA.
 - **Cloth he picks himself** — laid out in daylight so he sees the colour he'll actually wear.
 - **A pattern kept on file** — so the next suit is even easier to order.
 - **An hour of being fussed over** by someone who genuinely cares how it hangs.

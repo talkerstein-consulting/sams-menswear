@@ -38,7 +38,7 @@ const guides = [
   { href: '/guides/custom-vs-rental-wedding-suit', t: 'Custom vs rental' },
   { href: '/guides/choosing-your-cloth', t: 'Choosing your cloth' },
 ];
-const atelier = [
+const studio = [
   { href: '/gift', t: 'The Gift of Style', d: 'A garment, or the whole wardrobe' },
   { href: '/design', t: 'Design Your Suit', d: 'The Drawing Board' },
   { href: '/fabrics', t: 'The Cloth Library', d: '~200 fabrics' },
@@ -100,8 +100,8 @@ const atelier = [
         <a class="mega-more" href="/guides">All guides &amp; the journal &rarr;</a>
       </div>
       <div class="mega-col">
-        <div class="mega-h">The Atelier</div>
-        {atelier.map((a) => (
+        <div class="mega-h">The Studio</div>
+        {studio.map((a) => (
           <a class="mega-link" href={a.href}><span class="mega-link__t">{a.t}</span><span class="mega-link__d">{a.d}</span></a>
         ))}
       </div>

@@ -31,7 +31,7 @@ Most presents add to a pile. A custom suit replaces things — it quietly retire
 
 Here's the part that makes this giftable for anyone stuck: you reserve the gift, and he takes it from there. You don't need to know his measurements, his colour preference, or a free weekend in his calendar.
 
-He receives a note or gift certificate, then books his own fitting whenever suits him — at Sam's atelier in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham and Woodbridge. Sam takes the measurements, the suit is drafted to his own body, and the pattern is kept on file for whatever he orders next. If you're worried about sizing, we cover it plainly in [how to gift a suit without his size](/guides/how-to-gift-a-suit-without-his-size).
+He receives a note or gift certificate, then books his own fitting whenever suits him — at Sam's studio in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham and Woodbridge. Sam takes the measurements, the suit is drafted to his own body, and the pattern is kept on file for whatever he orders next. If you're worried about sizing, we cover it plainly in [how to gift a suit without his size](/guides/how-to-gift-a-suit-without-his-size).
 
 ## "Is it too expensive? Too impersonal?"
 

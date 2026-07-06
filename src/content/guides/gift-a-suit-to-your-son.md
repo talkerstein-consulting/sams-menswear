@@ -30,7 +30,7 @@ If it's that interview or first office he's walking into, [the interview suit as
 
 This is the worry that stops most parents, and it's the easiest one to put down. You don't need to know his chest, his sleeve, or his inseam — and you don't need to smuggle a tape measure into his closet.
 
-Here's how the gift works. You reserve it: a made-to-measure suit plus a personal fitting with Sam. Your son receives a note or gift certificate. Then **he** books his own fitting — either at Sam's atelier in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge. Sam takes the measurements himself, by hand, and the suit is drafted to your son's exact body. Nothing is guessed. If your son is away at school or works odd hours, Sam works around it — the fitting happens on his schedule, not yours.
+Here's how the gift works. You reserve it: a made-to-measure suit plus a personal fitting with Sam. Your son receives a note or gift certificate. Then **he** books his own fitting — either at Sam's studio in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge. Sam takes the measurements himself, by hand, and the suit is drafted to your son's exact body. Nothing is guessed. If your son is away at school or works odd hours, Sam works around it — the fitting happens on his schedule, not yours.
 
 That measuring session, by the way, is part of the gift. An hour with a master tailor who explains lapels and cloth and how a jacket is supposed to sit — for a young man, that's an education he'll remember. You can [book the fitting here](/book) when the time comes.
 

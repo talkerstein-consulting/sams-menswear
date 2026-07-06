@@ -24,7 +24,7 @@ This is the part that trips up most spouses, and it's genuinely the easy part. H
 
 - **You reserve the gift** — a made-to-measure suit plus a personal fitting with Sam.
 - **He receives the note or gift certificate** — on the morning of, at dinner, however you like to give a gift.
-- **He books his own fitting** — at Sam's atelier in Vaughan, or Sam travels to you across Thornhill, Toronto, Richmond Hill, Markham and the rest of the GTA.
+- **He books his own fitting** — at Sam's studio in Vaughan, or Sam travels to you across Thornhill, Toronto, Richmond Hill, Markham and the rest of the GTA.
 - **The suit is drafted to his measurements** — so you never had to sneak a tape measure or borrow a jacket from his closet.
 
 The surprise stays a surprise, and he gets the say in the fit, the cloth and the details. You gave the gift; he gets the fun of choosing it.

@@ -31,6 +31,6 @@ Fathers are the builds off-the-rack fails most — a fuller chest, a shorter or 
 
 ## Measure the whole family together
 
-The easiest way to keep the groom, groomsmen and both fathers coordinated is to measure them together. Sam does exactly this — at the Vaughan atelier or, for out-of-town or busy dads, on a single house call across the GTA. [How the traveling tailor works →](/guides/the-traveling-tailor)
+The easiest way to keep the groom, groomsmen and both fathers coordinated is to measure them together. Sam does exactly this — at the Vaughan studio or, for out-of-town or busy dads, on a single house call across the GTA. [How the traveling tailor works →](/guides/the-traveling-tailor)
 
 Father of the bride or groom in the GTA? [Book a fitting](/book) — dignified, comfortable, and coordinated with the party.

@@ -24,7 +24,7 @@ The mechanics are clean and discreet, which matters when a company is the giver:
 
 - **You reserve the gift.** A made-to-measure suit and a personal fitting with Sam, arranged in the company's name.
 - **The recipient receives a note or gift certificate** — presented at the sales dinner, the retirement lunch, or handed over privately by a manager.
-- **He books his own fitting**, at Sam's Vaughan atelier or with Sam travelling to him anywhere across Thornhill, North York, Richmond Hill, Markham, Woodbridge, or downtown Toronto.
+- **He books his own fitting**, at Sam's Vaughan studio or with Sam travelling to him anywhere across Thornhill, North York, Richmond Hill, Markham, Woodbridge, or downtown Toronto.
 - **The suit is drafted to his exact measurements** and kept on a personal pattern, so any future order builds on the same foundation.
 
 Nobody in your office needs to know his size, his taste, or his schedule. You hand over the recognition; he builds the suit himself with Sam.

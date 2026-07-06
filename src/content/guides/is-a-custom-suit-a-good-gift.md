@@ -31,7 +31,7 @@ This is the fear that stops most people, and it's a fair one. The answer is buil
 
 ## The two worries right behind it: size and cost
 
-**"I don't know his measurements."** Good news: you don't need them. The whole point is that Sam measures him in person, either at the [Vaughan atelier](/book) or by travelling to him anywhere across Thornhill, North York, Richmond Hill, Markham and the rest of the GTA. Your job is simply to reserve the gift. If you'd like the full picture, we wrote a short guide on [how to gift a suit without knowing his size](/guides/how-to-gift-a-suit-without-his-size).
+**"I don't know his measurements."** Good news: you don't need them. The whole point is that Sam measures him in person, either at the [Vaughan studio](/book) or by travelling to him anywhere across Thornhill, North York, Richmond Hill, Markham and the rest of the GTA. Your job is simply to reserve the gift. If you'd like the full picture, we wrote a short guide on [how to gift a suit without knowing his size](/guides/how-to-gift-a-suit-without-his-size).
 
 **"Is it too expensive, or too impersonal?"** On cost, you set the terms, not me. The value is agreed with Sam, and it can be an open-value [gift certificate](/guides/how-a-suit-gift-certificate-works) if you'd rather contribute an amount than commit to a full suit; here's an honest breakdown of [what a custom suit costs](/guides/what-a-custom-suit-costs). On the "impersonal" worry, it's the opposite of impersonal. Off-the-shelf gifts are one-size-for-everyone. This one is cut to one man's body, kept on a pattern in Sam's book, and reorderable for years. It's about as personal as a gift gets.
 

@@ -61,4 +61,4 @@ A hem or a taken-in waist is an alteration, and a good one is worth every penny.
 
 ## Ready to see the difference for yourself?
 
-The easiest way to judge a tailor is to sit across from one and watch how they talk about the work. Come by — the [first fitting is free](/book), there's no pressure, and if an alteration is all you need, we'll tell you that too. When you're ready, you can even [start designing your suit](/design) before you walk in. And if you already know you want a [custom suit in Vaughan](/locations/vaughan), Sam works one-on-one from the Charlton Avenue atelier by appointment.
+The easiest way to judge a tailor is to sit across from one and watch how they talk about the work. Come by — the [first fitting is free](/book), there's no pressure, and if an alteration is all you need, we'll tell you that too. When you're ready, you can even [start designing your suit](/design) before you walk in. And if you already know you want a [custom suit in Vaughan](/locations/vaughan), Sam works one-on-one from the Charlton Avenue studio by appointment.
