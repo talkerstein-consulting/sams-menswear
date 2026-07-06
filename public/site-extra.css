@@ -75,14 +75,28 @@ body::before {
 @media (max-width: 720px) {
   .hero__overlay {
     align-items: flex-end;
-    padding-bottom: 9%;
+    padding-bottom: 8%;
+    /* tall near-solid cream base so dark copy stays crisp over any video frame */
     background: linear-gradient(0deg,
-      rgba(242, 237, 225, 0.92) 0%,
-      rgba(242, 237, 225, 0.55) 32%,
-      rgba(242, 237, 225, 0) 62%);
+      var(--paper) 0%,
+      rgba(242, 237, 225, 0.99) 46%,
+      rgba(242, 237, 225, 0.88) 62%,
+      rgba(242, 237, 225, 0.45) 78%,
+      rgba(242, 237, 225, 0) 92%);
   }
-  .hero__title { font-size: clamp(34px, 10vw, 58px); }
-  .hero__lede { font-size: clamp(18px, 4.6vw, 22px); }
+  .hero__copy { max-width: 100%; }
+  .hero__title {
+    font-size: clamp(40px, 12vw, 62px);
+    line-height: 1.0;
+    text-shadow: 0 1px 16px rgba(242, 237, 225, 0.7);
+  }
+  .hero__lede {
+    font-size: clamp(17px, 4.6vw, 21px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 12px rgba(242, 237, 225, 0.7);
+  }
+  .hero__trust { font-size: 13px; line-height: 1.5; }
 }
 
 /* ─── The Bespoke Journey (scroll-driven dressing sequence) ──────────── */
@@ -737,7 +751,7 @@ body::before {
   font-family: var(--serif); font-style: italic; font-size: 15px;
   letter-spacing: 0.03em; color: var(--ink-mute);
 }
-.cta-trust.hero__trust { color: rgba(247, 243, 233, 0.86); }
+.cta-trust.hero__trust { color: var(--ink-soft); }
 
 /* ─── Responsive grid utility (replaces inline repeat() grids) ───────── */
 .rgrid { display: grid; gap: clamp(20px, 3vw, 40px); }

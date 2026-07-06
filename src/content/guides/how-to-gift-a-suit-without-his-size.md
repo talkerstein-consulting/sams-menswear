@@ -24,7 +24,7 @@ The mechanics are simple, and they're built precisely so you never touch a tape 
 
 - **You reserve the gift.** A made-to-measure suit plus a personal fitting with Sam. You can set a value with Sam, or make it an open-value gift certificate — see [how a suit gift certificate works](/guides/how-a-suit-gift-certificate-works).
 - **He receives a note or certificate.** Something to open — a card that tells him a suit made just for him is waiting.
-- **He books his own fitting.** At Sam's atelier in Vaughan, or Sam travels to him anywhere across the GTA — Thornhill, North York, Richmond Hill, Markham, Woodbridge.
+- **He books his own fitting.** At Sam's studio in Vaughan, or Sam travels to him anywhere across the GTA — Thornhill, North York, Richmond Hill, Markham, Woodbridge.
 - **Sam drafts it to his measurements.** The suit is cut to his body and the pattern is kept on file, so any future order starts from his exact fit.
 
 At no point does anyone need to have known his size in advance.

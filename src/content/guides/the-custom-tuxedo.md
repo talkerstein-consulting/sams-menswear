@@ -30,6 +30,6 @@ Built to your measurements, the black line is clean, the satin sits flat, the sh
 
 ## The GTA angle
 
-Sam makes tuxedos at the Vaughan atelier and brings the fitting to grooms across Toronto, North York, Thornhill and Markham — including measuring a whole party in one visit. [How the traveling tailor works →](/guides/the-traveling-tailor)
+Sam makes tuxedos at the Vaughan studio and brings the fitting to grooms across Toronto, North York, Thornhill and Markham — including measuring a whole party in one visit. [How the traveling tailor works →](/guides/the-traveling-tailor)
 
 Black-tie wedding on the calendar? [Book a tuxedo fitting](/book) — give it nine to twelve months and it's easy.

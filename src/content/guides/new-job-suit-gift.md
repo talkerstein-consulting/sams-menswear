@@ -20,13 +20,13 @@ It's also a gift with a long tail. He won't wear it once and forget it. He'll re
 
 ## What if you don't know his size?
 
-This is the worry that stops most people, and with Sam it simply isn't a problem. You're not guessing at a size off a tag — you're reserving the *experience*. He books his own fitting afterward, either at Sam's atelier in Vaughan or with Sam coming to him anywhere across Thornhill, North York, Richmond Hill, Markham, or Woodbridge. Sam takes every measurement himself and drafts the suit from there.
+This is the worry that stops most people, and with Sam it simply isn't a problem. You're not guessing at a size off a tag — you're reserving the *experience*. He books his own fitting afterward, either at Sam's studio in Vaughan or with Sam coming to him anywhere across Thornhill, North York, Richmond Hill, Markham, or Woodbridge. Sam takes every measurement himself and drafts the suit from there.
 
 Here's how the gift actually works:
 
 - **You reserve it.** A made-to-measure suit plus a personal fitting with Sam.
 - **He receives a note or gift certificate** — the announcement, without the pressure to act that day.
-- **He books his own fitting**, at the Vaughan atelier or wherever suits him across the GTA.
+- **He books his own fitting**, at the Vaughan studio or wherever suits him across the GTA.
 - **The suit is drafted to his exact measurements**, then kept on a personal pattern for every future order.
 
 No sizes to get wrong. No returns. Just his measurements and his choices.

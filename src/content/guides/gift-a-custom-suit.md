@@ -31,7 +31,7 @@ You don't need his measurements, his size, or even a firm sense of his taste. He
 
 - **You reserve the gift** — a made-to-measure suit plus a personal fitting with Sam.
 - **He receives a note or gift certificate** telling him what's waiting for him.
-- **He books his own fitting**, at Sam's atelier in Vaughan or wherever he is across the GTA — Sam travels to Thornhill, Toronto, North York, Richmond Hill, Markham and Woodbridge.
+- **He books his own fitting**, at Sam's studio in Vaughan or wherever he is across the GTA — Sam travels to Thornhill, Toronto, North York, Richmond Hill, Markham and Woodbridge.
 - **The suit is drafted to his own measurements** and every choice — cloth, cut, details — is his.
 - **His pattern is kept on file**, so future suits can be ordered without starting over.
 

@@ -24,7 +24,7 @@ The beauty of gifting a suit is that you don't need his measurements, his size, 
 
 - **You reserve the gift** — a made-to-measure suit plus a personal fitting with Sam.
 - **He receives a note or gift certificate** letting him know what's waiting for him.
-- **He books his own fitting** — at Sam's Vaughan atelier, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge.
+- **He books his own fitting** — at Sam's Vaughan studio, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge.
 - **The suit is drafted to his measurements** and kept on a pattern, so every future suit starts from his exact fit.
 
 No guessing on your part. No pressure on his. [See how the gift works →](/gift)

@@ -10,7 +10,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 (() => {
-  const LEAD_WEBHOOK = ''; // e.g. 'https://services.leadconnectorhq.com/hooks/XXXX/webhook-trigger/YYYY'
+  const LEAD_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/abOPCaMzoGlcrWSurBAo/webhook-trigger/218c8dc2-abfc-4ae7-a5eb-5e2ff7314249';
 
   const PHONE      = '+16474580711';
   const PHONE_DISP = '647 · 458 · 0711';
@@ -18,9 +18,19 @@
 
   // POST the lead to the CRM. Returns { ok, reason }.
   async function send(kind, data) {
+    const d = data || {};
     const payload = Object.assign(
-      { form: kind, source: 'customsuitandshirt.com', submittedAt: new Date().toISOString() },
-      data
+      {
+        form: kind,
+        source: 'customsuitandshirt.com',
+        submittedAt: new Date().toISOString(),
+        // Normalized contact fields so the CRM maps ONE set across every form
+        // (the gift form sends giver* — the giver is the lead/buyer).
+        name:  d.name  || d.giverName  || '',
+        email: d.email || d.giverEmail || '',
+        phone: d.phone || d.giverPhone || '',
+      },
+      d
     );
     if (!LEAD_WEBHOOK) return { ok: false, reason: 'unconfigured', payload };
     try {

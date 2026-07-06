@@ -32,7 +32,7 @@ If you want the fuller comparison, our guide on [custom versus rental for a wedd
 
 You don't need to, and that's the quiet genius of how the gift works. You reserve the gift; he receives a note or gift certificate; then he books his own fitting. Sam takes every measurement in person, so nothing rests on you guessing a collar size or sleeve length.
 
-The fitting itself is part of the gift. The groom comes to Sam's atelier in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge. For a groom juggling a full calendar before the wedding, a tailor who comes to him is no small thing.
+The fitting itself is part of the gift. The groom comes to Sam's studio in Vaughan, or Sam travels to him anywhere across Thornhill, Toronto, North York, Richmond Hill, Markham or Woodbridge. For a groom juggling a full calendar before the wedding, a tailor who comes to him is no small thing.
 
 ## "Is it too expensive, or too impersonal?"
 

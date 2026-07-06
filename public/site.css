@@ -765,6 +765,132 @@ a:hover { color: var(--oxblood); }
   overflow: hidden;
 }
 
+/* ─── Visit block · framed invitation (map matted like a card) ─────── */
+.visit-envelope {
+  background:
+    radial-gradient(150% 120% at 50% -8%, var(--paper-cream) 0%, var(--paper-warm) 62%, var(--paper-deep) 100%);
+  box-shadow:
+    0 34px 66px -40px rgba(33, 28, 21, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+/* faint diagonal envelope seams (kept subtle, behind the card) */
+.visit-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), rgba(33, 28, 21, 0.035) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom left,  transparent calc(50% - 0.5px), rgba(33, 28, 21, 0.035) 50%, transparent calc(50% + 0.5px));
+}
+/* the map, matted like an invitation card — nothing overlaps its body */
+.env-card {
+  position: absolute;
+  z-index: 1;
+  top: clamp(20px, 5%, 34px);
+  left: clamp(20px, 5%, 34px);
+  right: clamp(20px, 5%, 34px);
+  bottom: clamp(56px, 15%, 82px);   /* deeper lower mat holds the wax seal */
+  background: var(--paper);
+  border: 1px solid rgba(33, 28, 21, 0.3);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.45),
+    0 18px 34px -22px rgba(33, 28, 21, 0.6);
+  overflow: hidden;
+}
+.env-card::after {           /* gold invitation keyline */
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: 3;
+  border: 1px solid rgba(157, 127, 66, 0.5);
+  pointer-events: none;
+}
+.env-map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(0.95) contrast(1.01);
+}
+/* wax seal — centered on the lower mat, below the map */
+.env-seal {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  bottom: clamp(6px, 2.4%, 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(38px, 9.5%, 46px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 4.6%, 22px);
+  line-height: 1;
+  color: rgba(247, 243, 233, 0.95);
+  background: radial-gradient(circle at 36% 30%, #93343a 0%, var(--oxblood) 45%, var(--oxblood-deep) 100%);
+  border: 1px solid rgba(74, 21, 27, 0.5);
+  box-shadow:
+    0 6px 14px -5px rgba(74, 21, 27, 0.6),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38);
+}
+.env-seal::before {          /* embossed inner ring */
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px dashed rgba(247, 243, 233, 0.45);
+}
+/* postage stamp — small accent tucked in the top-right corner */
+.env-stamp {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  top: clamp(8px, 2.2%, 14px);
+  right: clamp(8px, 2.2%, 14px);
+  width: clamp(32px, 8.5%, 40px);
+  height: clamp(38px, 10%, 48px);
+  transform: rotate(3deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: var(--paper-cream);
+  border: 1.5px dashed rgba(33, 28, 21, 0.3);
+  box-shadow: 0 4px 9px -5px rgba(33, 28, 21, 0.5);
+}
+.env-stamp::before {         /* inner oxblood frame */
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 0.8px solid rgba(107, 34, 40, 0.4);
+}
+.env-stamp__mono {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(12px, 3.2%, 15px);
+  color: var(--oxblood);
+  line-height: 1;
+}
+.env-stamp__loc {
+  font-family: var(--serif);
+  font-size: clamp(5px, 1.5%, 6.5px);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .env-card { transition: box-shadow 0.4s ease, transform 0.4s ease; }
+  .visit-envelope:hover .env-card { transform: translateY(-2px); box-shadow: 0 4px 0 rgba(255,255,255,0.45), 0 26px 44px -22px rgba(33,28,21,0.66); }
+}
+
 /* ─── Fabric library teaser ──────────────────────────────────────── */
 
 .swatch-rail {
@@ -1157,4 +1283,168 @@ a:hover { color: var(--oxblood); }
     animation-duration: 0ms !important;
   }
   [data-reveal], [data-reveal-stagger] > * { opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   WARM EDITORIAL — bespoke/warm refinement layer (homepage reference)
+   Softer mixed-case type · paper grain · ink warmth · editorial set-pieces
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Subtle paper grain over the whole field (behind content) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='ng'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.10 0 0 0 0 0.07 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ng)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* Oldstyle figures site-wide — small warmth in every number */
+body { font-variant-numeric: oldstyle-nums proportional-nums; }
+
+/* Mixed-case headline refinement + consistent oxblood accent word */
+.h-1 { line-height: 1.02; letter-spacing: -0.005em; }
+.h-1 em { font-style: italic; font-weight: 400; color: var(--oxblood); }
+
+/* Drop cap on the opening editorial paragraph */
+.dropcap::first-letter {
+  float: left;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 3.4em;
+  line-height: 0.72;
+  padding: 8px 12px 0 0;
+  color: var(--oxblood);
+}
+
+/* In-flow pull-quote (magazine emphasis) */
+.pullquote {
+  margin: 26px 0;
+  padding: 2px 0 2px 22px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.25;
+  color: var(--oxblood-deep);
+  text-wrap: balance;
+}
+
+/* Notebook margin-slip (the motif, made visual) */
+.notebook-note {
+  position: relative;
+  margin-top: 24px;
+  max-width: 34ch;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  background: var(--paper-cream);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--oxblood);
+  padding: 15px 18px 14px;
+  border-radius: 2px;
+  box-shadow: 0 12px 24px -18px rgba(43, 31, 18, 0.5);
+  transform: rotate(-0.6deg);
+}
+.notebook-note__tab {
+  display: block;
+  font-style: normal;
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin-bottom: 5px;
+}
+
+/* Full-bleed pull-quote band (a quiet breather in the section rhythm) */
+.quote-band { text-align: center; }
+.quote-band__inner { max-width: 40ch; margin: 0 auto; padding: clamp(24px, 5vw, 56px) 0; }
+.quote-band__mark {
+  font-family: var(--serif);
+  font-size: clamp(84px, 11vw, 150px);
+  line-height: 0.5;
+  height: 0.42em;
+  color: var(--gold-soft);
+  opacity: 0.7;
+}
+.quote-band__q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1.22;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: 10px 0 22px;
+}
+.quote-band__by {
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  font-size: 15px;
+}
+.quote-band__by span {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 11.5px;
+  font-style: normal;
+}
+
+/* Wax-seal signature divider (bespoke = signed) — reuses the envelope seal look */
+.seal-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 560px;
+  margin: clamp(34px, 6vw, 72px) auto;
+  padding: 0 24px;
+}
+.seal-divider__rule {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--rule-strong), transparent);
+}
+.seal-divider__seal {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: rgba(247, 243, 233, 0.95);
+  background: radial-gradient(circle at 36% 30%, #93343a 0%, var(--oxblood) 46%, var(--oxblood-deep) 100%);
+  border: 1px solid rgba(74, 21, 27, 0.5);
+  box-shadow:
+    0 6px 14px -5px rgba(74, 21, 27, 0.6),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38);
+}
+
+/* Cards "laid on the bench" — soft warm resting shadow + mixed-case titles */
+.service-card {
+  border-radius: 2px;
+  box-shadow: 0 2px 2px rgba(43, 31, 18, 0.04), 0 16px 34px -26px rgba(43, 31, 18, 0.5);
+}
+.service-card__title { text-transform: none; letter-spacing: 0.005em; }
+.gcard { box-shadow: 0 2px 2px rgba(43, 31, 18, 0.035), 0 14px 30px -26px rgba(43, 31, 18, 0.42); }
+.lb-tile { box-shadow: 0 2px 3px rgba(43, 31, 18, 0.05), 0 14px 30px -28px rgba(43, 31, 18, 0.4); }
+.lb-tile .placeholder .label { text-transform: none; letter-spacing: 0.01em; font-size: 19px; }
+
+/* Warm the eyebrow rules (drawn-ink feel) */
+.eyebrow-rule::before, .eyebrow-rule.both::after {
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--oxblood) 60%, var(--gold));
+  opacity: 0.55;
 }

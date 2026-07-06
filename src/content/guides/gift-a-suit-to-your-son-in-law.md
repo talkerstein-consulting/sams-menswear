@@ -28,7 +28,7 @@ If you want the fuller picture of how gifting one of these works, our guide on [
 
 The mechanics are simple and low-pressure, which matters when the recipient is someone you're still getting to know. You reserve the gift — a made-to-measure suit plus a personal fitting with Sam. He receives a gift certificate or a written note letting him know it's waiting for him. Then, on his own time, he books his fitting.
 
-That fitting happens either at Sam's atelier in Vaughan or, if it's easier, Sam travels to him — a real convenience for a busy son-in-law anywhere across Thornhill, Richmond Hill, Markham, North York or Woodbridge. Sam takes his measurements, talks through what he actually wears and needs, and drafts the suit accordingly. Those measurements are kept on a personal pattern, so any future suit he orders is already halfway made.
+That fitting happens either at Sam's studio in Vaughan or, if it's easier, Sam travels to him — a real convenience for a busy son-in-law anywhere across Thornhill, Richmond Hill, Markham, North York or Woodbridge. Sam takes his measurements, talks through what he actually wears and needs, and drafts the suit accordingly. Those measurements are kept on a personal pattern, so any future suit he orders is already halfway made.
 
 ## What if he doesn't like it?
 

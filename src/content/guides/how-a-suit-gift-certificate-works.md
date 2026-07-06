@@ -18,7 +18,7 @@ Here is the whole flow, so there are no surprises:
 
 - **You reserve the gift.** You put the [gift of a custom suit](/gift) in place, choosing either a full made-to-measure suit and fitting or an open-value gift certificate if you would rather leave the details to him.
 - **He receives the note.** Your recipient gets a certificate or a personal note letting him know a suit is waiting, made just for him.
-- **He books his fitting.** When he is ready, he [books his own appointment](/book) with Sam, either at the Vaughan atelier or somewhere across the GTA that suits him.
+- **He books his fitting.** When he is ready, he [books his own appointment](/book) with Sam, either at the Vaughan studio or somewhere across the GTA that suits him.
 - **The suit is made to him.** Sam takes his measurements, they choose the cloth and details together, and the suit is drafted and hand-finished to his body.
 
 ## What "made to measure" really means here
@@ -39,6 +39,6 @@ We will never quote you a price out of thin air. The value of a made-to-measure 
 
 ## When he is ready to come in
 
-There is no rush and no expiry pressure. Whether your recipient is in Thornhill, Richmond Hill, Markham, North York, Woodbridge, or downtown Toronto, he can come to the Vaughan atelier or arrange for Sam to travel to him. When he does book, [your first fitting](/guides/your-first-fitting) explains exactly what that appointment looks like so he knows what to expect.
+There is no rush and no expiry pressure. Whether your recipient is in Thornhill, Richmond Hill, Markham, North York, Woodbridge, or downtown Toronto, he can come to the Vaughan studio or arrange for Sam to travel to him. When he does book, [your first fitting](/guides/your-first-fitting) explains exactly what that appointment looks like so he knows what to expect.
 
 Ready to put it in place? [Reserve his suit on the gift page](/gift) and let Sam handle the rest.

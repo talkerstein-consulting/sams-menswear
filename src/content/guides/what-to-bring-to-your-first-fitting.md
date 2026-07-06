@@ -62,10 +62,10 @@ Sam will ask things like: what's the occasion, do you run hot or cold, do you li
 
 Sam's is in Vaughan, on the Thornhill line, serving the GTA — Toronto, Thornhill, North York, Richmond Hill, Markham. And yes, for weddings Sam will come to you.
 
-That's genuinely useful for a groom juggling a hundred things, or for measuring the whole wedding party in one sitting at your place. If it's more your speed, come to the atelier instead. Either way, the first fitting is unhurried.
+That's genuinely useful for a groom juggling a hundred things, or for measuring the whole wedding party in one sitting at your place. If it's more your speed, come to the studio instead. Either way, the first fitting is unhurried.
 
 ---
 
 Still picture the first fitting as some intimidating ritual? It's a chat, a tape measure, and a good coffee. Bring your shoes, bring your questions, bring nothing else.
 
-[Book a free first fitting →](/book) — no obligation, no pressure. Or [design your suit](/design) first if you like to see it before you sit down. Planning a wedding? Sam will [measure the whole party](/wedding) at your place or the atelier.
+[Book a free first fitting →](/book) — no obligation, no pressure. Or [design your suit](/design) first if you like to see it before you sit down. Planning a wedding? Sam will [measure the whole party](/wedding) at your place or the studio.

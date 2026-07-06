@@ -90,7 +90,7 @@ const entityGraph = {
       image: origin + '/media/sam/sam-portrait.webp',
       worksFor: { '@id': origin + '/#org' },
       url: origin + '/about',
-      description: 'Bespoke and made-to-measure tailor with over 30 years of experience, working from his atelier in Vaughan, Ontario, on the Thornhill line.',
+      description: 'Bespoke and made-to-measure tailor with over 30 years of experience, working from his studio in Vaughan, Ontario, on the Thornhill line.',
       knowsAbout: [
         'Bespoke tailoring', 'Made-to-measure suits', 'Wedding suits and tuxedos',
         'Groomsmen and father-of-the-bride tailoring', 'Traditional Jewish menswear',
@@ -107,6 +107,10 @@ const GA_MEASUREMENT_ID = 'G-SWVP87BNED';
 //    method (google-site-verification). Empty = nothing rendered.
 //    Alternatively verify by DNS TXT, or by the sitemap already in robots.txt.
 const GSC_VERIFICATION = '';
+//  ▶ Microsoft Clarity: paste your Project ID from clarity.microsoft.com
+//    (Settings → Overview, or the "install manually" snippet — a short id like
+//    'abcde12345'). Empty = nothing loaded. Loads heatmaps + session replays.
+const CLARITY_PROJECT_ID = '';
 ---
 <!doctype html>
 <html lang="en">
@@ -159,6 +163,10 @@ const GSC_VERIFICATION = '';
         <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}></script>
       </>
+    )}
+
+    {CLARITY_PROJECT_ID && (
+      <script is:inline set:html={`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${CLARITY_PROJECT_ID}");`} />
     )}
   </head>
   <body>

@@ -24,7 +24,7 @@ You're not handing over a garment off a rack. Here's how the gift works:
 
 - **You reserve the gift** — a made-to-measure suit plus a personal fitting with Sam.
 - **He receives a note or gift certificate** — the surprise arrives in his hands, not a shipping box.
-- **He books his own fitting**, at Sam's Vaughan atelier or with Sam traveling to him anywhere across the GTA — Thornhill, North York, Richmond Hill, Markham, or Woodbridge.
+- **He books his own fitting**, at Sam's Vaughan studio or with Sam traveling to him anywhere across the GTA — Thornhill, North York, Richmond Hill, Markham, or Woodbridge.
 - **The suit is drafted to his measurements** and kept on a personal pattern, so his next suit — years from now — starts from a cloth he already knows fits.
 
 That last point matters for a graduate. You're not just buying one suit; you're opening a lifelong relationship with a tailor. The pattern on file becomes his for future orders.
