@@ -87,6 +87,11 @@ const entityGraph = {
       '@id': origin + '/#sam',
       name: 'Sam Talkar',
       jobTitle: 'Master Tailor',
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: 'Master Tailor',
+        occupationLocation: { '@type': 'City', name: 'Vaughan' },
+      },
       image: origin + '/media/sam/sam-portrait.webp',
       worksFor: { '@id': origin + '/#org' },
       url: origin + '/about',
