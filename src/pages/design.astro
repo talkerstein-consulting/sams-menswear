@@ -28,6 +28,39 @@ const ties = [
   { key: 'gold', name: 'Gold', hex: '#9d7f42' },
   { key: 'forest', name: 'Forest', hex: '#2c3d31' },
 ];
+
+// WebApplication + HowTo schema for the tool (AEO + rich understanding).
+const designSite = 'https://customsuitandshirt.com';
+const designSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${designSite}/design#app`,
+      name: 'The Drawing Board — Suit Designer',
+      url: `${designSite}/design`,
+      applicationCategory: 'DesignApplication',
+      operatingSystem: 'Web',
+      browserRequirements: 'Requires JavaScript',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
+      provider: { '@id': `${designSite}/#business` },
+      description: 'Design a custom suit online — pick the cloth, lapel, buttons, lining, shirt and tie and see it drawn live, then send the spec to Sam.',
+    },
+    {
+      '@type': 'HowTo',
+      '@id': `${designSite}/design#howto`,
+      name: 'How to design your custom suit on The Drawing Board',
+      description: 'Design your suit before you book a fitting with Sam in Vaughan.',
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Pick your cloth', text: 'Choose the fabric — navy, charcoal, glen check and more from the cloth library.' },
+        { '@type': 'HowToStep', position: 2, name: 'Choose the cut', text: 'Set the lapel, the buttons and single- or double-breasted, and watch the suit drawn live.' },
+        { '@type': 'HowToStep', position: 3, name: 'Finish the details', text: 'Pick the lining, shirt, tie and pocket square to complete the look.' },
+        { '@type': 'HowToStep', position: 4, name: 'Send it to Sam', text: 'Send your look with your event date and phone number; Sam builds the real suit at a personal fitting.' },
+      ],
+    },
+  ],
+};
 ---
 <BaseLayout
   title="The Drawing Board — Design Your Suit · Sam's Menswear"
@@ -390,4 +423,5 @@ const ties = [
       render();
     }
   </script>
+  <script type="application/ld+json" set:html={JSON.stringify(designSchema)} />
 </BaseLayout>
