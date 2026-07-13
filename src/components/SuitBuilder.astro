@@ -1,0 +1,562 @@
+---
+/*
+ * SuitBuilder — the "draw one, make many" raster configurator (art by Rems).
+ * Grayscale garment sprites are stacked in one registered canvas; changing a
+ * detail swaps a single transparent WebP layer. Fabric COLOUR is added later
+ * (a fabric weave multiplied under these luminance sprites — Ingrid's pass).
+ *
+ * Reconciled to the site: warm tokens (no cold gray / maroon), site serif
+ * fonts (no Inter), and the shared SamsLead pipe for capture. Dials are real
+ * radio-group buttons (keyboard + screen-reader accessible).
+ *
+ * PASS 2 (planned — see docs/suit-builder-art-brief-pass2.md): two more parts
+ * arrive from Rems as grayscale sprites — shirt COLLARS (collar-spread/-point/
+ * -button-down/-wing) and jacket LINING (lining-notch/-peak/-shawl). Wire them
+ * as two new layers in this z-order:
+ *   base -> lapel -> dbjacket -> lining -> collar -> pants -> neck -> square
+ * plus two new dials (Shirt collar, Lining). Wiring rules:
+ *   - collar hidden when neck==='open' (neck-open draws its own collar);
+ *   - WING forces neck='bow' and is hidden for other neckwear (mirror the
+ *     DB->peak lock below);
+ *   - lining auto-follows the lapel shape, DB forced to peak
+ *     (state.front==='db' ? 'peak' : state.lapel) — same rule as specText().
+ * Colour (shirt + lining tint + fabric multiply) is Ingrid's pass; stays
+ * grayscale until then.
+ */
+---
+<section class="suitbuilder" id="suitbuilder" aria-label="Custom suit builder">
+  <div class="sb-shell">
+
+    <!-- ── Live drawing ─────────────────────────────────────────────── -->
+    <div class="sb-stage">
+      <div class="sb-figure" role="img" aria-label="Live drawing of your suit" data-figure>
+        <img class="sb-layer" data-layer="base"     alt="" />
+        <img class="sb-layer" data-layer="lapel"    alt="" />
+        <img class="sb-layer" data-layer="dbjacket" alt="" />
+        <img class="sb-layer" data-layer="pants"    alt="" />
+        <img class="sb-layer" data-layer="neck"     alt="" />
+        <img class="sb-layer" data-layer="square"   alt="" />
+      </div>
+      <p class="sb-spec" data-spec></p>
+    </div>
+
+    <!-- ── Controls ─────────────────────────────────────────────────── -->
+    <div class="sb-panel">
+      <div class="sb-panel-head">Build your suit</div>
+      <div class="sb-panel-sub">Every detail, made to your taste.</div>
+
+      <div class="sb-group" data-opt="front">
+        <div class="sb-glabel"><span class="sb-glabel-txt">Front &amp; buttons</span><span class="sb-glabel-rule"></span></div>
+        <div class="sb-dial" role="radiogroup" aria-label="Front and buttons" style="--count:4">
+          <span class="sb-thumb" aria-hidden="true"></span>
+          <button class="sb-opt" type="button" role="radio" data-val="1btn"><span class="sb-cap">1</span><span class="sb-note">button</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="2btn"><span class="sb-cap">2</span><span class="sb-note">button</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="3btn"><span class="sb-cap">3</span><span class="sb-note">button</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="db"><span class="sb-cap">D.B.</span><span class="sb-note">breasted</span></button>
+        </div>
+      </div>
+
+      <div class="sb-group" data-opt="lapel">
+        <div class="sb-glabel">
+          <span class="sb-glabel-txt">Lapel</span><span class="sb-glabel-rule"></span>
+          <span class="sb-fixed-tag" data-fixed-tag hidden>fixed &middot; peak</span>
+        </div>
+        <div class="sb-dial" role="radiogroup" aria-label="Lapel" style="--count:3">
+          <span class="sb-thumb" aria-hidden="true"></span>
+          <button class="sb-opt" type="button" role="radio" data-val="notch"><span class="sb-cap">Notch</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="peak"><span class="sb-cap">Peak</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="shawl"><span class="sb-cap">Shawl</span></button>
+        </div>
+      </div>
+
+      <div class="sb-group" data-opt="pants">
+        <div class="sb-glabel"><span class="sb-glabel-txt">Trousers</span><span class="sb-glabel-rule"></span></div>
+        <div class="sb-dial" role="radiogroup" aria-label="Trousers" style="--count:2">
+          <span class="sb-thumb" aria-hidden="true"></span>
+          <button class="sb-opt" type="button" role="radio" data-val="flat"><span class="sb-cap">Flat front</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="pleated"><span class="sb-cap">Pleated</span></button>
+        </div>
+      </div>
+
+      <div class="sb-group" data-opt="neck">
+        <div class="sb-glabel"><span class="sb-glabel-txt">Neckwear</span><span class="sb-glabel-rule"></span></div>
+        <div class="sb-dial" role="radiogroup" aria-label="Neckwear" style="--count:3">
+          <span class="sb-thumb" aria-hidden="true"></span>
+          <button class="sb-opt" type="button" role="radio" data-val="tie"><span class="sb-cap">Tie</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="bow"><span class="sb-cap">Bow tie</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="open"><span class="sb-cap">Open</span><span class="sb-note">collar</span></button>
+        </div>
+      </div>
+
+      <div class="sb-group" data-opt="square">
+        <div class="sb-glabel"><span class="sb-glabel-txt">Pocket square</span><span class="sb-glabel-rule"></span></div>
+        <div class="sb-dial" role="radiogroup" aria-label="Pocket square" style="--count:2">
+          <span class="sb-thumb" aria-hidden="true"></span>
+          <button class="sb-opt" type="button" role="radio" data-val="on"><span class="sb-cap">On</span></button>
+          <button class="sb-opt" type="button" role="radio" data-val="off"><span class="sb-cap">Off</span></button>
+        </div>
+      </div>
+
+      <div class="sb-divider"></div>
+      <div class="sb-summary" data-summary></div>
+      <div class="sb-footnote">Grayscale cloth shown — the fabric colour is chosen with Sam at your fitting.</div>
+
+      <!-- ── Send the look to Sam (shared lead pipe) ─────────────────── -->
+      <div class="sb-lead" data-lead>
+        <h2 class="sb-lead-head">Send your look to Sam</h2>
+        <p class="sb-lead-copy">Sam will have your drawing in hand before you arrive — so the fitting starts from a spec, not a blank page. No obligation.</p>
+        <form class="sb-form" data-look-form novalidate>
+          <input type="text"  name="name"  placeholder="Your name" autocomplete="name" required />
+          <input type="tel"   name="phone" placeholder="Phone (so Sam can call)" autocomplete="tel" />
+          <input type="email" name="email" placeholder="Email" autocomplete="email" required />
+          <label class="sb-when">When do you need it?
+            <input type="date" name="eventdate" aria-label="When do you need it?" />
+          </label>
+          <input type="hidden" name="spec" data-spec-field />
+          <input type="text" name="company" class="sb-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn is-dark sb-submit">Send me this look</button>
+        </form>
+        <div class="sb-ack" data-look-ack hidden>
+          <div class="sb-ack-seal" aria-hidden="true">✓</div>
+          <p data-ack-lead><strong>Saved.</strong> Sam has your look — <span data-ack-spec></span>. Book a fitting and we'll pull the real bolt.</p>
+          <p class="sb-fallback" data-look-fallback hidden></p>
+          <a href="/book" class="btn is-primary" data-open-booking data-no-transition data-uselook>Book a fitting with this look</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .suitbuilder {
+    /* brass dial, seeded from the site's gold so it belongs to the palette */
+    --sb-brass-hi: #e8d29a;
+    --sb-brass-1:  #bd9d63; /* --gold-soft */
+    --sb-brass-2:  #9d7f42; /* --gold */
+    --sb-brass-3:  #6e5522;
+    --sb-dial-face:#e7dabd;
+    --sb-walnut:   #3a2c1e;
+    margin: 0;
+  }
+  .sb-shell {
+    display: flex;
+    min-height: 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper-cream);
+    box-shadow: 0 24px 60px -32px rgba(33, 28, 21, 0.35);
+  }
+
+  /* ── stage ── */
+  .sb-stage {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 30px 26px 24px;
+    background:
+      radial-gradient(ellipse at 50% 34%, var(--paper-cream) 0%, var(--paper-warm) 62%, var(--paper-deep) 100%);
+    box-shadow: inset 0 0 60px -20px rgba(33, 28, 21, 0.18);
+    overflow: hidden;
+  }
+  .sb-figure {
+    position: relative;
+    height: min(72vh, 940px);
+    aspect-ratio: 842 / 1264;
+    filter: drop-shadow(0 22px 30px rgba(33, 28, 21, 0.22));
+  }
+  .sb-figure .sb-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+  .sb-layer.sb-hidden { display: none; }
+  .sb-spec {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-mute);
+    text-align: center;
+    max-width: 42ch;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ── panel ── */
+  .sb-panel {
+    width: 380px;
+    flex: none;
+    background: var(--paper-cream);
+    border-left: 1px solid var(--rule);
+    padding: 26px 26px 32px;
+    overflow-y: auto;
+  }
+  .sb-panel-head {
+    font-family: var(--serif);
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 2px 0 3px;
+    color: var(--ink);
+  }
+  .sb-panel-sub {
+    font-family: var(--serif-body);
+    font-style: italic;
+    color: var(--ink-mute);
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  .sb-group { margin-bottom: 20px; }
+  .sb-glabel { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+  .sb-glabel-txt {
+    font-family: var(--serif-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    white-space: nowrap;
+  }
+  .sb-glabel-rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--rule), transparent); }
+  .sb-fixed-tag {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--sb-brass-3);
+    white-space: nowrap;
+  }
+  .sb-fixed-tag[hidden] { display: none; }
+
+  /* vintage brass radio-dial */
+  .sb-dial {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    padding: 5px;
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 40%),
+      linear-gradient(180deg, var(--sb-dial-face), #d9c79a);
+    border: 1px solid var(--sb-brass-2);
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 5px rgba(90, 66, 26, 0.32),
+      0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: opacity 0.2s ease;
+  }
+  .sb-thumb {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    width: calc((100% - 10px) / var(--count));
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--sb-brass-hi) 0%, var(--sb-brass-1) 45%, var(--sb-brass-2) 100%);
+    box-shadow:
+      0 2px 4px rgba(60, 42, 10, 0.42),
+      0 0 0 1px var(--sb-brass-3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.8),
+      inset 0 -3px 5px rgba(110, 85, 34, 0.5);
+    transform: translateX(calc(var(--index, 0) * 100%));
+    transition: transform 0.28s cubic-bezier(0.4, 1.4, 0.4, 1);
+    pointer-events: none;
+  }
+  .sb-opt {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 9px 8px;
+    color: var(--sb-walnut);
+    font-family: var(--serif-body);
+    font-size: 12.5px;
+    line-height: 1.15;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    margin: 0;
+    transition: color 0.2s ease;
+  }
+  .sb-opt:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 22%;
+    bottom: 22%;
+    width: 1px;
+    background: rgba(110, 85, 34, 0.28);
+  }
+  .sb-opt.is-sel:not(:last-child)::after,
+  .sb-opt.is-sel + .sb-opt::after { background: transparent; }
+  .sb-opt .sb-cap {
+    display: block;
+    font-family: var(--serif);
+    font-size: 16.5px;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  .sb-opt .sb-note {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin-top: 2px;
+  }
+  .sb-opt.is-sel .sb-cap { color: #3a2408; }
+  .sb-opt:focus-visible {
+    outline: 2px solid var(--oxblood);
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+  .sb-dial.is-disabled { opacity: 0.45; pointer-events: none; filter: grayscale(0.4); }
+
+  .sb-divider { height: 1px; background: var(--rule); margin: 24px 0; }
+  .sb-summary { font-family: var(--serif-body); font-size: 14px; color: var(--ink-mute); line-height: 1.65; }
+  .sb-summary b { color: var(--ink); font-weight: 600; }
+  .sb-footnote { margin-top: 18px; font-family: var(--serif-body); font-size: 11.5px; color: var(--ink-mute); opacity: 0.8; line-height: 1.5; }
+
+  /* ── lead capture ── */
+  .sb-lead { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--rule); }
+  .sb-lead-head {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0;
+  }
+  .sb-lead-copy { font-family: var(--serif-body); font-size: 14.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.5; }
+  .sb-form { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .sb-form input[type="text"],
+  .sb-form input[type="tel"],
+  .sb-form input[type="email"],
+  .sb-form input[type="date"] {
+    font-family: var(--serif-body);
+    font-size: 15px;
+    padding: 11px 13px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+  }
+  .sb-form input:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 1px; border-color: var(--oxblood); }
+  .sb-when { font-family: var(--serif-body); font-size: 13px; color: var(--ink-mute); display: flex; flex-direction: column; gap: 6px; }
+  .sb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .sb-submit { width: 100%; margin-top: 4px; }
+  .sb-ack { margin-top: 8px; font-family: var(--serif-body); }
+  .sb-ack-seal {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--oxblood); color: var(--paper-cream);
+    font-size: 20px; margin-bottom: 10px;
+  }
+  .sb-ack p { font-size: 15px; color: var(--ink-soft); line-height: 1.5; margin: 0 0 10px; }
+  .sb-fallback[hidden] { display: none; }
+  .sb-fallback a { color: var(--oxblood); }
+
+  /* ── responsive ── */
+  @media (max-width: 900px) {
+    .sb-shell { flex-direction: column; }
+    .sb-panel { width: auto; border-left: none; border-top: 1px solid var(--rule); }
+    .sb-figure { height: 58vh; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-thumb { transition: none; }
+    .sb-dial, .sb-opt { transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    const root = document.getElementById('suitbuilder');
+    if (!root) return;
+
+    const A = '/media/suit/';
+    const state = { front: '2btn', lapel: 'peak', pants: 'flat', neck: 'tie', square: 'on' };
+
+    // Preload every sprite so switching is instant.
+    const FILES = ['base-1btn', 'base-2btn', 'base-3btn-notch', 'base-3btn-peak', 'base-3btn-shawl',
+      'lapel-notch', 'lapel-peak', 'lapel-shawl', 'jacket-db', 'pants-flat', 'pants-pleated',
+      'neck-tie', 'neck-bow', 'neck-open', 'pocket-square', 'sqoff-1btn', 'sqoff-2btn'];
+    FILES.forEach((f) => { const i = new Image(); i.src = A + f + '.webp'; });
+
+    const layer = {};
+    root.querySelectorAll('.sb-layer').forEach((el) => { layer[el.dataset.layer] = el; });
+
+    const FR = { '1btn': 'One-button', '2btn': 'Two-button', '3btn': 'Three-button', db: 'Double-breasted' };
+    const LA = { notch: 'notch', peak: 'peak', shawl: 'shawl' };
+    const NE = { tie: 'tie', bow: 'bow tie', open: 'open collar' };
+
+    function setLayer(el, file) {
+      if (!el) return;
+      if (!file) { el.classList.add('sb-hidden'); return; }
+      const src = A + file + '.webp';
+      const cur = el.getAttribute('src') || '';
+      if (!cur.endsWith(src)) el.src = src;
+      el.classList.remove('sb-hidden');
+    }
+
+    function specText() {
+      const cut = state.front === 'db'
+        ? 'Double-breasted, peak lapel'
+        : FR[state.front] + ', ' + LA[state.lapel] + ' lapel';
+      return cut + ' · ' + (state.pants === 'flat' ? 'flat-front' : 'pleated') + ' trousers · '
+        + NE[state.neck] + ' · ' + (state.square === 'on' ? 'pocket square' : 'no pocket square');
+    }
+
+    function summaryHTML() {
+      const cut = state.front === 'db'
+        ? '<b>Double-breasted</b> · <b>peak</b> lapel'
+        : '<b>' + FR[state.front] + '</b> single-breasted · <b>' + LA[state.lapel] + '</b> lapel';
+      return cut + '<br><b>' + (state.pants === 'flat' ? 'Flat-front' : 'Pleated') + '</b> trousers · <b>'
+        + NE[state.neck] + '</b><br>' + (state.square === 'on' ? 'With pocket square' : 'No pocket square');
+    }
+
+    function syncDials() {
+      root.querySelectorAll('.sb-group').forEach((g) => {
+        const key = g.dataset.opt;
+        const opts = [...g.querySelectorAll('.sb-opt')];
+        const idx = opts.findIndex((o) => o.dataset.val === state[key]);
+        opts.forEach((o) => {
+          const on = o.dataset.val === state[key];
+          o.classList.toggle('is-sel', on);
+          o.setAttribute('aria-checked', on ? 'true' : 'false');
+          o.tabIndex = on ? 0 : -1; // roving tabindex for the radiogroup
+        });
+        g.querySelector('.sb-dial').style.setProperty('--index', idx < 0 ? 0 : idx);
+      });
+    }
+
+    function render() {
+      // base: 3-button bakes its lapel in; double-breasted is its own jacket over
+      // the 2-button base; 1/2-button single-breasted use a separate lapel overlay.
+      if (state.front === '3btn') {
+        setLayer(layer.base, 'base-3btn-' + state.lapel);
+        setLayer(layer.lapel, null);
+        setLayer(layer.dbjacket, null);
+      } else if (state.front === 'db') {
+        setLayer(layer.base, 'base-2btn');
+        setLayer(layer.lapel, null);
+        setLayer(layer.dbjacket, 'jacket-db');
+      } else {
+        setLayer(layer.base, 'base-' + state.front);
+        setLayer(layer.lapel, 'lapel-' + state.lapel);
+        setLayer(layer.dbjacket, null);
+      }
+      setLayer(layer.pants, 'pants-' + state.pants);
+      setLayer(layer.neck, 'neck-' + state.neck);
+
+      // pocket square: on = overlay; off over a baked square = fabric patch
+      // (1/2-button only — 3-button and DB have no baked square to hide).
+      if (state.square === 'on') setLayer(layer.square, 'pocket-square');
+      else if (state.front === '3btn' || state.front === 'db') setLayer(layer.square, null);
+      else setLayer(layer.square, 'sqoff-' + state.front);
+
+      // lapel is fixed (peak) and disabled for double-breasted.
+      const dbFixed = state.front === 'db';
+      const lapelGroup = root.querySelector('.sb-group[data-opt="lapel"]');
+      const lapelDial = lapelGroup.querySelector('.sb-dial');
+      lapelDial.classList.toggle('is-disabled', dbFixed);
+      lapelDial.setAttribute('aria-disabled', dbFixed ? 'true' : 'false');
+      lapelGroup.querySelector('[data-fixed-tag]').hidden = !dbFixed;
+
+      syncDials();
+      const spec = specText();
+      const specEl = root.querySelector('[data-spec]');
+      if (specEl) specEl.textContent = spec;
+      const sumEl = root.querySelector('[data-summary]');
+      if (sumEl) sumEl.innerHTML = summaryHTML();
+      const specField = root.querySelector('[data-spec-field]');
+      if (specField) specField.value = spec;
+      return spec;
+    }
+
+    // wire dials — click + arrow-key navigation within each radiogroup
+    root.querySelectorAll('.sb-group').forEach((g) => {
+      const key = g.dataset.opt;
+      const opts = [...g.querySelectorAll('.sb-opt')];
+      opts.forEach((o, i) => {
+        o.addEventListener('click', () => {
+          if (g.querySelector('.sb-dial').classList.contains('is-disabled')) return;
+          state[key] = o.dataset.val;
+          render();
+        });
+        o.addEventListener('keydown', (e) => {
+          if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].indexOf(e.key) === -1) return;
+          if (g.querySelector('.sb-dial').classList.contains('is-disabled')) return;
+          e.preventDefault();
+          const dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+          const next = (i + dir + opts.length) % opts.length;
+          state[key] = opts[next].dataset.val;
+          render();
+          opts[next].focus();
+        });
+      });
+    });
+
+    // lead form — mirrors /design: honeypot, urgency scoring, shared SamsLead
+    // pipe, localStorage handoff, and an honest fallback if the CRM is unreachable.
+    const form = root.querySelector('[data-look-form]');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const val = (n) => { const el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+        // Honeypot: real users never fill this. Silently pretend success for bots.
+        if (val('company')) { form.hidden = true; const a = root.querySelector('[data-look-ack]'); if (a) a.hidden = false; return; }
+        const spec = render();
+        const name = val('name'), email = val('email'), phone = val('phone'), eventdate = val('eventdate');
+        if (!name || !email) {
+          (form.querySelector(!name ? '[name="name"]' : '[name="email"]')).focus();
+          return;
+        }
+        // Lead scoring: an event within ~6 weeks is a call-now lead.
+        let urgency = 'nurture';
+        if (eventdate) {
+          const days = Math.round((new Date(eventdate) - new Date()) / 86400000);
+          urgency = days <= 42 ? 'HOT — call now' : days <= 120 ? 'warm' : 'nurture';
+        }
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        // Persist for the "book with this look" handoff no matter what.
+        try { localStorage.setItem('sams:look', JSON.stringify({ ...state, spec, name, phone, email, eventdate, at: Date.now() })); } catch (e2) {}
+        let result = { ok: false };
+        try {
+          result = (window.SamsLead && window.SamsLead.send)
+            ? await window.SamsLead.send('design-look', { name, phone, email, eventdate, urgency, spec })
+            : { ok: false };
+        } catch (err) { result = { ok: false }; }
+        const ack = root.querySelector('[data-look-ack]');
+        const ackSpec = root.querySelector('[data-ack-spec]');
+        const ackLead = root.querySelector('[data-ack-lead]');
+        if (ackSpec) ackSpec.textContent = spec;
+        if (!result.ok) {
+          // Honest ack — we did NOT reach Sam automatically; make the real path primary.
+          if (ackLead) ackLead.innerHTML = '<strong>Your look is ready.</strong> One tap sends it to Sam — <span data-ack-spec>' + spec + '</span>';
+          if (window.SamsLead) {
+            const mail = window.SamsLead.mailto('My suit look — ' + (name || 'website'), { Name: name, Phone: phone, Email: email, 'Need by': eventdate, Look: spec });
+            const fb = root.querySelector('[data-look-fallback]');
+            if (fb) { fb.innerHTML = 'To reach Sam right now: <a href="' + mail + '">email your look</a> or <a href="tel:' + window.SamsLead.PHONE + '">call ' + window.SamsLead.PHONE_DISP + '</a>.'; fb.hidden = false; }
+          }
+        }
+        form.hidden = true;
+        if (ack) ack.hidden = false;
+      });
+    }
+
+    render();
+  })();
+</script>

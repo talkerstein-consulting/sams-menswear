@@ -10,6 +10,7 @@ const {
   description = "Sam's Menswear — a personal master tailor in Vaughan. Wedding suits, business suits, custom shirts and traditional menswear, measured personally.",
   nav = null,
   ogType = 'website',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -127,6 +128,7 @@ const CLARITY_PROJECT_ID = '';
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f2ede1" />
     {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Sam's Menswear" />
