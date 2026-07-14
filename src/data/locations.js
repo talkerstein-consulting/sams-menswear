@@ -235,6 +235,114 @@ export const locations = [
       },
     ],
   },
+  {
+    slug: 'bathurst-lawrence',
+    city: 'Bathurst & Lawrence',
+    headline: 'The heart of the community.',
+    metaTitle: "Jewish Tailor at Bathurst & Lawrence — Shabbos & Custom Suits | Sam's Menswear",
+    h1: "A tailor for <em>Bathurst &amp; Lawrence.</em>",
+    metaDesc: "Traditional and custom Jewish menswear for the Bathurst–Lawrence and Lawrence Manor community — Shabbos suits, bekishe, kapota, kittel, bar mitzvah and chosson tailoring, plus custom and wedding suits. Measured personally by Sam, never on Shabbos.",
+    blurb:
+      "The Bathurst–Lawrence and Lawrence Manor community is where Sam's traditional work lives — Shabbos suits, simcha garments, and the fine dark suit that reads as kavod in shul.",
+    services: ['Traditional & Jewish Menswear', 'Shabbos Suits', 'Bar Mitzvah Suits', 'Chosson Tailoring', 'Custom Suits', 'Alterations'],
+    nearby: ['North York', 'Thornhill', 'Forest Hill'],
+    neighbourhoods: [
+      'Lawrence Manor', 'Lawrence Plaza', 'Ledbury Park', 'Glen Park', 'Englemount',
+      'Bathurst Manor', 'Wilson Heights', 'Cedarvale', 'Forest Hill North', 'Armour Heights',
+    ],
+    intro: [
+      "Along Bathurst from Lawrence to Wilson is one of the oldest, closest Jewish communities in Toronto — and it's where most of Sam's traditional work begins. He has dressed Lawrence Manor and Lawrence Plaza families for years: the fine dark suit for Shabbos, the bekishe and kapota, the kittel, and the bar mitzvah suit a boy grows into. Sam knows what these garments are for, not only what they look like, and that is why fathers send their sons.",
+      "It's a short run up Bathurst to the studio, or Sam brings the fitting to your home — whichever keeps the family together and the schedule easy. Everything is one-on-one, dignified and discreet, and never fitted on Shabbos or Yom Tov. Chosson wardrobes are drawn together and finished in the days before the wedding; a whole party can be measured in a single visit.",
+      "Beyond the traditional garments, the same hand cuts custom suits, wedding suits and tuxedos for the community — drafted to your body, kept on a pattern, and made to fit rather than sold off a rack.",
+    ],
+    faqs: [
+      { q: 'Is there a Jewish tailor at Bathurst & Lawrence?', a: "Yes — Sam makes traditional Jewish menswear for the Bathurst–Lawrence and Lawrence Manor community: Shabbos suits, bekishe, kapota, kittel, bar mitzvah and chosson tailoring, all cut by hand and to the tradition. A short drive up Bathurst to the studio, or he comes to you." },
+      { q: 'How much is a custom Shabbos suit, bekishe or kapota?', a: "It depends on the cloth and the garment — Sam gives an honest quote at the consultation, with no showroom markup and no pressure. The first conversation costs nothing." },
+      { q: 'Does Sam make bar mitzvah suits for the community?', a: "Yes — bar mitzvah suits cut with room to let out over the next two years, with the pattern kept for the next suit. Fathers are often measured at the same visit." },
+      { q: 'Are you closed on Shabbos and Yom Tov?', a: "Always. Fittings are by appointment, one family at a time, and never on Shabbos or Yom Tov." },
+    ],
+  },
+  {
+    slug: 'financial-district',
+    city: 'the Financial District',
+    headline: 'The tailor comes to the tower.',
+    metaTitle: "Business Suits for Bay Street & the Financial District — Sam's Menswear",
+    h1: "Business suits for <em>Bay Street.</em>",
+    metaDesc: "Custom business suits for Bay Street and Toronto's Financial District — Sam brings the fitting to your tower or the boardroom. Navy, charcoal and glen check, drafted to your body and kept on a pattern. No showroom, no rack, no half-day lost.",
+    blurb:
+      "For the Bay Street crowd who can't lose half a day to a showroom, Sam brings the cloth and the tape to your tower — the full fitting, taken where you already are.",
+    services: ['Business Suits', 'Have Sam Over', 'Custom Suits', 'Custom Shirts', 'Travel Suits'],
+    nearby: ['Yorkville', 'King West', 'North York'],
+    neighbourhoods: [
+      'Bay Street', 'King & Bay', 'First Canadian Place', 'Commerce Court', 'Brookfield Place',
+      'The PATH', 'Wellington', 'Union', 'St. Lawrence', 'The Well',
+    ],
+    intro: [
+      "In the Financial District the traveling tailor beats the commute every time. Sam comes to you by appointment — the office tower on Bay or King, a boardroom, a condo nearby — with bolts of cloth, the tape and the notebook, and takes the full fitting where you already are. The hour you'd have spent driving to a showroom is spent being measured properly instead.",
+      "The work is a partner's wardrobe: navy and charcoal that carry a room, glen check with a little more to say, and a travelling suit cut to survive a red-eye and a morning meeting. Soft enough to sit and work in, structured enough to command the table. Custom shirts to match — your collar, your cuff, your fit — so nothing gapes when the jacket comes off.",
+      "Twenty-six measurements are taken by hand and kept on a personal pattern, so your next suit or shirt is already halfway made — order the reorder by phone and it arrives cut to you. One tailor, one client, no sales floor.",
+    ],
+    faqs: [
+      { q: 'Will Sam come to my Bay Street office?', a: "Yes — the traveling service brings the whole fitting to your tower, boardroom or nearby condo across the Financial District, by appointment. There's no house-call surcharge; the suit costs what the suit costs." },
+      { q: 'How long does a custom business suit take?', a: "About six to eight weeks from the first fitting, across two or three visits. Once your pattern is on file, reorders are faster." },
+      { q: 'Do you make custom shirts for the office too?', a: "Yes — custom dress shirts cut from the pattern of your own shoulders, in two-ply cotton, with your collar, cuff and monogram. They stop the gape and bunching an off-the-rack shirt gives under a jacket." },
+      { q: 'Can I reorder without coming in again?', a: "Yes — your measurements and pattern are kept in the notebook, so a second navy suit or a run of shirts can be ordered by phone and cut to you." },
+    ],
+  },
+  {
+    slug: 'yorkville',
+    city: 'Yorkville',
+    headline: 'Pay for the tailor, not the showroom.',
+    metaTitle: "Bespoke Suits in Yorkville — the Tailor, Not the Showroom | Sam's Menswear",
+    h1: "Bespoke suits, <em>Yorkville.</em>",
+    metaDesc: "Bespoke and made-to-measure suits for Yorkville and Bloor West — the craft of a proper tailor without the Mink Mile markup. Sam drafts, cuts and fits every garment by hand, or comes to your condo. Custom, wedding and black-tie tailoring.",
+    blurb:
+      "In Yorkville you can pay for a showroom or pay for a tailor. With Sam, every dollar goes into the cloth and the hand that cuts it — not the address.",
+    services: ['Bespoke Suits', 'Made-to-Measure', 'Custom Tuxedos', 'Have Sam Over', 'Custom Shirts'],
+    nearby: ['Financial District', 'Rosedale', 'Forest Hill'],
+    neighbourhoods: [
+      'Bloor-Yorkville', 'The Mink Mile', 'Rosedale', 'The Annex', 'Summerhill',
+      'Forest Hill', 'Deer Park', 'Ramsden Park', 'Hazelton', 'Yonge & Bloor',
+    ],
+    intro: [
+      "Yorkville is where a suit gets expensive for reasons that have nothing to do with the suit — the address, the fit-out, the sales floor. Sam's proposition is the opposite: the whole cost goes into the cloth and the hand that cuts it. Every garment is drawn, canvassed and fitted personally, one client at a time, on the plain principle that a suit should be built around the man, not the showroom.",
+      "This is real bespoke and made-to-measure depth — a full-canvas jacket that moulds to you over years, twenty-six measurements kept on a personal pattern, a wall of cloth from the good English and Italian mills. For a Bloor-Yorkville or Rosedale client that means a wardrobe with genuine craft behind it, and a tailor who answers the phone himself.",
+      "For galas and black-tie seasons, Sam cuts tuxedos to your measurements — midnight or black, satin peak or shawl — that photograph clean where a rental never will. He'll come to the condo for the fitting, or you come to the studio; either way the room is yours.",
+    ],
+    faqs: [
+      { q: 'How is Sam different from the Yorkville tailors?', a: "Same craft, without the showroom in the price. Sam draws, cuts and fits every garment by hand himself — no sales floor, no upsell — so what you pay goes into the cloth and the making, not the address." },
+      { q: 'Do you offer true bespoke, or made-to-measure?', a: "Both — made-to-measure adjusted from a base pattern, and full bespoke drafted from nothing to your body, posture and stance. Sam will tell you honestly which your wardrobe actually needs." },
+      { q: 'Will Sam come to my Yorkville condo?', a: "Yes — by appointment, with cloth and tape, for the fitting and later try-ons. Or come to the studio; either way it's one client in the room at a time." },
+      { q: 'Do you make black-tie tuxedos?', a: "Yes — custom tuxedos in midnight or black with satin lapels, cut to your measurements for galas and weddings. A made tuxedo reads clean in photographs where a rental shows every borrowed line." },
+    ],
+  },
+  {
+    slug: 'etobicoke',
+    city: 'Etobicoke',
+    headline: 'West-end tailoring, on your schedule.',
+    metaTitle: "Custom Suits in Etobicoke — House Calls Across the West End | Sam's Menswear",
+    h1: "Custom Suits in <em>Etobicoke.</em>",
+    metaDesc: "Custom and wedding suits in Etobicoke without the cross-city drive — Sam brings the fitting to your home or office from The Kingsway to Mimico, or measures you at the Vaughan studio. Groom, groomsmen and fathers, made to fit and never rented.",
+    blurb:
+      "Etobicoke clients skip the drive north — Sam brings the fitting to you, from The Kingsway to Mimico, or measures you at the studio when you'd rather come up.",
+    services: ['Custom Suits', 'Wedding Suits & Tuxedos', 'Groomsmen & Fathers', 'Have Sam Over', 'Alterations'],
+    nearby: ['Toronto', 'Vaughan', 'Mississauga'],
+    neighbourhoods: [
+      'The Kingsway', 'Mimico', 'Islington', 'Humber Bay', 'Sunnylea',
+      'Markland Wood', 'Princess Gardens', 'Alderwood', 'New Toronto', 'Royal York',
+    ],
+    intro: [
+      "The west end is far enough from most tailoring that the drive alone talks people out of a proper suit. So for Etobicoke — from The Kingsway to Mimico and Humber Bay — Sam brings the fitting to you: the tape, the cloth book and the notebook, at your home or office, on an afternoon you'd otherwise lose to the Gardiner. When you'd rather come up, the Vaughan studio is a straight run and the room is yours.",
+      "Etobicoke weddings keep him busy every season — grooms and groomsmen getting married at the Old Mill, the west-end golf clubs and the waterfront halls, measured together with both fathers so the whole party reads as one tailored line in the photographs. Custom suits and tuxedos, made to fit, never a rental cut for the last man who wore it.",
+      "The same hand does the working wardrobe too: the first serious navy suit, the daily charcoal, the sport coat and trousers for the weekend — drafted to your body, fitted in person, and yours to keep for years of events after.",
+    ],
+    faqs: [
+      { q: 'Will Sam come to my home or office in Etobicoke?', a: "Yes — the traveling service brings the whole fitting to you anywhere in Etobicoke, from The Kingsway and Islington to Mimico and Humber Bay. There's no house-call surcharge." },
+      { q: 'Can Sam dress an Etobicoke wedding party?', a: "Yes — groom, groomsmen and both fathers, measured together and coordinated. Custom wedding suits and tuxedos for weddings at the Old Mill and the west-end venues, at your home or the studio." },
+      { q: 'How far is the studio from Etobicoke?', a: "A straight run up to the Vaughan studio at 318 Charlton Avenue — or skip the drive and have Sam come to you." },
+      { q: 'Do you do alterations in the west end?', a: "Yes — expert alterations on suits and jackets, whether Sam made them or not." },
+    ],
+  },
 ];
 
 export const getLocation = (slug) => locations.find((l) => l.slug === slug);

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Testimonials from '../components/Testimonials.astro';
+import FaqBlock from '../components/FaqBlock.astro';
 import { reviews } from '../data/reviews.js';
 
 const site = 'https://customsuitandshirt.com';
@@ -17,6 +18,18 @@ const serviceSchema = {
   url: `${site}/traditional`,
   description: 'Traditional Jewish menswear cut by hand in Vaughan and Thornhill — bekishe, kapota, kittel, Shabbos suits and chosson tailoring, handled with discretion and never on Shabbos.',
 };
+
+// Niche FAQ — long-tail intent (kapota/bekishe/kittel/chosson/Shabbos suit,
+// Thornhill–Vaughan). FaqBlock renders these + emits FAQPage JSON-LD.
+const traditionalFaqs = [
+  { q: 'Do you make a custom kapota or bekishe in the Thornhill–Vaughan area?', a: "Yes. Sam cuts bekishe, kapota and rekel by hand at the Vaughan studio on the Thornhill line, with proper allowance for the gartel and tzitzis, in satin or fine wool. Families come from across Thornhill, Vaughan, Bathurst and the wider GTA." },
+  { q: 'How much does a custom bekishe, kapota or Shabbos suit cost?', a: "It depends on the cloth and the garment — a fine-wool kapota and a satin bekishe sit at different prices — so Sam gives you an honest quote at the consultation, with no showroom markup and no pressure. The first conversation costs nothing." },
+  { q: 'When should I order before Yom Tov or a wedding?', a: "Kittels for the Yamim Noraim should be ordered by the end of Elul; a chosson's wardrobe nine to twelve months before the wedding; a bar mitzvah suit about six months out. If a date is tight, call — Sam will tell you honestly what's still possible." },
+  { q: 'Do you tailor the full chosson wardrobe?', a: "Yes — the Shabbos and kallah suits, the chuppah kittel, and the bekishe for sheva brachos, drawn together, coordinated with the kallah's side and the mechutanim, and finished in the days before the wedding." },
+  { q: 'Can Sam fit a bar mitzvah boy with growing room?', a: "Yes. The bar mitzvah suit is cut with room to let out in the sleeve and trouser over the next two years, and the pattern is kept in the notebook for the next suit." },
+  { q: 'Are you open on Shabbos and Yom Tov?', a: "Never. Fittings are by appointment, one family at a time, and are never held on Shabbos or Yom Tov — the studio is closed for both." },
+  { q: 'Where is the studio?', a: "318 Charlton Avenue, Vaughan — on the Vaughan–Thornhill line, an easy drive from Bathurst & Clark, the Promenade and across the GTA. By appointment only." },
+];
 ---
 <BaseLayout
   nav="traditional"
@@ -43,7 +56,7 @@ const serviceSchema = {
     <div class="container">
       <div class="split wide-right" data-reveal>
         <div>
-          <h2 class="h-2" style="text-transform: uppercase;">A garment that <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">welcomes Shabbos.</em></h2>
+          <h2 class="h-2">A garment that <em style="font-style: italic; font-weight: 400; text-transform: none; color: var(--oxblood);">welcomes Shabbos.</em></h2>
         </div>
         <div>
           <p class="lede" style="margin-bottom: 24px;">A bekishe is not a costume. A kapota is not a uniform. They are the cloth of a community's most personal moments — and they deserve the same patience as a wedding suit.</p>
@@ -66,7 +79,7 @@ const serviceSchema = {
     <div class="container">
       <div class="section-head" data-reveal>
         <div class="chapter-no">No. 02</div>
-        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">The <em>garments.</em></h2>
+        <h2 class="h-1" style="max-width: 18ch;">The <em>garments.</em></h2>
         <div class="right">Tailored personally · Hand-finished</div>
       </div>
 
@@ -99,7 +112,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">א</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Bekishe</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Bekishe</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             Satin or fine wool, full-length, single-breasted closure with double-row stitching. Cut to drape from the shoulders without strain, with allowance for the gartel and tzitzis.
           </p>
@@ -129,7 +142,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">ב</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Kapota / Rekel</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Kapota / Rekel</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             Wool worsted, lapel cut, hand-finished buttonholes. Worn daily by some, kept for Shabbos by others. Cut roomy in the chest and shoulders, narrow at the cuff.
           </p>
@@ -161,7 +174,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">ג</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Shabbos Suit</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Shabbos Suit</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             The classic three-piece in black or midnight navy, single-breasted, peak or notch lapel. Cut with the room to bend, to stand, and to sit through a long davening.
           </p>
@@ -186,7 +199,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">ד</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Kittel</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Kittel</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             White linen or cotton, simple closure ties, modest belt. Cut to last decades — for the Yamim Noraim, the Seder table, and the chuppah.
           </p>
@@ -214,7 +227,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">ה</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Bar Mitzvah Suit</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Bar Mitzvah Suit</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             The first suit of a boy's life. Cut with growing room in the trouser and sleeve, ready to be let out for the next two years. A small ceremony of its own.
           </p>
@@ -240,7 +253,7 @@ const serviceSchema = {
             </svg>
           </div>
           <div class="chapter-no heb-num" style="color: var(--gold);">ו</div>
-          <h3 class="h-3" style="margin-top: 6px; text-transform: uppercase; color: var(--navy);">Chosson Tailoring</h3>
+          <h3 class="h-3" style="margin-top: 6px; color: var(--navy);">Chosson Tailoring</h3>
           <p class="body-prose" style="margin-top: 12px; font-size: 16px;">
             A chosson's wedding wardrobe: the Shabbos kallah suit, the chuppah kittel, the bekishe for sheva brachos. Drawn together, finished in time, fitted in the days before the wedding.
           </p>
@@ -257,7 +270,7 @@ const serviceSchema = {
     <div class="container">
       <div class="section-head" data-reveal>
         <div class="chapter-no">No. 03</div>
-        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">A <em>tailor's calendar.</em></h2>
+        <h2 class="h-1" style="max-width: 18ch;">A <em>tailor's calendar.</em></h2>
         <div class="right">Order before the season</div>
       </div>
 
@@ -291,10 +304,37 @@ const serviceSchema = {
     <div class="container">
       <div class="section-head" data-reveal>
         <div class="chapter-no">No. 04</div>
-        <h2 class="h-1" style="text-transform: uppercase; max-width: 18ch;">From the <em>community.</em></h2>
+        <h2 class="h-1" style="max-width: 18ch;">From the <em>community.</em></h2>
         <div class="right">Letters &amp; reference</div>
       </div>
       <Testimonials items={[reviews[4], reviews[10], reviews[7]]} />
+    </div>
+  </section>
+
+  <!-- READING ROOM + FAQ — niche depth + FAQPage schema -->
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="chapter-no">No. 05</div>
+        <h2 class="h-1" style="max-width: 20ch;">Read the <em>tradition.</em></h2>
+        <div class="right">From the notebook</div>
+      </div>
+      <ul class="prose-list" data-reveal style="margin-top: 28px; max-width: 62rem; columns: 2; column-gap: 56px;">
+        <li><a href="/guides/the-traditional-jewish-wardrobe" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">The traditional Jewish wardrobe, explained</a></li>
+        <li><a href="/guides/the-bekishe-explained" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">What a bekishe is — and how it's cut</a></li>
+        <li><a href="/guides/kapota-vs-rekel" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">Kapota vs. rekel: the difference</a></li>
+        <li><a href="/guides/the-kittel-guide" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">The kittel, and when it's worn</a></li>
+        <li><a href="/guides/the-bar-mitzvah-suit" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">The bar mitzvah suit</a></li>
+        <li><a href="/guides/building-a-shabbos-wardrobe" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">Building a Shabbos wardrobe</a></li>
+        <li><a href="/guides/what-the-chosson-wears" style="color: var(--oxblood); border-bottom: 1px solid var(--rule-strong);">What the chosson wears</a></li>
+      </ul>
+
+      <div class="section-head" data-reveal style="margin-top: clamp(48px, 7vw, 96px);">
+        <div class="chapter-no">No. 06</div>
+        <h2 class="h-1" style="max-width: 18ch;">Common <em>questions.</em></h2>
+        <div class="right">Straight answers</div>
+      </div>
+      <div style="max-width: 62rem; margin-top: 28px;" data-reveal><FaqBlock items={traditionalFaqs} /></div>
     </div>
   </section>
 

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SuitBuilder from '../components/SuitBuilder.astro';
+
+/*
+ * Staging surface for Rems's raster suit builder (real drawn art, grayscale).
+ * noindex + excluded from the sitemap so it doesn't compete with the live
+ * /design page in search. When Ingrid's fabric-colour layer lands, this engine
+ * replaces the SVG configurator on /design in one swap.
+ */
+const site = 'https://customsuitandshirt.com';
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${site}/suit-builder#app`,
+      name: 'Custom Suit Builder — Sam\'s Menswear',
+      url: `${site}/suit-builder`,
+      applicationCategory: 'DesignApplication',
+      operatingSystem: 'Web',
+      browserRequirements: 'Requires JavaScript',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
+      provider: { '@id': `${site}/#business` },
+      description: 'Build a custom suit online — choose the front, buttons, lapel, trousers, neckwear and pocket square and see it drawn live, then send the spec to Sam.',
+    },
+    {
+      '@type': 'HowTo',
+      '@id': `${site}/suit-builder#howto`,
+      name: 'How to build your custom suit',
+      description: 'Design the cut of your suit before you book a fitting with Sam in Vaughan.',
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Set the front', text: 'Choose one, two or three buttons, or a double-breasted front.' },
+        { '@type': 'HowToStep', position: 2, name: 'Choose the details', text: 'Pick the lapel, trousers, neckwear and pocket square and watch the suit drawn live.' },
+        { '@type': 'HowToStep', position: 3, name: 'Send it to Sam', text: 'Send your look with your event date and phone number; Sam builds the real suit at a personal fitting.' },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title="Custom Suit Builder · Sam's Menswear"
+  description="Build your custom suit — front, buttons, lapel, trousers, neckwear and pocket square, drawn live. Then send the spec to Sam for a personal fitting in Vaughan."
+  noindex={true}
+>
+  <section class="page-hero" style="padding-bottom: 0;">
+    <div class="container">
+      <div data-reveal>
+        <div class="eyebrow-rule">The Studio &middot; Custom Suit Builder</div>
+        <h1>Build your suit, <em>line by line.</em></h1>
+        <p class="lede">Real drawn tailoring — not AI guesswork. Set the front, the lapel, the trousers and the finishing, and watch it come together. Then send the spec ahead so your first fitting with Sam starts from a drawing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 40px;">
+    <div class="container">
+      <SuitBuilder />
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</BaseLayout>
