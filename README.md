@@ -88,6 +88,10 @@ Body in Markdown…
 
 It appears automatically on `/journal` (newest first) and at `/journal/<filename>`.
 
+## Distribb SEO and Backlinks
+
+Distribb slash commands are checked into `.claude/commands/` for this repo. Add `DISTRIBB_API_KEY` locally, optionally set `DISTRIBB_PROJECT_ID`, then run `/distribb-setup` and `/backlinks <keyword>` before publishing new SEO articles through the exchange. Project-specific notes live in `docs/distribb-backlinks.md`.
+
 ## Add / edit a location
 
 Edit `src/data/locations.js`. Each entry generates `/locations/<slug>` automatically.
